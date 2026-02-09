@@ -8,7 +8,7 @@
 <link href="2.Graficos_en_R_3_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="2.Graficos_en_R_3_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="2.Graficos_en_R_3_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.555">
+  <meta name="generator" content="quarto-1.5.57">
 
   <title>graficos_en_r_3</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -41,7 +41,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -69,7 +69,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -83,7 +83,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -384,6 +384,24 @@
       margin-right: 0; 
     }
   </style>
+  <link href="2.Graficos_en_R_3_files/libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+
+  <script src="2.Graficos_en_R_3_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+  <script src="2.Graficos_en_R_3_files/libs/plotly-binding-4.12.0/plotly.js"></script>
+
+  <script src="2.Graficos_en_R_3_files/libs/typedarray-0.1/typedarray.min.js"></script>
+
+  <script src="2.Graficos_en_R_3_files/libs/jquery-3.5.1/jquery.min.js"></script>
+
+  <link href="2.Graficos_en_R_3_files/libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+
+  <script src="2.Graficos_en_R_3_files/libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+
+  <link href="2.Graficos_en_R_3_files/libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
+
+  <script src="2.Graficos_en_R_3_files/libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
+
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -407,22 +425,22 @@
 <span id="cb1-2"><a href=""></a>df.heatmap <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Var1 =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">Var2 =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
 <span id="cb1-3"><a href=""></a>df.heatmap<span class="sc">$</span>score <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fu">nrow</span>(df.heatmap), <span class="at">min =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">max =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb2-2"><a href=""></a><span class="fu">ggplot</span>(df.heatmap, <span class="fu">aes</span>(<span class="at">x =</span> Var1, <span class="at">y =</span> Var2, <span class="at">fill =</span> score)) <span class="sc">+</span> </span>
 <span id="cb2-3"><a href=""></a>  <span class="fu">geom_tile</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="heatmaps-o-mapas-de-calor-1" class="slide level2">
 <h2>Heatmaps o mapas de calor</h2>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">ggplot</span>(df.heatmap, <span class="fu">aes</span>(<span class="at">x =</span> Var1, <span class="at">y =</span> Var2, <span class="at">fill =</span> score)) <span class="sc">+</span> </span>
 <span id="cb3-2"><a href=""></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span> </span>
 <span id="cb3-3"><a href=""></a>  <span class="fu">scale_fill_gradient2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="heatmaps-usando-complexheatmap" class="slide level2">
 <h2>Heatmaps usando <a href="https://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html"><code>ComplexHeatmap</code></a></h2>
 <p>Primero modificamos la data:</p>
@@ -456,112 +474,1151 @@
 <span id="cb6-3"><a href=""></a></span>
 <span id="cb6-4"><a href=""></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"ComplexHeatmap"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="heatmaps-usando-complexheatmap-2" class="slide level2">
-<h2>Heatmaps usando <a href="https://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html"><code>ComplexHeatmap</code></a></h2>
 <ul>
 <li>Corriendo <a href="https://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html"><code>ComplexHeatmap</code></a><code>:</code></li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">library</span>(ComplexHeatmap)</span>
+<span id="cb7-2"><a href=""></a><span class="fu">Heatmap</span>(</span>
+<span id="cb7-3"><a href=""></a>  <span class="fu">as.matrix</span>(mat),</span>
+<span id="cb7-4"><a href=""></a>  <span class="at">name =</span> <span class="st">"mat"</span>,</span>
+<span id="cb7-5"><a href=""></a>  <span class="at">rect_gp =</span> <span class="fu">gpar</span>(<span class="at">col =</span> <span class="st">"white"</span>, <span class="at">lwd =</span> <span class="dv">2</span>),</span>
+<span id="cb7-6"><a href=""></a>  <span class="at">column_title =</span> <span class="st">"Heatmap"</span>,</span>
+<span id="cb7-7"><a href=""></a>  <span class="at">column_km =</span> <span class="dv">3</span>,</span>
+<span id="cb7-8"><a href=""></a>  <span class="at">top_annotation =</span> <span class="fu">HeatmapAnnotation</span>(<span class="at">foo1 =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">bar1 =</span> <span class="fu">anno_points</span>(<span class="fu">runif</span>(<span class="dv">5</span>))),</span>
+<span id="cb7-9"><a href=""></a>  <span class="at">right_annotation =</span> <span class="fu">rowAnnotation</span>(<span class="at">foo2 =</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">bar2 =</span> <span class="fu">anno_barplot</span>(<span class="fu">runif</span>(<span class="dv">5</span>)))</span>
+<span id="cb7-10"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="heatmaps-usando-complexheatmap-2" class="slide level2">
+<h2>Heatmaps usando <a href="https://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html"><code>ComplexHeatmap</code></a></h2>
 
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
 <section id="diagramas-de-venn" class="slide level2">
 <h2>Diagramas de Venn</h2>
 <ul>
 <li>Instalando <a href="https://r-charts.com/es/parte-todo/ggvenndiagram/"><code>ggVennDiagram</code></a>:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"ggVennDiagram"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"ggVennDiagram"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Corriendo <a href="https://r-charts.com/es/parte-todo/ggvenndiagram/"><code>ggVennDiagram</code></a>:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">library</span>(ggVennDiagram)</span>
-<span id="cb8-2"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">A =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">B =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>)</span>
-<span id="cb8-3"><a href=""></a><span class="fu">ggVennDiagram</span>(x) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">library</span>(ggVennDiagram)</span>
+<span id="cb9-2"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">A =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">B =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>)</span>
+<span id="cb9-3"><a href=""></a><span class="fu">ggVennDiagram</span>(x) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="diagramas-de-venn-1" class="slide level2">
+<h2>Diagramas de Venn</h2>
+
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="sankey-plots" class="slide level2">
+<h2>Sankey plots</h2>
+<ul>
+<li>Instalando paquete</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"networkD3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Construyendo la data</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">library</span>(networkD3)</span>
+<span id="cb11-2"><a href=""></a>links <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb11-3"><a href=""></a>  <span class="at">source=</span><span class="fu">c</span>(<span class="st">"group_A"</span>,<span class="st">"group_A"</span>, <span class="st">"group_B"</span>, <span class="st">"group_C"</span>, <span class="st">"group_C"</span>, <span class="st">"group_E"</span>), </span>
+<span id="cb11-4"><a href=""></a>  <span class="at">target=</span><span class="fu">c</span>(<span class="st">"group_C"</span>,<span class="st">"group_D"</span>, <span class="st">"group_E"</span>, <span class="st">"group_F"</span>, <span class="st">"group_G"</span>, <span class="st">"group_H"</span>), </span>
+<span id="cb11-5"><a href=""></a>  <span class="at">value=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb11-6"><a href=""></a>  )</span>
+<span id="cb11-7"><a href=""></a>nodes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb11-8"><a href=""></a>  <span class="at">name=</span><span class="fu">c</span>(<span class="fu">as.character</span>(links<span class="sc">$</span>source), </span>
+<span id="cb11-9"><a href=""></a>  <span class="fu">as.character</span>(links<span class="sc">$</span>target)) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
+<span id="cb11-10"><a href=""></a>)</span>
+<span id="cb11-11"><a href=""></a>links<span class="sc">$</span>IDsource <span class="ot">&lt;-</span> <span class="fu">match</span>(links<span class="sc">$</span>source, nodes<span class="sc">$</span>name)<span class="sc">-</span><span class="dv">1</span> </span>
+<span id="cb11-12"><a href=""></a>links<span class="sc">$</span>IDtarget <span class="ot">&lt;-</span> <span class="fu">match</span>(links<span class="sc">$</span>target, nodes<span class="sc">$</span>name)<span class="sc">-</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sankey-plots-1" class="slide level2">
+<h2>Sankey plots</h2>
+<ul>
+<li>Corriendo la función</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>p <span class="ot">&lt;-</span> <span class="fu">sankeyNetwork</span>(<span class="at">Links =</span> links, <span class="at">Nodes =</span> nodes,</span>
+<span id="cb12-2"><a href=""></a>              <span class="at">Source =</span> <span class="st">"IDsource"</span>, <span class="at">Target =</span> <span class="st">"IDtarget"</span>,</span>
+<span id="cb12-3"><a href=""></a>              <span class="at">Value =</span> <span class="st">"value"</span>, <span class="at">NodeID =</span> <span class="st">"name"</span>, </span>
+<span id="cb12-4"><a href=""></a>              <span class="at">sinksRight=</span><span class="cn">FALSE</span>)</span>
+<span id="cb12-5"><a href=""></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Guardando la red</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">library</span>(htmlwidgets)</span>
+<span id="cb13-2"><a href=""></a><span class="fu">saveWidget</span>(p, <span class="at">file=</span><span class="fu">paste0</span>( <span class="fu">getwd</span>(), <span class="st">"/HtmlWidget/sankeyBasic1.html"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="lolipop-plots" class="slide level2">
+<h2>Lolipop plots</h2>
+<p>Usaremos la data de <strong><em>iris</em></strong>, pero primero la modificamos para graficar.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">data</span>(iris)</span>
+<span id="cb14-2"><a href=""></a></span>
+<span id="cb14-3"><a href=""></a>df <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href=""></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href=""></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Sepal.Length, mean)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-6"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">x=</span><span class="dv">0</span>, <span class="at">y=</span>Sepal.Length)</span>
+<span id="cb14-7"><a href=""></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  Species    Sepal.Length     x     y
+  &lt;fct&gt;             &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 setosa             5.01     0  5.01
+2 versicolor         5.94     0  5.94
+3 virginica          6.59     0  6.59</code></pre>
+</div>
+</div>
+</section>
+<section id="lolipop-plots-1" class="slide level2">
+<h2>Lolipop plots</h2>
+<p>Ahora si graficamos….</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> Species)) <span class="sc">+</span></span>
+<span id="cb16-2"><a href=""></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">xend =</span> y, <span class="at">yend =</span> Species),</span>
+<span id="cb16-3"><a href=""></a>               <span class="at">color =</span> <span class="st">"gray"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href=""></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> y),</span>
+<span id="cb16-5"><a href=""></a>             <span class="at">size =</span> <span class="fl">7.5</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"purple"</span>) <span class="sc">+</span></span>
+<span id="cb16-6"><a href=""></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">label =</span> <span class="fu">round</span>(y, <span class="dv">2</span>)),</span>
+<span id="cb16-7"><a href=""></a>            <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">2.8</span>) <span class="sc">+</span></span>
+<span id="cb16-8"><a href=""></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb16-9"><a href=""></a>  <span class="fu">xlab</span>(<span class="st">"Promedio de Sepal Length"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"><p>2.7. Sankey plots</p>
-<p>2.8. Lolipop plots</p>
-<p>2.9. Gráficos de ordenación</p>
-</section>
-<section id="otros-gráficos" class="slide level2">
-<h2>Otros gráficos</h2>
-<h3 id="stat_summary-y-stat_smooth">stat_summary() y stat_smooth()</h3>
-<p>Esta es una capa que nos permite poner desviaciones estándar o líneas que representan el promedio de los datos, por ejemplo:</p>
-
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center r-stretch" width="384"></section>
-<section id="stat_summary-y-stat_smoot" class="slide level2">
-<h2>stat_summary() y stat_smoot()</h2>
-<p>stat_smooth() nos permite colorear o resaltar la línea que representa nuestro modelo lineal:</p>
-
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-12-1.png" class="quarto-figure quarto-figure-center r-stretch" width="384"></section>
-<section id="ggpubr" class="slide level2">
-<h2><em>ggpubr()</em></h2>
-<p><em>ggpubr()</em> es una paqutería tipo compatible con <em>ggplot2()</em> pero un poco más fácil de declarar y más intuitivo.</p>
-
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-13-1.png" class="quarto-figure quarto-figure-center r-stretch" width="336"></section>
-<section id="ggpubr-1" class="slide level2">
-<h2><em>ggpubr()</em></h2>
-
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-14-1.png" class="quarto-figure quarto-figure-center r-stretch" width="288"><p>Vemos que los parámetros se definen similarmente pero con algunas diferencias, además que nos permite agregarles más elementos sin agregar más capas. Y el ‘output’ o tipo de gráfica es igual del tipo <code>ggplot2()</code>.</p>
-</section>
-<section id="ggpubr-2" class="slide level2">
-<h2><em>ggpubr()</em></h2>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-17-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="gráficos-de-ordenación" class="slide level2">
+<h2>Gráficos de ordenación</h2>
 <ul>
-<li><p>Otras funciones interesantes de este paquete son <strong>facet.by</strong> que es un argumento que puede ser declarado dentro de la función principal y nos permite hacer las gráficas multi-panel</p></li>
-<li><p>Otro que es muy útil es el de <strong>stat_compare_means()</strong> que nos permite agregar una capa que hace análisis estátidísticos como t.test, wilcoxon, kruskal.walis, anova, entre otros y que nos evita hacer análisis fuera y que podamos agragarlas a la gráfica en un sólo paso.</p></li>
+<li>Instalando <code>ggordiplots</code></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">'ggordiplots'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>Corriendo <code>ggord</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">library</span>(ggordiplots)</span>
+<span id="cb18-2"><a href=""></a>ord <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb18-3"><a href=""></a>p <span class="ot">&lt;-</span> <span class="fu">gg_ordiplot</span>(ord, </span>
+<span id="cb18-4"><a href=""></a>                 iris<span class="sc">$</span>Species, </span>
+<span id="cb18-5"><a href=""></a>                 <span class="at">spiders =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb18-6"><a href=""></a>                 <span class="at">ellipse =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-7"><a href=""></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
 </ul>
 </section>
-<section id="ggpubr-3" class="slide level2">
-<h2><em>ggpubr()</em></h2>
-
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center r-stretch" width="336"></section>
-<section id="ggpubr-4" class="slide level2">
-<h2><em>ggpubr()</em></h2>
-
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:60.0%"></section>
-<section id="misceláneos-ggcats" class="slide level2">
-<h2>Misceláneos: <em>ggcats()</em></h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>) </span>
-<span id="cb9-2"><a href=""></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"R-CoderDotCom/ggcats@main"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><em>ggplot2()</em> nos permite usar diversos paquetes desarrollados por muchos usarios con fines divertidos o misceláneos, podemos verlo en el pie de página el link para explorar todos los que hay. Veremos <em>ggcats()</em>. Estas son las opciones que podemos usar:</p>
-</section>
-<section id="misceláneos-ggcats-1" class="slide level2">
-<h2>Misceláneos: <em>ggcats()</em></h2>
-
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"></section>
-<section id="misceláneos-ggcats-2" class="slide level2">
-<h2>Misceláneos: <em>ggcats()</em></h2>
-
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-20-1.png" class="quarto-figure quarto-figure-center r-stretch" width="316"></section>
-<section id="misceláneos-ggtexttable" class="slide level2">
-<h2>Misceláneos: <em>ggtexttable()</em></h2>
-<p>Esta función me permite hacer mis tablas como figuras que puedo exportar como imágenes y darle formato. Hace parte del paquete <strong>ggpubr()</strong> que vimos anteriormente.</p>
-<p>Haremos un ejemplo con los primeros cuatro datos de <strong>iris</strong>:</p>
-
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"></section>
-<section id="misceláneos-ggtexttable-1" class="slide level2">
-<h2>Misceláneos: <em>ggtexttable()</em></h2>
-<p>También podemos cambiar el tema con el que se formatea la tabla, por ejemplo:</p>
-</section>
-<section id="misceláneos-ggtexttable-2" class="slide level2">
-<h2>Misceláneos: <em>ggtexttable()</em></h2>
-
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-23-1.png" width="960" class="r-stretch"></section>
-<section id="misceláneos-ggtexttable-3" class="slide level2">
-<h2>Misceláneos: <em>ggtexttable()</em></h2>
-<p>Para ver otros temas: <a href="https://rpkgs.datanovia.com/ggpubr/files/ggtexttable-theme.pdf" class="uri">https://rpkgs.datanovia.com/ggpubr/files/ggtexttable-theme.pdf</a></p>
-<p>Otros formateos:</p>
-<ul>
-<li><p>Poner en negrita una celda:</p>
+<section id="gráficos-de-ordenación-1" class="slide level2">
+<h2>Gráficos de ordenación</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
+<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$df_ord
+                   x            y      Group
+site1   -2.684125626 -0.319397247     setosa
+site2   -2.714141687  0.177001225     setosa
+site3   -2.888990569  0.144949426     setosa
+site4   -2.745342856  0.318298979     setosa
+site5   -2.728716537 -0.326754513     setosa
+site6   -2.280859633 -0.741330449     setosa
+site7   -2.820537751  0.089461385     setosa
+site8   -2.626144973 -0.163384960     setosa
+site9   -2.886382732  0.578311754     setosa
+site10  -2.672755798  0.113774246     setosa
+site11  -2.506947091 -0.645068899     setosa
+site12  -2.612755231 -0.014729939     setosa
+site13  -2.786109266  0.235112000     setosa
+site14  -3.223803744  0.511394587     setosa
+site15  -2.644750390 -1.178764636     setosa
+site16  -2.386039034 -1.338062330     setosa
+site17  -2.623527875 -0.810679514     setosa
+site18  -2.648296706 -0.311849145     setosa
+site19  -2.199820324 -0.872839039     setosa
+site20  -2.587986400 -0.513560309     setosa
+site21  -2.310256215 -0.391345936     setosa
+site22  -2.543705229 -0.432996063     setosa
+site23  -3.215939416 -0.133468070     setosa
+site24  -2.302733182 -0.098708855     setosa
+site25  -2.355754049  0.037281860     setosa
+site26  -2.506668907  0.146016880     setosa
+site27  -2.468820073 -0.130951489     setosa
+site28  -2.562319906 -0.367718857     setosa
+site29  -2.639534715 -0.312039980     setosa
+site30  -2.631989387  0.196961225     setosa
+site31  -2.587398477  0.204318491     setosa
+site32  -2.409932497 -0.410924264     setosa
+site33  -2.648862334 -0.813363820     setosa
+site34  -2.598736749 -1.093145759     setosa
+site35  -2.636926878  0.121322348     setosa
+site36  -2.866241652 -0.069364472     setosa
+site37  -2.625238050 -0.599370021     setosa
+site38  -2.800684115 -0.268643738     setosa
+site39  -2.980502044  0.487958344     setosa
+site40  -2.590006314 -0.229043837     setosa
+site41  -2.770102426 -0.263527534     setosa
+site42  -2.849368705  0.940960574     setosa
+site43  -2.997406547  0.341926057     setosa
+site44  -2.405614485 -0.188871429     setosa
+site45  -2.209489238 -0.436663142     setosa
+site46  -2.714451427  0.250208204     setosa
+site47  -2.538148259 -0.503771144     setosa
+site48  -2.839462168  0.227945569     setosa
+site49  -2.543085750 -0.579410022     setosa
+site50  -2.703359782 -0.107706082     setosa
+site51   1.284825689 -0.685160470 versicolor
+site52   0.932488532 -0.318333638 versicolor
+site53   1.464302322 -0.504262815 versicolor
+site54   0.183317720  0.827959012 versicolor
+site55   1.088103258 -0.074590675 versicolor
+site56   0.641669084  0.418246872 versicolor
+site57   1.095060663 -0.283468270 versicolor
+site58  -0.749122670  1.004890961 versicolor
+site59   1.044131826 -0.228361900 versicolor
+site60  -0.008745404  0.723081905 versicolor
+site61  -0.507840884  1.265971191 versicolor
+site62   0.511698557  0.103981235 versicolor
+site63   0.264976508  0.550036464 versicolor
+site64   0.984934510  0.124817854 versicolor
+site65  -0.173925372  0.254854209 versicolor
+site66   0.927860781 -0.467179494 versicolor
+site67   0.660283762  0.352969666 versicolor
+site68   0.236104993  0.333610767 versicolor
+site69   0.944733728  0.543145551 versicolor
+site70   0.045226976  0.583834377 versicolor
+site71   1.116283177  0.084616852 versicolor
+site72   0.357888418  0.068925032 versicolor
+site73   1.298183875  0.327787308 versicolor
+site74   0.921728922  0.182737794 versicolor
+site75   0.714853326 -0.149055944 versicolor
+site76   0.900174373 -0.328504474 versicolor
+site77   1.332024437 -0.244440876 versicolor
+site78   1.557802155 -0.267495447 versicolor
+site79   0.813290650  0.163350301 versicolor
+site80  -0.305583778  0.368262190 versicolor
+site81  -0.068126492  0.705172132 versicolor
+site82  -0.189622472  0.680286764 versicolor
+site83   0.136428712  0.314032438 versicolor
+site84   1.380026436  0.420954287 versicolor
+site85   0.588006443  0.484287420 versicolor
+site86   0.806858313 -0.194182315 versicolor
+site87   1.220690882 -0.407619594 versicolor
+site88   0.815095236  0.372037060 versicolor
+site89   0.245957680  0.268524397 versicolor
+site90   0.166413217  0.681926725 versicolor
+site91   0.464800288  0.670711545 versicolor
+site92   0.890815198  0.034464444 versicolor
+site93   0.230548024  0.404385848 versicolor
+site94  -0.704531759  1.012248228 versicolor
+site95   0.356981495  0.504910093 versicolor
+site96   0.331934480  0.212654684 versicolor
+site97   0.376215651  0.293218929 versicolor
+site98   0.642576008 -0.017738190 versicolor
+site99  -0.906469865  0.756093367 versicolor
+site100  0.299000842  0.348897806 versicolor
+site101  2.531192728  0.009849109  virginica
+site102  1.415235877  0.574916348  virginica
+site103  2.616676016 -0.343903151  virginica
+site104  1.971531053  0.179727904  virginica
+site105  2.350005920  0.040260947  virginica
+site106  3.397038736 -0.550836673  virginica
+site107  0.521232244  1.192758727  virginica
+site108  2.932587069 -0.355500003  virginica
+site109  2.321228817  0.243831502  virginica
+site110  2.916750967 -0.782791949  virginica
+site111  1.661774154 -0.242228408  virginica
+site112  1.803401953  0.215637617  virginica
+site113  2.165591796 -0.216275585  virginica
+site114  1.346163579  0.776818347  virginica
+site115  1.585928224  0.539640714  virginica
+site116  1.904456375 -0.119250692  virginica
+site117  1.949689059 -0.041943260  virginica
+site118  3.487055364 -1.175739330  virginica
+site119  3.795645422 -0.257322973  virginica
+site120  1.300791713  0.761149636  virginica
+site121  2.427817913 -0.378196013  virginica
+site122  1.199001105  0.606091528  virginica
+site123  3.499920039 -0.460674099  virginica
+site124  1.388766132  0.204399327  virginica
+site125  2.275430504 -0.334990606  virginica
+site126  2.614090474 -0.560901355  virginica
+site127  1.258508161  0.179704795  virginica
+site128  1.291132059  0.116668651  virginica
+site129  2.123608723  0.209729477  virginica
+site130  2.388003016 -0.464639805  virginica
+site131  2.841672778 -0.375269167  virginica
+site132  3.230673661 -1.374165087  virginica
+site133  2.159437642  0.217277579  virginica
+site134  1.444161242  0.143413410  virginica
+site135  1.781294810  0.499901681  virginica
+site136  3.076499932 -0.688085678  virginica
+site137  2.144243314 -0.140064201  virginica
+site138  1.905098149 -0.049300526  virginica
+site139  1.169326339  0.164990262  virginica
+site140  2.107611143 -0.372287872  virginica
+site141  2.314154705 -0.183651279  virginica
+site142  1.922267801 -0.409203467  virginica
+site143  1.415235877  0.574916348  virginica
+site144  2.563013375 -0.277862603  virginica
+site145  2.418746183 -0.304798198  virginica
+site146  1.944109795 -0.187532303  virginica
+site147  1.527166615  0.375316983  virginica
+site148  1.764345717 -0.078858855  virginica
+site149  1.900941614 -0.116627959  virginica
+site150  1.390188862  0.282660938  virginica
+
+$df_mean.ord
+       Group          x           y
+1     setosa -2.6424155 -0.19088505
+2 versicolor  0.5332066  0.24554983
+3  virginica  2.1092089 -0.05466479
+
+$df_ellipse
+         Group            x            y
+1       setosa -2.762529162  0.275695389
+2       setosa -2.750613337  0.274774699
+3       setosa -2.738270505  0.272016263
+4       setosa -2.725549377  0.267430967
+5       setosa -2.712500157  0.261036907
+6       setosa -2.699174345  0.252859317
+7       setosa -2.685624531  0.242930471
+8       setosa -2.671904191  0.231289554
+9       setosa -2.658067473  0.217982506
+10      setosa -2.644168983  0.203061845
+11      setosa -2.630263573  0.186586455
+12      setosa -2.616406121  0.168621358
+13      setosa -2.602651316  0.149237453
+14      setosa -2.589053442  0.128511240
+15      setosa -2.575666163  0.106524516
+16      setosa -2.562542313  0.083364052
+17      setosa -2.549733687  0.059121253
+18      setosa -2.537290832  0.033891792
+19      setosa -2.525262857  0.007775241
+20      setosa -2.513697230 -0.019125333
+21      setosa -2.502639594 -0.046703763
+22      setosa -2.492133590 -0.074851211
+23      setosa -2.482220680 -0.103456591
+24      setosa -2.472939986 -0.132407012
+25      setosa -2.464328134 -0.161588219
+26      setosa -2.456419111 -0.190885047
+27      setosa -2.449244131 -0.220181875
+28      setosa -2.442831510 -0.249363082
+29      setosa -2.437206555 -0.278313502
+30      setosa -2.432391466 -0.306918883
+31      setosa -2.428405247 -0.335066331
+32      setosa -2.425263627 -0.362644761
+33      setosa -2.422979007 -0.389545334
+34      setosa -2.421560402 -0.415661886
+35      setosa -2.421013411 -0.440891346
+36      setosa -2.421340193 -0.465134146
+37      setosa -2.422539458 -0.488294610
+38      setosa -2.424606474 -0.510281334
+39      setosa -2.427533081 -0.531007547
+40      setosa -2.431307732 -0.550391451
+41      setosa -2.435915528 -0.568356549
+42      setosa -2.441338285 -0.584831938
+43      setosa -2.447554602 -0.599752600
+44      setosa -2.454539946 -0.613059647
+45      setosa -2.462266748 -0.624700565
+46      setosa -2.470704515 -0.634629411
+47      setosa -2.479819947 -0.642807000
+48      setosa -2.489577069 -0.649201060
+49      setosa -2.499937374 -0.653786357
+50      setosa -2.510859976 -0.656544793
+51      setosa -2.522301766 -0.657465483
+52      setosa -2.534217591 -0.656544793
+53      setosa -2.546560423 -0.653786357
+54      setosa -2.559281551 -0.649201060
+55      setosa -2.572330771 -0.642807000
+56      setosa -2.585656583 -0.634629411
+57      setosa -2.599206397 -0.624700565
+58      setosa -2.612926736 -0.613059647
+59      setosa -2.626763455 -0.599752600
+60      setosa -2.640661945 -0.584831938
+61      setosa -2.654567355 -0.568356549
+62      setosa -2.668424807 -0.550391451
+63      setosa -2.682179612 -0.531007547
+64      setosa -2.695777486 -0.510281334
+65      setosa -2.709164765 -0.488294610
+66      setosa -2.722288614 -0.465134146
+67      setosa -2.735097241 -0.440891346
+68      setosa -2.747540095 -0.415661886
+69      setosa -2.759568071 -0.389545334
+70      setosa -2.771133698 -0.362644761
+71      setosa -2.782191334 -0.335066331
+72      setosa -2.792697338 -0.306918883
+73      setosa -2.802610248 -0.278313502
+74      setosa -2.811890942 -0.249363082
+75      setosa -2.820502794 -0.220181875
+76      setosa -2.828411817 -0.190885047
+77      setosa -2.835586797 -0.161588219
+78      setosa -2.841999418 -0.132407012
+79      setosa -2.847624373 -0.103456591
+80      setosa -2.852439461 -0.074851211
+81      setosa -2.856425681 -0.046703763
+82      setosa -2.859567301 -0.019125333
+83      setosa -2.861851921  0.007775241
+84      setosa -2.863270526  0.033891792
+85      setosa -2.863817516  0.059121253
+86      setosa -2.863490734  0.083364052
+87      setosa -2.862291469  0.106524516
+88      setosa -2.860224454  0.128511240
+89      setosa -2.857297846  0.149237453
+90      setosa -2.853523196  0.168621358
+91      setosa -2.848915400  0.186586455
+92      setosa -2.843492643  0.203061845
+93      setosa -2.837276326  0.217982506
+94      setosa -2.830290982  0.231289554
+95      setosa -2.822564180  0.242930471
+96      setosa -2.814126413  0.252859317
+97      setosa -2.805010981  0.261036907
+98      setosa -2.795253859  0.267430967
+99      setosa -2.784893553  0.272016263
+100     setosa -2.773970952  0.274774699
+101     setosa -2.762529162  0.275695389
+102 versicolor  1.129420430 -0.087790570
+103 versicolor  1.128243939 -0.070045422
+104 versicolor  1.124719106 -0.051054764
+105 versicolor  1.118859844 -0.030893544
+106 versicolor  1.110689276 -0.009641327
+107 versicolor  1.100239647  0.012618012
+108 versicolor  1.087552198  0.035796626
+109 versicolor  1.072677000  0.059803041
+110 versicolor  1.055672758  0.084542514
+111 versicolor  1.036606582  0.109917408
+112 versicolor  1.015553715  0.135827582
+113 versicolor  0.992597245  0.162170780
+114 versicolor  0.967827769  0.188843037
+115 versicolor  0.941343042  0.215739089
+116 versicolor  0.913247587  0.242752791
+117 versicolor  0.883652284  0.269777532
+118 versicolor  0.852673931  0.296706656
+119 versicolor  0.820434787  0.323433889
+120 versicolor  0.787062085  0.349853748
+121 versicolor  0.752687530  0.375861967
+122 versicolor  0.717446784  0.401355905
+123 versicolor  0.681478927  0.426234946
+124 versicolor  0.644925906  0.450400906
+125 versicolor  0.607931980  0.473758413
+126 versicolor  0.570643147  0.496215284
+127 versicolor  0.533206569  0.517682894
+128 versicolor  0.495769991  0.538076518
+129 versicolor  0.458481158  0.557315674
+130 versicolor  0.421487232  0.575324432
+131 versicolor  0.384934211  0.592031720
+132 versicolor  0.348966354  0.607371603
+133 versicolor  0.313725608  0.621283540
+134 versicolor  0.279351054  0.633712628
+135 versicolor  0.245978351  0.644609815
+136 versicolor  0.213739207  0.653932094
+137 versicolor  0.182760854  0.661642676
+138 versicolor  0.153165551  0.667711128
+139 versicolor  0.125070096  0.672113504
+140 versicolor  0.098585369  0.674832427
+141 versicolor  0.073815893  0.675857168
+142 versicolor  0.050859423  0.675183682
+143 versicolor  0.029806556  0.672814628
+144 versicolor  0.010740380  0.668759355
+145 versicolor -0.006263862  0.663033867
+146 versicolor -0.021139060  0.655660761
+147 versicolor -0.033826509  0.646669134
+148 versicolor -0.044276137  0.636094472
+149 versicolor -0.052446706  0.623978509
+150 versicolor -0.058305968  0.610369062
+151 versicolor -0.061830800  0.595319839
+152 versicolor -0.063007292  0.578890234
+153 versicolor -0.061830800  0.561145086
+154 versicolor -0.058305968  0.542154428
+155 versicolor -0.052446706  0.521993208
+156 versicolor -0.044276137  0.500740992
+157 versicolor -0.033826509  0.478481652
+158 versicolor -0.021139060  0.455303038
+159 versicolor -0.006263862  0.431296623
+160 versicolor  0.010740380  0.406557150
+161 versicolor  0.029806556  0.381182256
+162 versicolor  0.050859423  0.355272082
+163 versicolor  0.073815893  0.328928884
+164 versicolor  0.098585369  0.302256627
+165 versicolor  0.125070096  0.275360575
+166 versicolor  0.153165551  0.248346873
+167 versicolor  0.182760854  0.221322133
+168 versicolor  0.213739207  0.194393008
+169 versicolor  0.245978351  0.167665776
+170 versicolor  0.279351054  0.141245916
+171 versicolor  0.313725608  0.115237697
+172 versicolor  0.348966354  0.089743760
+173 versicolor  0.384934211  0.064864718
+174 versicolor  0.421487232  0.040698758
+175 versicolor  0.458481158  0.017341251
+176 versicolor  0.495769991 -0.005115620
+177 versicolor  0.533206569 -0.026583230
+178 versicolor  0.570643147 -0.046976854
+179 versicolor  0.607931980 -0.066216009
+180 versicolor  0.644925906 -0.084224767
+181 versicolor  0.681478927 -0.100932056
+182 versicolor  0.717446784 -0.116271938
+183 versicolor  0.752687530 -0.130183876
+184 versicolor  0.787062085 -0.142612964
+185 versicolor  0.820434787 -0.153510151
+186 versicolor  0.852673931 -0.162832430
+187 versicolor  0.883652284 -0.170543012
+188 versicolor  0.913247587 -0.176611464
+189 versicolor  0.941343042 -0.181013840
+190 versicolor  0.967827769 -0.183732763
+191 versicolor  0.992597245 -0.184757504
+192 versicolor  1.015553715 -0.184084018
+193 versicolor  1.036606582 -0.181714964
+194 versicolor  1.055672758 -0.177659691
+195 versicolor  1.072677000 -0.171934203
+196 versicolor  1.087552198 -0.164561097
+197 versicolor  1.100239647 -0.155569470
+198 versicolor  1.110689276 -0.144994808
+199 versicolor  1.118859844 -0.132878845
+200 versicolor  1.124719106 -0.119269397
+201 versicolor  1.128243939 -0.104220175
+202 versicolor  1.129420430 -0.087790570
+203  virginica  2.815107033 -0.445450427
+204  virginica  2.813714105 -0.426855300
+205  virginica  2.809540816 -0.406791308
+206  virginica  2.802603637 -0.385337633
+207  virginica  2.792929945 -0.362578943
+208  virginica  2.780557919 -0.338605057
+209  virginica  2.765536386 -0.313510588
+210  virginica  2.747924627 -0.287394574
+211  virginica  2.727792149 -0.260360081
+212  virginica  2.705218406 -0.232513803
+213  virginica  2.680292485 -0.203965636
+214  virginica  2.653112759 -0.174828246
+215  virginica  2.623786492 -0.145216627
+216  virginica  2.592429423 -0.115247640
+217  virginica  2.559165303 -0.085039561
+218  virginica  2.524125410 -0.054711606
+219  virginica  2.487448032 -0.024383467
+220  virginica  2.449277917  0.005825166
+221  virginica  2.409765704  0.035795072
+222  virginica  2.369067331  0.065407975
+223  virginica  2.327343416  0.094547006
+224  virginica  2.284758623  0.123097166
+225  virginica  2.241481016  0.150945780
+226  virginica  2.197681391  0.177982944
+227  virginica  2.153532606  0.204101953
+228  virginica  2.109208895  0.229199728
+229  virginica  2.064885184  0.253177220
+230  virginica  2.020736399  0.275939800
+231  virginica  1.976936774  0.297397635
+232  virginica  1.933659166  0.317466040
+233  virginica  1.891074374  0.336065814
+234  virginica  1.849350458  0.353123554
+235  virginica  1.808652086  0.368571939
+236  virginica  1.769139873  0.382350003
+237  virginica  1.730969758  0.394403368
+238  virginica  1.694292379  0.404684467
+239  virginica  1.659252487  0.413152724
+240  virginica  1.625988367  0.419774719
+241  virginica  1.594631298  0.424524319
+242  virginica  1.565305031  0.427382777
+243  virginica  1.538125305  0.428338814
+244  virginica  1.513199384  0.427388657
+245  virginica  1.490625641  0.424536055
+246  virginica  1.470493163  0.419792266
+247  virginica  1.452881404  0.413176012
+248  virginica  1.437859870  0.404713404
+249  virginica  1.425487844  0.394437840
+250  virginica  1.415814153  0.382389874
+251  virginica  1.408876974  0.368617052
+252  virginica  1.404703685  0.353173730
+253  virginica  1.403310756  0.336120856
+254  virginica  1.404703685  0.317525730
+255  virginica  1.408876974  0.297461737
+256  virginica  1.415814153  0.276008062
+257  virginica  1.425487844  0.253249373
+258  virginica  1.437859870  0.229275487
+259  virginica  1.452881404  0.204181018
+260  virginica  1.470493163  0.178065003
+261  virginica  1.490625641  0.151030510
+262  virginica  1.513199384  0.123184232
+263  virginica  1.538125305  0.094636065
+264  virginica  1.565305031  0.065498676
+265  virginica  1.594631298  0.035887056
+266  virginica  1.625988367  0.005918070
+267  virginica  1.659252487 -0.024290010
+268  virginica  1.694292379 -0.054617964
+269  virginica  1.730969758 -0.084946103
+270  virginica  1.769139873 -0.115154736
+271  virginica  1.808652086 -0.145124643
+272  virginica  1.849350458 -0.174737546
+273  virginica  1.891074374 -0.203876576
+274  virginica  1.933659166 -0.232426736
+275  virginica  1.976936774 -0.260275351
+276  virginica  2.020736399 -0.287312514
+277  virginica  2.064885184 -0.313431524
+278  virginica  2.109208895 -0.338529299
+279  virginica  2.153532606 -0.362506791
+280  virginica  2.197681391 -0.385269370
+281  virginica  2.241481016 -0.406727205
+282  virginica  2.284758623 -0.426795610
+283  virginica  2.327343416 -0.445395385
+284  virginica  2.369067331 -0.462453125
+285  virginica  2.409765704 -0.477901510
+286  virginica  2.449277917 -0.491679573
+287  virginica  2.487448032 -0.503732939
+288  virginica  2.524125410 -0.514014038
+289  virginica  2.559165303 -0.522482295
+290  virginica  2.592429423 -0.529104290
+291  virginica  2.623786492 -0.533853889
+292  virginica  2.653112759 -0.536712348
+293  virginica  2.680292485 -0.537668385
+294  virginica  2.705218406 -0.536718228
+295  virginica  2.727792149 -0.533865626
+296  virginica  2.747924627 -0.529121837
+297  virginica  2.765536386 -0.522505583
+298  virginica  2.780557919 -0.514042975
+299  virginica  2.792929945 -0.503767411
+300  virginica  2.802603637 -0.491719444
+301  virginica  2.809540816 -0.477946622
+302  virginica  2.813714105 -0.462503301
+303  virginica  2.815107033 -0.445450427
+
+$df_hull
+        Group          x           y
+1      setosa -2.2094892 -0.43666314
+2      setosa -2.1998203 -0.87283904
+3      setosa -2.3860390 -1.33806233
+4      setosa -2.6447504 -1.17876464
+5      setosa -3.2159394 -0.13346807
+6      setosa -3.2238037  0.51139459
+7      setosa -2.8493687  0.94096057
+8      setosa -2.3557540  0.03728186
+9      setosa -2.3027332 -0.09870885
+10     setosa -2.2094892 -0.43666314
+11 versicolor  1.5578022 -0.26749545
+12 versicolor  1.4643023 -0.50426282
+13 versicolor  1.2848257 -0.68516047
+14 versicolor  0.9278608 -0.46717949
+15 versicolor -0.1739254  0.25485421
+16 versicolor -0.9064699  0.75609337
+17 versicolor -0.7491227  1.00489096
+18 versicolor -0.5078409  1.26597119
+19 versicolor  1.3800264  0.42095429
+20 versicolor  1.5578022 -0.26749545
+21  virginica  3.4870554 -1.17573933
+22  virginica  3.2306737 -1.37416509
+23  virginica  1.6617742 -0.24222841
+24  virginica  1.1693263  0.16499026
+25  virginica  0.5212322  1.19275873
+26  virginica  3.7956454 -0.25732297
+27  virginica  3.4870554 -1.17573933
+
+$df_spiders
+             Group     cntr.x      cntr.y            x            y
+site1       setosa -2.6424155 -0.19088505 -2.684125626 -0.319397247
+site2       setosa -2.6424155 -0.19088505 -2.714141687  0.177001225
+site3       setosa -2.6424155 -0.19088505 -2.888990569  0.144949426
+site4       setosa -2.6424155 -0.19088505 -2.745342856  0.318298979
+site5       setosa -2.6424155 -0.19088505 -2.728716537 -0.326754513
+site6       setosa -2.6424155 -0.19088505 -2.280859633 -0.741330449
+site7       setosa -2.6424155 -0.19088505 -2.820537751  0.089461385
+site8       setosa -2.6424155 -0.19088505 -2.626144973 -0.163384960
+site9       setosa -2.6424155 -0.19088505 -2.886382732  0.578311754
+site10      setosa -2.6424155 -0.19088505 -2.672755798  0.113774246
+site11      setosa -2.6424155 -0.19088505 -2.506947091 -0.645068899
+site12      setosa -2.6424155 -0.19088505 -2.612755231 -0.014729939
+site13      setosa -2.6424155 -0.19088505 -2.786109266  0.235112000
+site14      setosa -2.6424155 -0.19088505 -3.223803744  0.511394587
+site15      setosa -2.6424155 -0.19088505 -2.644750390 -1.178764636
+site16      setosa -2.6424155 -0.19088505 -2.386039034 -1.338062330
+site17      setosa -2.6424155 -0.19088505 -2.623527875 -0.810679514
+site18      setosa -2.6424155 -0.19088505 -2.648296706 -0.311849145
+site19      setosa -2.6424155 -0.19088505 -2.199820324 -0.872839039
+site20      setosa -2.6424155 -0.19088505 -2.587986400 -0.513560309
+site21      setosa -2.6424155 -0.19088505 -2.310256215 -0.391345936
+site22      setosa -2.6424155 -0.19088505 -2.543705229 -0.432996063
+site23      setosa -2.6424155 -0.19088505 -3.215939416 -0.133468070
+site24      setosa -2.6424155 -0.19088505 -2.302733182 -0.098708855
+site25      setosa -2.6424155 -0.19088505 -2.355754049  0.037281860
+site26      setosa -2.6424155 -0.19088505 -2.506668907  0.146016880
+site27      setosa -2.6424155 -0.19088505 -2.468820073 -0.130951489
+site28      setosa -2.6424155 -0.19088505 -2.562319906 -0.367718857
+site29      setosa -2.6424155 -0.19088505 -2.639534715 -0.312039980
+site30      setosa -2.6424155 -0.19088505 -2.631989387  0.196961225
+site31      setosa -2.6424155 -0.19088505 -2.587398477  0.204318491
+site32      setosa -2.6424155 -0.19088505 -2.409932497 -0.410924264
+site33      setosa -2.6424155 -0.19088505 -2.648862334 -0.813363820
+site34      setosa -2.6424155 -0.19088505 -2.598736749 -1.093145759
+site35      setosa -2.6424155 -0.19088505 -2.636926878  0.121322348
+site36      setosa -2.6424155 -0.19088505 -2.866241652 -0.069364472
+site37      setosa -2.6424155 -0.19088505 -2.625238050 -0.599370021
+site38      setosa -2.6424155 -0.19088505 -2.800684115 -0.268643738
+site39      setosa -2.6424155 -0.19088505 -2.980502044  0.487958344
+site40      setosa -2.6424155 -0.19088505 -2.590006314 -0.229043837
+site41      setosa -2.6424155 -0.19088505 -2.770102426 -0.263527534
+site42      setosa -2.6424155 -0.19088505 -2.849368705  0.940960574
+site43      setosa -2.6424155 -0.19088505 -2.997406547  0.341926057
+site44      setosa -2.6424155 -0.19088505 -2.405614485 -0.188871429
+site45      setosa -2.6424155 -0.19088505 -2.209489238 -0.436663142
+site46      setosa -2.6424155 -0.19088505 -2.714451427  0.250208204
+site47      setosa -2.6424155 -0.19088505 -2.538148259 -0.503771144
+site48      setosa -2.6424155 -0.19088505 -2.839462168  0.227945569
+site49      setosa -2.6424155 -0.19088505 -2.543085750 -0.579410022
+site50      setosa -2.6424155 -0.19088505 -2.703359782 -0.107706082
+site51  versicolor  0.5332066  0.24554983  1.284825689 -0.685160470
+site52  versicolor  0.5332066  0.24554983  0.932488532 -0.318333638
+site53  versicolor  0.5332066  0.24554983  1.464302322 -0.504262815
+site54  versicolor  0.5332066  0.24554983  0.183317720  0.827959012
+site55  versicolor  0.5332066  0.24554983  1.088103258 -0.074590675
+site56  versicolor  0.5332066  0.24554983  0.641669084  0.418246872
+site57  versicolor  0.5332066  0.24554983  1.095060663 -0.283468270
+site58  versicolor  0.5332066  0.24554983 -0.749122670  1.004890961
+site59  versicolor  0.5332066  0.24554983  1.044131826 -0.228361900
+site60  versicolor  0.5332066  0.24554983 -0.008745404  0.723081905
+site61  versicolor  0.5332066  0.24554983 -0.507840884  1.265971191
+site62  versicolor  0.5332066  0.24554983  0.511698557  0.103981235
+site63  versicolor  0.5332066  0.24554983  0.264976508  0.550036464
+site64  versicolor  0.5332066  0.24554983  0.984934510  0.124817854
+site65  versicolor  0.5332066  0.24554983 -0.173925372  0.254854209
+site66  versicolor  0.5332066  0.24554983  0.927860781 -0.467179494
+site67  versicolor  0.5332066  0.24554983  0.660283762  0.352969666
+site68  versicolor  0.5332066  0.24554983  0.236104993  0.333610767
+site69  versicolor  0.5332066  0.24554983  0.944733728  0.543145551
+site70  versicolor  0.5332066  0.24554983  0.045226976  0.583834377
+site71  versicolor  0.5332066  0.24554983  1.116283177  0.084616852
+site72  versicolor  0.5332066  0.24554983  0.357888418  0.068925032
+site73  versicolor  0.5332066  0.24554983  1.298183875  0.327787308
+site74  versicolor  0.5332066  0.24554983  0.921728922  0.182737794
+site75  versicolor  0.5332066  0.24554983  0.714853326 -0.149055944
+site76  versicolor  0.5332066  0.24554983  0.900174373 -0.328504474
+site77  versicolor  0.5332066  0.24554983  1.332024437 -0.244440876
+site78  versicolor  0.5332066  0.24554983  1.557802155 -0.267495447
+site79  versicolor  0.5332066  0.24554983  0.813290650  0.163350301
+site80  versicolor  0.5332066  0.24554983 -0.305583778  0.368262190
+site81  versicolor  0.5332066  0.24554983 -0.068126492  0.705172132
+site82  versicolor  0.5332066  0.24554983 -0.189622472  0.680286764
+site83  versicolor  0.5332066  0.24554983  0.136428712  0.314032438
+site84  versicolor  0.5332066  0.24554983  1.380026436  0.420954287
+site85  versicolor  0.5332066  0.24554983  0.588006443  0.484287420
+site86  versicolor  0.5332066  0.24554983  0.806858313 -0.194182315
+site87  versicolor  0.5332066  0.24554983  1.220690882 -0.407619594
+site88  versicolor  0.5332066  0.24554983  0.815095236  0.372037060
+site89  versicolor  0.5332066  0.24554983  0.245957680  0.268524397
+site90  versicolor  0.5332066  0.24554983  0.166413217  0.681926725
+site91  versicolor  0.5332066  0.24554983  0.464800288  0.670711545
+site92  versicolor  0.5332066  0.24554983  0.890815198  0.034464444
+site93  versicolor  0.5332066  0.24554983  0.230548024  0.404385848
+site94  versicolor  0.5332066  0.24554983 -0.704531759  1.012248228
+site95  versicolor  0.5332066  0.24554983  0.356981495  0.504910093
+site96  versicolor  0.5332066  0.24554983  0.331934480  0.212654684
+site97  versicolor  0.5332066  0.24554983  0.376215651  0.293218929
+site98  versicolor  0.5332066  0.24554983  0.642576008 -0.017738190
+site99  versicolor  0.5332066  0.24554983 -0.906469865  0.756093367
+site100 versicolor  0.5332066  0.24554983  0.299000842  0.348897806
+site101  virginica  2.1092089 -0.05466479  2.531192728  0.009849109
+site102  virginica  2.1092089 -0.05466479  1.415235877  0.574916348
+site103  virginica  2.1092089 -0.05466479  2.616676016 -0.343903151
+site104  virginica  2.1092089 -0.05466479  1.971531053  0.179727904
+site105  virginica  2.1092089 -0.05466479  2.350005920  0.040260947
+site106  virginica  2.1092089 -0.05466479  3.397038736 -0.550836673
+site107  virginica  2.1092089 -0.05466479  0.521232244  1.192758727
+site108  virginica  2.1092089 -0.05466479  2.932587069 -0.355500003
+site109  virginica  2.1092089 -0.05466479  2.321228817  0.243831502
+site110  virginica  2.1092089 -0.05466479  2.916750967 -0.782791949
+site111  virginica  2.1092089 -0.05466479  1.661774154 -0.242228408
+site112  virginica  2.1092089 -0.05466479  1.803401953  0.215637617
+site113  virginica  2.1092089 -0.05466479  2.165591796 -0.216275585
+site114  virginica  2.1092089 -0.05466479  1.346163579  0.776818347
+site115  virginica  2.1092089 -0.05466479  1.585928224  0.539640714
+site116  virginica  2.1092089 -0.05466479  1.904456375 -0.119250692
+site117  virginica  2.1092089 -0.05466479  1.949689059 -0.041943260
+site118  virginica  2.1092089 -0.05466479  3.487055364 -1.175739330
+site119  virginica  2.1092089 -0.05466479  3.795645422 -0.257322973
+site120  virginica  2.1092089 -0.05466479  1.300791713  0.761149636
+site121  virginica  2.1092089 -0.05466479  2.427817913 -0.378196013
+site122  virginica  2.1092089 -0.05466479  1.199001105  0.606091528
+site123  virginica  2.1092089 -0.05466479  3.499920039 -0.460674099
+site124  virginica  2.1092089 -0.05466479  1.388766132  0.204399327
+site125  virginica  2.1092089 -0.05466479  2.275430504 -0.334990606
+site126  virginica  2.1092089 -0.05466479  2.614090474 -0.560901355
+site127  virginica  2.1092089 -0.05466479  1.258508161  0.179704795
+site128  virginica  2.1092089 -0.05466479  1.291132059  0.116668651
+site129  virginica  2.1092089 -0.05466479  2.123608723  0.209729477
+site130  virginica  2.1092089 -0.05466479  2.388003016 -0.464639805
+site131  virginica  2.1092089 -0.05466479  2.841672778 -0.375269167
+site132  virginica  2.1092089 -0.05466479  3.230673661 -1.374165087
+site133  virginica  2.1092089 -0.05466479  2.159437642  0.217277579
+site134  virginica  2.1092089 -0.05466479  1.444161242  0.143413410
+site135  virginica  2.1092089 -0.05466479  1.781294810  0.499901681
+site136  virginica  2.1092089 -0.05466479  3.076499932 -0.688085678
+site137  virginica  2.1092089 -0.05466479  2.144243314 -0.140064201
+site138  virginica  2.1092089 -0.05466479  1.905098149 -0.049300526
+site139  virginica  2.1092089 -0.05466479  1.169326339  0.164990262
+site140  virginica  2.1092089 -0.05466479  2.107611143 -0.372287872
+site141  virginica  2.1092089 -0.05466479  2.314154705 -0.183651279
+site142  virginica  2.1092089 -0.05466479  1.922267801 -0.409203467
+site143  virginica  2.1092089 -0.05466479  1.415235877  0.574916348
+site144  virginica  2.1092089 -0.05466479  2.563013375 -0.277862603
+site145  virginica  2.1092089 -0.05466479  2.418746183 -0.304798198
+site146  virginica  2.1092089 -0.05466479  1.944109795 -0.187532303
+site147  virginica  2.1092089 -0.05466479  1.527166615  0.375316983
+site148  virginica  2.1092089 -0.05466479  1.764345717 -0.078858855
+site149  virginica  2.1092089 -0.05466479  1.900941614 -0.116627959
+site150  virginica  2.1092089 -0.05466479  1.390188862  0.282660938
+
+$plot</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-20-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="gráficos-de-ordenación-2" class="slide level2">
+<h2>Gráficos de ordenación</h2>
+<ul>
+<li>Manualmente</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a>pcaData <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(ord<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]) </span>
+<span id="cb20-2"><a href=""></a>pcaData <span class="ot">&lt;-</span> <span class="fu">cbind</span>(pcaData, iris<span class="sc">$</span>Species) </span>
+<span id="cb20-3"><a href=""></a><span class="fu">colnames</span>(pcaData) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PC1"</span>, <span class="st">"PC2"</span>, <span class="st">"Species"</span>) </span>
+<span id="cb20-4"><a href=""></a></span>
+<span id="cb20-5"><a href=""></a><span class="fu">ggplot</span>(pcaData) <span class="sc">+</span></span>
+<span id="cb20-6"><a href=""></a>  <span class="fu">aes</span>(PC1, PC2, <span class="at">color =</span> Species, <span class="at">shape =</span> Species) <span class="sc">+</span> </span>
+<span id="cb20-7"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb20-8"><a href=""></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb20-9"><a href=""></a>  <span class="fu">xlab</span>(<span class="st">"PC1: 73%"</span>)<span class="sc">+</span></span>
+<span id="cb20-10"><a href=""></a>  <span class="fu">ylab</span>(<span class="st">"PC2: 23%"</span>) <span class="sc">+</span></span>
+<span id="cb20-11"><a href=""></a>  <span class="fu">stat_ellipse</span>(<span class="at">geom=</span><span class="st">"polygon"</span>, <span class="at">level=</span><span class="fl">0.95</span>, <span class="at">alpha=</span><span class="fl">0.2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="gráficos-de-ordenación-3" class="slide level2">
+<h2>Gráficos de ordenación</h2>
+
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch"></section>
+<section id="pie-charts" class="slide level2">
+<h2>Pie charts</h2>
+<ul>
+<li>Modificamos la data de iris</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a>df <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href=""></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href=""></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb21-4"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> n<span class="sc">/</span><span class="dv">150</span><span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb21-5"><a href=""></a></span>
+<span id="cb21-6"><a href=""></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+# Groups:   Species [3]
+  Species        n percent
+  &lt;fct&gt;      &lt;int&gt;   &lt;dbl&gt;
+1 setosa        50    33.3
+2 versicolor    50    33.3
+3 virginica     50    33.3</code></pre>
+</div>
+</div>
+</section>
+<section id="pie-charts-1" class="slide level2">
+<h2>Pie charts</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">library</span>(scales)</span>
+<span id="cb23-2"><a href=""></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(<span class="at">x=</span><span class="st">""</span>,<span class="at">y=</span>percent, <span class="at">fill=</span>Species)) <span class="sc">+</span></span>
+<span id="cb23-3"><a href=""></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>,</span>
+<span id="cb23-4"><a href=""></a>           <span class="at">color=</span><span class="st">"white"</span>)<span class="sc">+</span></span>
+<span id="cb23-5"><a href=""></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span><span class="fu">percent</span>(percent<span class="sc">/</span><span class="dv">100</span>)),</span>
+<span id="cb23-6"><a href=""></a>              <span class="at">position=</span><span class="fu">position_stack</span>(<span class="at">vjust=</span><span class="fl">0.5</span>),<span class="at">color=</span><span class="st">"white"</span>,<span class="at">size=</span><span class="dv">6</span>)<span class="sc">+</span></span>
+<span id="cb23-7"><a href=""></a>  <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>)<span class="sc">+</span></span>
+<span id="cb23-8"><a href=""></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"salmon"</span>,<span class="st">"steelblue"</span>,<span class="st">"orange"</span>))<span class="sc">+</span></span>
+<span id="cb23-9"><a href=""></a>    <span class="fu">theme_void</span>()<span class="sc">+</span></span>
+<span id="cb23-10"><a href=""></a>    <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Pie chart"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-24-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="donus-chart" class="slide level2">
+<h2>Donus chart</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">2</span>,<span class="at">y=</span>percent, <span class="at">fill=</span>Species)) <span class="sc">+</span></span>
+<span id="cb24-2"><a href=""></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>,</span>
+<span id="cb24-3"><a href=""></a>           <span class="at">color=</span><span class="st">"white"</span>)  <span class="sc">+</span></span>
+<span id="cb24-4"><a href=""></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span><span class="fu">percent</span>(percent<span class="sc">/</span><span class="dv">100</span>)),</span>
+<span id="cb24-5"><a href=""></a>              <span class="at">position=</span><span class="fu">position_stack</span>(<span class="at">vjust=</span><span class="fl">0.5</span>),<span class="at">color=</span><span class="st">"white"</span>,<span class="at">size=</span><span class="dv">6</span>)<span class="sc">+</span></span>
+<span id="cb24-6"><a href=""></a>  <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>)<span class="sc">+</span></span>
+<span id="cb24-7"><a href=""></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"salmon"</span>,<span class="st">"steelblue"</span>,<span class="st">"orange"</span>))<span class="sc">+</span></span>
+<span id="cb24-8"><a href=""></a>    <span class="fu">theme_void</span>()<span class="sc">+</span></span>
+<span id="cb24-9"><a href=""></a>    <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Donus chart"</span>)<span class="sc">+</span></span>
+<span id="cb24-10"><a href=""></a>  <span class="fu">xlim</span>(<span class="fl">0.5</span>,<span class="fl">2.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-25-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="stat_summary-y-stat_smooth" class="slide level2">
+<h2>stat_summary() y stat_smooth()</h2>
+<p>Esta es una capa que nos permite poner desviaciones estándar o líneas que representan el promedio de los datos, por ejemplo:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a>ToothGrowth <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dose, <span class="at">y =</span> len)) <span class="sc">+</span></span>
+<span id="cb25-2"><a href=""></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun =</span> mean, <span class="fu">aes</span>(<span class="at">group =</span> supp, <span class="at">color =</span> supp)) <span class="sc">+</span></span>
+<span id="cb25-3"><a href=""></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">fun.data =</span> mean_se, <span class="fu">aes</span>(<span class="at">group =</span> supp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-27-1.png" class="quarto-figure quarto-figure-center r-stretch" width="384"></section>
+<section id="stat_summary-y-stat_smoot" class="slide level2">
+<h2>stat_summary() y stat_smoot()</h2>
+<p>stat_smooth() nos permite colorear o resaltar la línea que representa nuestro modelo lineal:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Petal.Width, <span class="at">y =</span> Sepal.Length)) <span class="sc">+</span>    </span>
+<span id="cb26-2"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb26-3"><a href=""></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-28-1.png" class="quarto-figure quarto-figure-center r-stretch" width="384"></section>
+<section id="ggpubr" class="slide level2">
+<h2><code>ggpubr()</code></h2>
+<p><a href="https://cran.r-project.org/web/packages/ggpubr/index.html"><code>ggpubr()</code></a> es una paqutería tipo compatible con <code>ggplot2()</code> pero un poco más fácil de declarar y más intuitivo.</p>
+<p>Para instarla, debemos hacerlo como usualmente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"ggpubr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ggpubr-1" class="slide level2">
+<h2><code>ggpubr()</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="fu">library</span>(ggpubr) </span>
+<span id="cb28-2"><a href=""></a><span class="fu">ggboxplot</span>(ToothGrowth, </span>
+<span id="cb28-3"><a href=""></a>          <span class="at">x =</span> <span class="st">"dose"</span>, </span>
+<span id="cb28-4"><a href=""></a>          <span class="at">y =</span> <span class="st">"len"</span>, </span>
+<span id="cb28-5"><a href=""></a>          <span class="at">color =</span> <span class="st">"dose"</span>, </span>
+<span id="cb28-6"><a href=""></a>          <span class="at">add =</span> <span class="st">"jitter"</span>, </span>
+<span id="cb28-7"><a href=""></a>          <span class="at">shape =</span> <span class="st">"dose"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-30-1.png" class="quarto-figure quarto-figure-center r-stretch" width="336"></section>
+<section id="ggpubr-2" class="slide level2">
+<h2><code>ggpubr()</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a><span class="fu">ggbarplot</span>(ToothGrowth, </span>
+<span id="cb29-2"><a href=""></a>          <span class="at">x =</span> <span class="st">"dose"</span>, </span>
+<span id="cb29-3"><a href=""></a>          <span class="at">y =</span> <span class="st">"len"</span>, </span>
+<span id="cb29-4"><a href=""></a>          <span class="at">fill =</span> <span class="st">"dose"</span>, </span>
+<span id="cb29-5"><a href=""></a>          <span class="at">add =</span> <span class="st">"mean_se"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-31-1.png" class="quarto-figure quarto-figure-center r-stretch" width="288"></section>
+<section id="ggpubr-3" class="slide level2">
+<h2><code>ggpubr()</code></h2>
+<ul>
+<li><p>Otras funciones interesantes de este paquete son <strong>facet.by</strong> que nos permite hacer las gráficas multi-panel</p></li>
+<li><p>Otro que es muy útil es el de <strong>stat_compare_means()</strong> que nos permite agregar una capa que hace análisis estátidísticos como t.test, wilcoxon, kruskal.walis, anova, entre otros y que nos evita hacer análisis fuera y que podamos agragarlas a la gráfica en un sólo paso.</p></li>
+</ul>
+</section>
+<section id="ggpubr-4" class="slide level2">
+<h2><code>ggpubr()</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="fu">ggboxplot</span>(ToothGrowth,</span>
+<span id="cb30-2"><a href=""></a>          <span class="at">x =</span> <span class="st">"dose"</span>,</span>
+<span id="cb30-3"><a href=""></a>          <span class="at">y =</span> <span class="st">"len"</span>, </span>
+<span id="cb30-4"><a href=""></a>          <span class="at">color =</span> <span class="st">"dose"</span>,           </span>
+<span id="cb30-5"><a href=""></a>          <span class="at">facet.by =</span> <span class="st">"supp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-32-1.png" class="quarto-figure quarto-figure-center r-stretch" width="336"></section>
+<section id="ggpubr-5" class="slide level2">
+<h2><code>ggpubr()</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a>comparaciones <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="fu">c</span>(<span class="st">"0.5"</span>, <span class="st">"1"</span>), <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>), <span class="fu">c</span>(<span class="st">"0.5"</span>, <span class="st">"2"</span>) ) </span>
+<span id="cb31-2"><a href=""></a><span class="fu">ggbarplot</span>(ToothGrowth, <span class="at">x =</span> <span class="st">"dose"</span>, </span>
+<span id="cb31-3"><a href=""></a>          <span class="at">y =</span> <span class="st">"len"</span>, <span class="at">fill =</span> <span class="st">"dose"</span>, </span>
+<span id="cb31-4"><a href=""></a>          <span class="at">add =</span> <span class="st">"mean_sd"</span>, </span>
+<span id="cb31-5"><a href=""></a>          <span class="at">legend =</span> <span class="st">"right"</span>)<span class="sc">+</span></span>
+<span id="cb31-6"><a href=""></a>  <span class="fu">stat_compare_means</span>(<span class="at">comparisons =</span> comparaciones, <span class="at">label =</span> <span class="st">"p.signif"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-33-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:60.0%"></section>
+<section id="tidyplots" class="slide level2">
+<h2><a href="https://jbengler.github.io/tidyplots/">Tidyplots</a></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"tidyplots"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">library</span>(tidyplots)</span>
+<span id="cb33-2"><a href=""></a></span>
+<span id="cb33-3"><a href=""></a>study <span class="sc">|&gt;</span> </span>
+<span id="cb33-4"><a href=""></a>  <span class="fu">tidyplot</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> score, <span class="at">color =</span> treatment) <span class="sc">|&gt;</span> </span>
+<span id="cb33-5"><a href=""></a>  <span class="fu">add_mean_bar</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb33-6"><a href=""></a>  <span class="fu">add_sem_errorbar</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb33-7"><a href=""></a>  <span class="fu">add_data_points_beeswarm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-35-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="tidyplots-1" class="slide level2">
+<h2><a href="https://jbengler.github.io/tidyplots/">Tidyplots</a></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a>study <span class="sc">|&gt;</span> </span>
+<span id="cb34-2"><a href=""></a>  <span class="fu">tidyplot</span>(<span class="at">x =</span> group, <span class="at">y =</span> score, <span class="at">color =</span> dose) <span class="sc">|&gt;</span> </span>
+<span id="cb34-3"><a href=""></a>  <span class="fu">add_mean_bar</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb34-4"><a href=""></a>  <span class="fu">add_mean_dash</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb34-5"><a href=""></a>  <span class="fu">add_mean_value</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-36-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="tidyplots-2" class="slide level2">
+<h2><a href="https://jbengler.github.io/tidyplots/">Tidyplots</a></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a>study <span class="sc">|&gt;</span> </span>
+<span id="cb35-2"><a href=""></a>  <span class="fu">tidyplot</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> score, <span class="at">color =</span> treatment) <span class="sc">|&gt;</span> </span>
+<span id="cb35-3"><a href=""></a>  <span class="fu">add_boxplot</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb35-4"><a href=""></a>  <span class="fu">add_test_pvalue</span>(<span class="at">ref.group =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-37-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="tidyplots-3" class="slide level2">
+<h2><a href="https://jbengler.github.io/tidyplots/">Tidyplots</a></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a>energy <span class="sc">|&gt;</span> </span>
+<span id="cb36-2"><a href=""></a>  <span class="fu">tidyplot</span>(<span class="at">x =</span> year, <span class="at">y =</span> energy, <span class="at">color =</span> energy_source) <span class="sc">|&gt;</span> </span>
+<span id="cb36-3"><a href=""></a>  <span class="fu">add_barstack_absolute</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-38-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="tidyplots-4" class="slide level2">
+<h2><a href="https://jbengler.github.io/tidyplots/">Tidyplots</a></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a>energy <span class="sc">|&gt;</span> </span>
+<span id="cb37-2"><a href=""></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2005</span>, <span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">2020</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb37-3"><a href=""></a>  <span class="fu">tidyplot</span>(<span class="at">y =</span> energy, <span class="at">color =</span> energy_source) <span class="sc">|&gt;</span> </span>
+<span id="cb37-4"><a href=""></a>  <span class="fu">add_donut</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb37-5"><a href=""></a>  <span class="fu">adjust_size</span>(<span class="at">width =</span> <span class="dv">25</span>, <span class="at">height =</span> <span class="dv">25</span>) <span class="sc">|&gt;</span></span>
+<span id="cb37-6"><a href=""></a>  <span class="fu">split_plot</span>(<span class="at">by =</span> year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-39-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="plotly" class="slide level2">
+<h2><a href="https://plotly.com/r/">Plotly</a></h2>
+<ul>
+<li>Instalando plotly</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"plotly"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a><span class="fu">library</span>(plotly)</span>
+<span id="cb39-2"><a href=""></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(<span class="at">data =</span> iris, <span class="at">x =</span> <span class="sc">~</span>Sepal.Length, <span class="at">y =</span> <span class="sc">~</span>Petal.Length)</span>
+<span id="cb39-3"><a href=""></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-812c9115cde5c072f267" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-812c9115cde5c072f267">{"x":{"visdat":{"66747c48583e":["function () ","plotlyVisDat"]},"cur_data":"66747c48583e","attrs":{"66747c48583e":{"x":{},"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Sepal.Length"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Petal.Length"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[5.0999999999999996,4.9000000000000004,4.7000000000000002,4.5999999999999996,5,5.4000000000000004,4.5999999999999996,5,4.4000000000000004,4.9000000000000004,5.4000000000000004,4.7999999999999998,4.7999999999999998,4.2999999999999998,5.7999999999999998,5.7000000000000002,5.4000000000000004,5.0999999999999996,5.7000000000000002,5.0999999999999996,5.4000000000000004,5.0999999999999996,4.5999999999999996,5.0999999999999996,4.7999999999999998,5,5,5.2000000000000002,5.2000000000000002,4.7000000000000002,4.7999999999999998,5.4000000000000004,5.2000000000000002,5.5,4.9000000000000004,5,5.5,4.9000000000000004,4.4000000000000004,5.0999999999999996,5,4.5,4.4000000000000004,5,5.0999999999999996,4.7999999999999998,5.0999999999999996,4.5999999999999996,5.2999999999999998,5,7,6.4000000000000004,6.9000000000000004,5.5,6.5,5.7000000000000002,6.2999999999999998,4.9000000000000004,6.5999999999999996,5.2000000000000002,5,5.9000000000000004,6,6.0999999999999996,5.5999999999999996,6.7000000000000002,5.5999999999999996,5.7999999999999998,6.2000000000000002,5.5999999999999996,5.9000000000000004,6.0999999999999996,6.2999999999999998,6.0999999999999996,6.4000000000000004,6.5999999999999996,6.7999999999999998,6.7000000000000002,6,5.7000000000000002,5.5,5.5,5.7999999999999998,6,5.4000000000000004,6,6.7000000000000002,6.2999999999999998,5.5999999999999996,5.5,5.5,6.0999999999999996,5.7999999999999998,5,5.5999999999999996,5.7000000000000002,5.7000000000000002,6.2000000000000002,5.0999999999999996,5.7000000000000002,6.2999999999999998,5.7999999999999998,7.0999999999999996,6.2999999999999998,6.5,7.5999999999999996,4.9000000000000004,7.2999999999999998,6.7000000000000002,7.2000000000000002,6.5,6.4000000000000004,6.7999999999999998,5.7000000000000002,5.7999999999999998,6.4000000000000004,6.5,7.7000000000000002,7.7000000000000002,6,6.9000000000000004,5.5999999999999996,7.7000000000000002,6.2999999999999998,6.7000000000000002,7.2000000000000002,6.2000000000000002,6.0999999999999996,6.4000000000000004,7.2000000000000002,7.4000000000000004,7.9000000000000004,6.4000000000000004,6.2999999999999998,6.0999999999999996,7.7000000000000002,6.2999999999999998,6.4000000000000004,6,6.9000000000000004,6.7000000000000002,6.9000000000000004,5.7999999999999998,6.7999999999999998,6.7000000000000002,6.7000000000000002,6.2999999999999998,6.5,6.2000000000000002,5.9000000000000004],"y":[1.3999999999999999,1.3999999999999999,1.3,1.5,1.3999999999999999,1.7,1.3999999999999999,1.5,1.3999999999999999,1.5,1.5,1.6000000000000001,1.3999999999999999,1.1000000000000001,1.2,1.5,1.3,1.3999999999999999,1.7,1.5,1.7,1.5,1,1.7,1.8999999999999999,1.6000000000000001,1.6000000000000001,1.5,1.3999999999999999,1.6000000000000001,1.6000000000000001,1.5,1.5,1.3999999999999999,1.5,1.2,1.3,1.3999999999999999,1.3,1.5,1.3,1.3,1.3,1.6000000000000001,1.8999999999999999,1.3999999999999999,1.6000000000000001,1.3999999999999999,1.5,1.3999999999999999,4.7000000000000002,4.5,4.9000000000000004,4,4.5999999999999996,4.5,4.7000000000000002,3.2999999999999998,4.5999999999999996,3.8999999999999999,3.5,4.2000000000000002,4,4.7000000000000002,3.6000000000000001,4.4000000000000004,4.5,4.0999999999999996,4.5,3.8999999999999999,4.7999999999999998,4,4.9000000000000004,4.7000000000000002,4.2999999999999998,4.4000000000000004,4.7999999999999998,5,4.5,3.5,3.7999999999999998,3.7000000000000002,3.8999999999999999,5.0999999999999996,4.5,4.5,4.7000000000000002,4.4000000000000004,4.0999999999999996,4,4.4000000000000004,4.5999999999999996,4,3.2999999999999998,4.2000000000000002,4.2000000000000002,4.2000000000000002,4.2999999999999998,3,4.0999999999999996,6,5.0999999999999996,5.9000000000000004,5.5999999999999996,5.7999999999999998,6.5999999999999996,4.5,6.2999999999999998,5.7999999999999998,6.0999999999999996,5.0999999999999996,5.2999999999999998,5.5,5,5.0999999999999996,5.2999999999999998,5.5,6.7000000000000002,6.9000000000000004,5,5.7000000000000002,4.9000000000000004,6.7000000000000002,4.9000000000000004,5.7000000000000002,6,4.7999999999999998,4.9000000000000004,5.5999999999999996,5.7999999999999998,6.0999999999999996,6.4000000000000004,5.5999999999999996,5.0999999999999996,5.5999999999999996,6.0999999999999996,5.5999999999999996,5.5,4.7999999999999998,5.4000000000000004,5.5999999999999996,5.0999999999999996,5.0999999999999996,5.9000000000000004,5.7000000000000002,5.2000000000000002,5,5.2000000000000002,5.4000000000000004,5.0999999999999996],"type":"scatter","mode":"markers","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="plotly-1" class="slide level2">
+<h2><a href="https://plotly.com/r/">Plotly</a></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a>Animals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"giraffes"</span>, <span class="st">"orangutans"</span>, <span class="st">"monkeys"</span>)</span>
+<span id="cb40-2"><a href=""></a>SF_Zoo <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">14</span>, <span class="dv">23</span>)</span>
+<span id="cb40-3"><a href=""></a>LA_Zoo <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">29</span>)</span>
+<span id="cb40-4"><a href=""></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Animals, SF_Zoo, LA_Zoo)</span>
+<span id="cb40-5"><a href=""></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(data, <span class="at">x =</span> <span class="sc">~</span>Animals, <span class="at">y =</span> <span class="sc">~</span>SF_Zoo, <span class="at">type =</span> <span class="st">'bar'</span>, <span class="at">name =</span> <span class="st">'SF Zoo'</span>)</span>
+<span id="cb40-6"><a href=""></a>fig <span class="ot">&lt;-</span> fig <span class="sc">%&gt;%</span> <span class="fu">add_trace</span>(<span class="at">y =</span> <span class="sc">~</span>LA_Zoo, <span class="at">name =</span> <span class="st">'LA Zoo'</span>)</span>
+<span id="cb40-7"><a href=""></a>fig <span class="ot">&lt;-</span> fig <span class="sc">%&gt;%</span> <span class="fu">layout</span>(<span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">'Count'</span>), <span class="at">barmode =</span> <span class="st">'group'</span>)</span>
+<span id="cb40-8"><a href=""></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-45d6feeb4567664ad0e3" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-45d6feeb4567664ad0e3">{"x":{"visdat":{"667423121fbf":["function () ","plotlyVisDat"]},"cur_data":"667423121fbf","attrs":{"667423121fbf":{"x":{},"y":{},"name":"SF Zoo","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"},"667423121fbf.1":{"x":{},"y":{},"name":"LA Zoo","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"Count"},"barmode":"group","xaxis":{"domain":[0,1],"automargin":true,"title":"Animals","type":"category","categoryorder":"array","categoryarray":["giraffes","monkeys","orangutans"]},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["giraffes","orangutans","monkeys"],"y":[20,14,23],"name":"SF Zoo","type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["giraffes","orangutans","monkeys"],"y":[12,18,29],"name":"LA Zoo","type":"bar","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="plotly-2" class="slide level2">
+<h2><a href="https://plotly.com/r/">Plotly</a></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(<span class="at">y =</span> <span class="sc">~</span><span class="fu">rnorm</span>(<span class="dv">50</span>), <span class="at">type =</span> <span class="st">"box"</span>)</span>
+<span id="cb41-2"><a href=""></a>fig <span class="ot">&lt;-</span> fig <span class="sc">%&gt;%</span> <span class="fu">add_trace</span>(<span class="at">y =</span> <span class="sc">~</span><span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="dv">1</span>))</span>
+<span id="cb41-3"><a href=""></a></span>
+<span id="cb41-4"><a href=""></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-0c27d8af58166d53661c" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-0c27d8af58166d53661c">{"x":{"visdat":{"667422211640":["function () ","plotlyVisDat"]},"cur_data":"667422211640","attrs":{"667422211640":{"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"},"667422211640.1":{"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"rnorm(50)"},"xaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(31,119,180,0.5)","y":[-0.053805040582905118,-1.3770595568286066,-0.41499456329967976,-0.39428995371034931,-0.059313396711185663,1.1000253719838831,0.76317574845754421,-0.1645235962535869,-0.25336168013650756,0.69696337540473741,0.55666319867365732,-0.6887556945495199,-0.70749515696211962,0.36458196213683031,0.76853292451541577,-0.11234621215022805,0.88110772645421476,0.39810588036706807,-0.61202639325077124,0.34111969142442478,-1.1293630960807926,1.433023701701037,1.98039989850586,-0.36722147646650904,-1.0441346263165308,0.56971962744241289,-0.13505460388082435,2.4016177605047764,-0.039240002733169244,0.68973936245077672,0.028002158780666062,-0.74327320888240533,0.1887922995143429,-1.8049586288910378,1.4655548615628859,0.15325333821189771,2.1726116703621527,0.47550952889966253,-0.70994643092181453,0.61072635348905491,-0.93409763164425152,-1.2536334002391021,0.29144623551746285,-0.443291873218433,0.0011053516316241311,0.074341324151664057,-0.58952094618807194,-0.56866873281850194,-0.13517861512383206,1.1780869965732044],"type":"box","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(255,127,14,0.5)","y":[-0.523566800429762,1.5939461876284216,1.3329503712135182,2.0630998372763627,0.69581607636569931,1.3700188099162882,1.2670987907722311,0.45747996900834964,2.207867805983172,2.1604026156949514,1.7002136495149982,2.5868334545408453,1.5584864255653039,-0.27659220845803656,0.42673458576311374,-0.22461261489835582,0.52659936356068848,0.3796333227758758,1.0421158731442353,0.089078351447554494,1.158028772404075,0.34541535608118223,2.767287269372646,1.7167074760172056,1.9101742294952273,1.3841853578263446,2.6821760805194184,0.36426354605102296,0.53835526963943403,2.4322822385416627,0.34930364668963332,0.79261925639803454,0.60719207055801605,0.68000713145149316,0.7208866970234411,1.494188331267827,0.82266951773039365,0.49404253788574259,2.3430388251704115,0.78542059145313126,0.82044346995661288,0.89980925878643803,1.7126663070514052,0.92643559587367363,0.96236582853295205,0.31833952124434306,0.6757297277536809,1.0601604404345151,0.41110551374033621,1.5314961926325723],"type":"box","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="misceláneos-ggcats" class="slide level2">
+<h2>Misceláneos: <code>ggcats()</code></h2>
+<p><code>ggplot2()</code> nos permite usar diversos paquetes desarrollados por muchos usarios con fines divertidos o misceláneos como <a href="https://r-charts.com/es/miscelanea/ggcats/"><code>ggcats</code></a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>) </span>
+<span id="cb42-2"><a href=""></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"R-CoderDotCom/ggcats@main"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="misceláneos-ggcats-1" class="slide level2">
+<h2>Misceláneos: <code>ggcats()</code></h2>
+
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-45-1.png" width="960" class="r-stretch"></section>
+<section id="misceláneos-ggcats-2" class="slide level2">
+<h2>Misceláneos: <code>ggcats()</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a><span class="fu">library</span>(ggcats)</span>
+<span id="cb43-2"><a href=""></a>ToothGrowth<span class="sc">$</span>cats <span class="ot">&lt;-</span> <span class="fu">factor</span>(ToothGrowth<span class="sc">$</span>dose, <span class="at">levels =</span> <span class="fu">c</span>(<span class="fl">0.5</span>,<span class="dv">1</span>,<span class="dv">2</span>),                            <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"mouth"</span>, <span class="st">"grumpy"</span>, <span class="st">"pusheen_pc"</span>))  </span>
+<span id="cb43-3"><a href=""></a></span>
+<span id="cb43-4"><a href=""></a>ToothGrowth <span class="sc">%&gt;%</span>  </span>
+<span id="cb43-5"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> len, <span class="at">x =</span> dose)) <span class="sc">+</span>   </span>
+<span id="cb43-6"><a href=""></a>  <span class="fu">geom_cat</span>(<span class="fu">aes</span>(<span class="at">cat =</span> cats), <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span>  </span>
+<span id="cb43-7"><a href=""></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">2.25</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-46-1.png" class="quarto-figure quarto-figure-center r-stretch" width="316"></section>
+<section id="misceláneos-ggtexttable" class="slide level2">
+<h2>Misceláneos: <code>ggtexttable()</code></h2>
+<p>Esta función me permite hacer mis tablas como figuras que puedo exportar como imágenes y darle formato. Hace parte del paquete <code>ggpubr()</code> que vimos anteriormente.</p>
+<p>Haremos un ejemplo con los primeros cuatro datos de <strong>iris</strong>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">library</span>(dplyr) </span>
+<span id="cb44-2"><a href=""></a>df<span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)) </span>
+<span id="cb44-3"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-47-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="misceláneos-ggtexttable-1" class="slide level2">
+<h2>Misceláneos: <em>ggtexttable()</em></h2>
+<p>También podemos cambiar el tema con el que se formatea la tabla, por ejemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"blank"</span>)) </span>
+<span id="cb45-2"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"light"</span>)) </span>
+<span id="cb45-3"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"classic"</span>)) </span>
+<span id="cb45-4"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"minimal"</span>)) </span>
+<span id="cb45-5"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"lVioletWhite"</span>)) </span>
+<span id="cb45-6"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"mVioletWhite"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="misceláneos-ggtexttable-2" class="slide level2">
+<h2>Misceláneos: <em>ggtexttable()</em></h2>
+
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-49-1.png" width="960" class="r-stretch"></section>
+<section id="misceláneos-ggtexttable-3" class="slide level2">
+<h2>Misceláneos: <em>ggtexttable()</em></h2>
+<p>Otros formateos:</p>
+<ul>
+<li><p>Poner en negrita una celda:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>,  <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"classic"</span>)) <span class="sc">%&gt;%</span>    </span>
+<span id="cb46-2"><a href=""></a>  <span class="fu">table_cell_font</span>(<span class="at">row =</span> <span class="dv">3</span>, <span class="at">column =</span> <span class="dv">2</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-50-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
@@ -572,11 +1629,13 @@
 <h2>Misceláneos: <em>ggtexttable()</em></h2>
 <ul>
 <li><p>Resaltar una columna:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>,  <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"classic"</span>)) <span class="sc">%&gt;%</span>    </span>
+<span id="cb47-2"><a href=""></a>  <span class="fu">table_cell_bg</span>(<span class="at">row =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">column =</span> <span class="dv">3</span>, <span class="at">fill=</span><span class="st">"yellow"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-25-1.png" width="960"></p>
+<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-51-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
@@ -587,35 +1646,19 @@
 <h2>Misceláneos: <em>ggtexttable()</em></h2>
 <ul>
 <li><p>Poner títulos y pies de notas:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>,  <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"classic"</span>)) <span class="sc">%&gt;%</span>    </span>
+<span id="cb48-2"><a href=""></a>  <span class="fu">tab_add_title</span>(<span class="at">text =</span> <span class="st">"Data iris"</span>,  <span class="at">size =</span> <span class="dv">14</span>, <span class="at">face=</span><span class="st">"bold"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href=""></a>  <span class="fu">tab_add_footnote</span>(<span class="at">text =</span> <span class="st">"*Alguna nota"</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">face =</span> <span class="st">"italic"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-26-1.png" width="960"></p>
+<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-52-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
 </div></li>
 </ul>
-</section>
-<section id="muchas-gracias" class="slide level2">
-<h2>Muchas gracias…</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="images//gg1.jpg" style="width:45.0%"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="images//gg3.jpeg" style="width:45.0%"></p>
-</figure>
-</div>
-</div>
-</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -940,18 +1983,7 @@
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -983,7 +2015,29 @@
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -991,7 +2045,7 @@
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {
