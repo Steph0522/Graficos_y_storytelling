@@ -12,7 +12,7 @@ Repositorio creado para el material del Módulo I: Presentación de gráficos en
 1.3. Gráficos circulares y de anillos 
 
 1.4. Otros gráficos 
-
+\
  
 
 **2. Gráficos en R:**
@@ -39,7 +39,7 @@ Repositorio creado para el material del Módulo I: Presentación de gráficos en
 2.9. Gráficos de ordenación 
 
 2.10. Otros gráficos	 
-
+\
 
 
 **3. Storytelling de datos. [Presentación](https://drive.google.com/drive/folders/1qbaztkVNTWj_PReaxHi8AH9xmdkjC-AK?usp=drive_link)**
@@ -54,7 +54,7 @@ Repositorio creado para el material del Módulo I: Presentación de gráficos en
 
 3.5. Pensar como diseñador 
 
-
+\
 
 **4. "Los amigos no dejan que sus amigos hagan malos gráficos”. [Presentación](https://drive.google.com/drive/folders/1qbaztkVNTWj_PReaxHi8AH9xmdkjC-AK?usp=drive_link)**
 Créditos de esta parte al repositorio de [cxli233](https://github.com/cxli233/FriendsDontLetFriends)
