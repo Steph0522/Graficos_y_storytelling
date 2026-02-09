@@ -3,7 +3,7 @@
 Repositorio creado para el material del Módulo I: Presentación de gráficos en R y Excel, storytelling de visualizaciones del curso: "Habilidades básicas para la elaboración de documentos académicos"
 
 
-1. [Gráficos exploratorios en Excel](https://drive.google.com/drive/folders/1qbaztkVNTWj_PReaxHi8AH9xmdkjC-AK?usp=drive_link)
+1. Gráficos exploratorios en Excel: [Presentación](https://drive.google.com/drive/folders/1qbaztkVNTWj_PReaxHi8AH9xmdkjC-AK?usp=drive_link)
 
 1.1. Gráficos de columnas y barras 
 
@@ -16,7 +16,10 @@ Repositorio creado para el material del Módulo I: Presentación de gráficos en
  
 
 
-2. Gráficos en R 
+2. Gráficos en R:
+[Presentación 1]()
+[Presentación 2]()
+[Presentación 3]()
 
 2.1 Sintaxis R básico 
 

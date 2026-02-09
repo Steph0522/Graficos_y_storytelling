@@ -1,0 +1,309 @@
+---
+title: ""
+format:
+   revealjs:
+    slide-number: true
+    theme: serif
+---
+
+::: cover
+# Gráficos en R parte 3
+
+::: subtitle
+PhD. Stephanie Elizabeth Hereira Pacheco
+:::
+
+------------------------------------------------------------------------
+
+![](logo.png)
+:::
+
+## Heatmaps o mapas de calor
+
+Data de ejemplo:
+
+```{r,echo=TRUE}
+set.seed(1)
+df.heatmap <- expand.grid(Var1 = letters[1:5], Var2 = 1:5)
+df.heatmap$score <- runif(nrow(df.heatmap), min = -2, max = 2)
+```
+
+```{r, echo=TRUE}
+library(ggplot2)
+ggplot(df.heatmap, aes(x = Var1, y = Var2, fill = score)) + 
+  geom_tile()
+```
+
+## Heatmaps o mapas de calor
+
+```{r, echo=TRUE}
+ggplot(df.heatmap, aes(x = Var1, y = Var2, fill = score)) + 
+  geom_tile() + 
+  scale_fill_gradient2()
+
+```
+
+## Heatmaps usando [`ComplexHeatmap`](https://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html)
+
+Primero modificamos la data:
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(tidyr)
+library(tibble)
+mat = df.heatmap %>%
+  pivot_wider(id_cols = Var2, names_from = Var1, values_from = score)%>%
+  column_to_rownames(var = "Var2")
+```
+
+```{r, echo=FALSE}
+head(mat)
+```
+
+## Heatmaps usando [`ComplexHeatmap`](https://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html)
+
+-   Instalando [`ComplexHeatmap`](https://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html)`:`
+
+```{r, echo=TRUE, eval=FALSE}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("ComplexHeatmap")
+```
+
+## Heatmaps usando [`ComplexHeatmap`](https://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html)
+
+-   Corriendo [`ComplexHeatmap`](https://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html)`:`
+
+```{r}
+library(ComplexHeatmap)
+Heatmap(
+  as.matrix(mat),
+  name = "mat",
+  rect_gp = gpar(col = "white", lwd = 2),
+  column_title = "Heatmap",
+  column_km = 3,
+  top_annotation = HeatmapAnnotation(foo1 = 1:5, bar1 = anno_points(runif(5))),
+  right_annotation = rowAnnotation(foo2 = 5:1, bar2 = anno_barplot(runif(5)))
+)
+```
+
+##  Diagramas de Venn
+
+-   Instalando [`ggVennDiagram`](https://r-charts.com/es/parte-todo/ggvenndiagram/):
+
+```{r, echo=TRUE, eval=FALSE}
+install.packages("ggVennDiagram")
+```
+
+-   Corriendo [`ggVennDiagram`](https://r-charts.com/es/parte-todo/ggvenndiagram/):
+
+```{r, echo=TRUE}
+library(ggVennDiagram)
+x <- list(A = 1:5, B = 2:7)
+ggVennDiagram(x) 
+```
+
+2.7. Sankey plots
+
+2.8. Lolipop plots
+
+2.9. Gráficos de ordenación
+
+## Otros gráficos
+
+### stat_summary() y stat_smooth()
+
+Esta es una capa que nos permite poner desviaciones estándar o líneas que representan el promedio de los datos, por ejemplo:
+
+```{r}
+data("ToothGrowth")
+```
+
+```{r, fig.height=2, fig.width=4, fig.align='center'}
+ToothGrowth %>%    ggplot(aes(x = dose, y = len)) +   
+  stat_summary(geom = "line", fun = mean, aes(group = supp, color = supp))+
+  stat_summary(geom = "errorbar", fun.data = mean_se, aes(group = supp))
+```
+
+## stat_summary() y stat_smoot()
+
+stat_smooth() nos permite colorear o resaltar la línea que representa nuestro modelo lineal:
+
+```{r, fig.height=2, fig.width=4, fig.align='center'}
+ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +    
+  geom_point() +
+  stat_smooth(method = "lm", col = "red")
+```
+
+## *ggpubr()*
+
+*ggpubr()* es una paqutería tipo compatible con *ggplot2()* pero un poco más fácil de declarar y más intuitivo.
+
+```{r, fig.height=2.5, fig.width=3.5, fig.align='center', warning=FALSE, message=FALSE}
+library(ggpubr) 
+ggboxplot(ToothGrowth, 
+          x = "dose", 
+          y = "len", 
+          color = "dose", 
+          add = "jitter", 
+          shape = "dose")
+```
+
+## *ggpubr()*
+
+```{r, fig.height=2.5, fig.width=3, fig.align='center', warning=FALSE, message=FALSE}
+ggbarplot(ToothGrowth, x = "dose", y = "len", fill = "dose", add = "mean_se")
+```
+
+Vemos que los parámetros se definen similarmente pero con algunas diferencias, además que nos permite agregarles más elementos sin agregar más capas. Y el 'output' o tipo de gráfica es igual del tipo `ggplot2()`.
+
+## *ggpubr()*
+
+-   Otras funciones interesantes de este paquete son **facet.by** que es un argumento que puede ser declarado dentro de la función principal y nos permite hacer las gráficas multi-panel
+
+-   Otro que es muy útil es el de **stat_compare_means()** que nos permite agregar una capa que hace análisis estátidísticos como t.test, wilcoxon, kruskal.walis, anova, entre otros y que nos evita hacer análisis fuera y que podamos agragarlas a la gráfica en un sólo paso.
+
+## *ggpubr()*
+
+```{r, fig.height=2.5, fig.width=3.5, fig.align='center', warning=FALSE, message=FALSE}
+ggboxplot(ToothGrowth,
+          x = "dose",
+          y = "len", 
+          color = "dose",           
+          facet.by = "supp")
+```
+
+## *ggpubr()*
+
+```{r, fig.height=2.9, fig.width=4, fig.align='center', warning=FALSE, message=FALSE, out.width='60%'}
+comparaciones <- list( c("0.5", "1"), c("1", "2"), c("0.5", "2") ) 
+ggbarplot(ToothGrowth, x = "dose", 
+          y = "len", fill = "dose", 
+          add = "mean_sd", 
+          legend = "right")+
+  stat_compare_means(comparisons = comparaciones, label = "p.signif")
+```
+
+## Misceláneos: *ggcats()*
+
+```{r, eval=FALSE, echo=TRUE}
+install.packages("remotes") 
+remotes::install_github("R-CoderDotCom/ggcats@main")
+```
+
+*ggplot2()* nos permite usar diversos paquetes desarrollados por muchos usarios con fines divertidos o misceláneos, podemos verlo en el pie de página el link para explorar todos los que hay. Veremos *ggcats()*. Estas son las opciones que podemos usar:
+
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+library(ggcats) grid <- expand.grid(1:5, 3:1)  
+df <- data.frame(x = grid[, 1], 
+                 y = grid[, 2],               
+                 image = c("nyancat", "bongo", "colonel", "grumpy",                            "hipster", "lil_bub", "maru", "mouth", "pop", "pop_close", "pusheen", "pusheen_pc", "toast", "venus", "shironeko")) 
+ggplot(df) +  
+  geom_cat(aes(x, y, cat = image), size = 5) +    
+  geom_text(aes(x, y - 0.5, label = image), size = 2.5) +     
+  xlim(c(0.25, 5.5)) +      
+  ylim(c(0.25, 3.5))
+```
+
+## Misceláneos: *ggcats()*
+
+```{r, warning=FALSE, message=FALSE, eval=TRUE, echo=FALSE}
+library(ggcats) 
+grid <- expand.grid(1:5, 3:1)  
+df <- data.frame(x = grid[, 1], 
+                 y = grid[, 2],                 
+                 image = c("nyancat", "bongo", "colonel", "grumpy",                            "hipster", "lil_bub", "maru", "mouth", "pop", "pop_close", "pusheen", "pusheen_pc",  "toast", "venus", "shironeko")) 
+ggplot(df) +  
+  geom_cat(aes(x, y, cat = image), size = 5) +     
+  geom_text(aes(x, y - 0.5, label = image), size = 2.5) +     
+  xlim(c(0.25, 5.5)) +      
+  ylim(c(0.25, 3.5))
+```
+
+## Misceláneos: *ggcats()*
+
+```{r, fig.align='center', fig.height=2.3, fig.width=3.3}
+ToothGrowth$cats <- factor(ToothGrowth$dose, levels = c(0.5,1,2),                            labels = c("mouth", "grumpy", "pusheen_pc"))  
+ToothGrowth %>%  
+  ggplot(aes(y = len, x = dose)) +   
+  geom_cat(aes(cat = cats), size = 4) +  
+  xlim(c(0.25, 2.25))
+```
+
+## Misceláneos: *ggtexttable()*
+
+Esta función me permite hacer mis tablas como figuras que puedo exportar como imágenes y darle formato. Hace parte del paquete **ggpubr()** que vimos anteriormente.
+
+Haremos un ejemplo con los primeros cuatro datos de **iris**:
+
+```{r}
+library(dplyr) 
+df<- iris %>% slice(c(1:4)) 
+ggtexttable(df, rows = NULL)
+```
+
+## Misceláneos: *ggtexttable()*
+
+También podemos cambiar el tema con el que se formatea la tabla, por ejemplo:
+
+```{r, eval=FALSE}
+ggtexttable(df, rows = NULL, theme = ttheme("blank")) 
+ggtexttable(df, rows = NULL, theme = ttheme("light")) 
+ggtexttable(df, rows = NULL, theme = ttheme("classic")) 
+ggtexttable(df, rows = NULL, theme = ttheme("minimal")) 
+ggtexttable(df, rows = NULL, theme = ttheme("lVioletWhite")) 
+ggtexttable(df, rows = NULL, theme = ttheme("mVioletWhite"))
+```
+
+## Misceláneos: *ggtexttable()*
+
+```{r, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE}
+library(cowplot) 
+a<-ggtexttable(df, rows = NULL, theme = ttheme("blank")) 
+b<-ggtexttable(df, rows = NULL, theme = ttheme("light")) 
+c<-ggtexttable(df, rows = NULL, theme = ttheme("classic")) 
+d<-ggtexttable(df, rows = NULL, theme = ttheme("minimal")) 
+e<-ggtexttable(df, rows = NULL, theme = ttheme("lVioletWhite"))
+f<-ggtexttable(df, rows = NULL, theme = ttheme("mVioletWhite"))  
+plot_grid(a,b,c,d,e,f, labels=c("blank", "light", "classic",                                  "minimal", "lVioletWhite", "mVioletWhite"), ncol = 2, nrow = 3)
+```
+
+## Misceláneos: *ggtexttable()*
+
+Para ver otros temas: <https://rpkgs.datanovia.com/ggpubr/files/ggtexttable-theme.pdf>
+
+Otros formateos:
+
+-   Poner en negrita una celda:
+
+    ```{r}
+    ggtexttable(df, rows = NULL,  theme = ttheme("classic")) %>%    
+      table_cell_font(row = 3, column = 2, face = "bold", color = "red")
+    ```
+
+## Misceláneos: *ggtexttable()*
+
+-   Resaltar una columna:
+
+    ```{r}
+    ggtexttable(df, rows = NULL,  theme = ttheme("classic")) %>%    
+      table_cell_bg(row = 2:5, column = 3, fill="yellow")
+    ```
+
+## Misceláneos: *ggtexttable()*
+
+-   Poner títulos y pies de notas:
+
+    ```{r}
+    ggtexttable(df, rows = NULL,  theme = ttheme("classic")) %>%    
+      tab_add_title(text = "Data iris",  size = 14, face="bold") %>%   tab_add_footnote(text = "*Alguna nota", size = 10, face = "italic")
+    ```
+
+## Muchas gracias...
+
+```{r, echo=FALSE, out.width= "45%"}
+img_path<- "images/" 
+knitr::include_graphics(file.path(img_path,"gg1.jpg")) 
+knitr::include_graphics(file.path(img_path,"gg3.jpeg"))
+```

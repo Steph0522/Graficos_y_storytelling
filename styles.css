@@ -1,0 +1,32 @@
+/* Fondo de la slide completa */
+.reveal .slides section:first-of-type {
+  background: linear-gradient(
+    135deg,
+    #5b2c83,
+    #c4458a,
+    #f08a24
+  ) !important;
+}
+
+/* Texto blanco */
+.reveal .slides section:first-of-type,
+.reveal .slides section:first-of-type h1 {
+  color: white !important;
+}
+
+/* Subtítulo */
+.reveal .slides section:first-of-type .subtitle {
+  font-size: 1.6rem;
+  font-weight: 300;
+  margin-top: 1rem;
+}
+
+/* Centrado vertical */
+.reveal .slides section:first-of-type {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+

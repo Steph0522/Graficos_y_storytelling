@@ -1,0 +1,288 @@
+---
+title: ""
+format:
+   revealjs:
+    slide-number: true
+    theme: serif
+---
+
+::: cover
+# Gráficos en R parte 1
+
+::: subtitle
+PhD. Stephanie Elizabeth Hereira Pacheco
+:::
+
+------------------------------------------------------------------------
+
+![](logo.png)
+:::
+
+## Gráficos en R base
+
+-   R cuenta con un sistema de generación de gráficas poderoso y flexible, usando la función `plot()` como base.
+
+-   En este capítulo revisaremos como crear las gráficas más comunes con R base.
+
+-   Luego un poco más complejas usando *ggplot2* del *tidyverse*.
+
+## La función `plot()`
+
+La función `plot()` es usada de manera general para generar gráficos. Esta función es muy especial porque depende del tipo de datos que le demos generará diferentes tipos de gráficos. El argumento principal que pide esta función es *"x"* también podemos poner *"y"*. Y depende de estos el tipo de gráfica que se generará. Diremos:
+
+-   **Continuo**: Cuando nos referimos a un vector numérico, entero, lógico o complejo.
+
+-   **Discreto**: Cuando nos referimos a un vector de factores o cadenas de texto.
+
+## La función `plot()`
+
+|    x     |    y     |            Tipo Gráfico             |
+|:--------:|:--------:|:-----------------------------------:|
+| Continuo | Continuo |         Dispersión /Scatter         |
+| Continuo | Discreto | Dispersión y coercionada a numérica |
+| Continuo | Ninguno  |  Dispersión por número de renglón   |
+| Discreto | Continuo |            Boxplot/Cajas            |
+| Discreto | Discreto |               Mosaico               |
+| Discreto | Ninguno  |               Barras                |
+
+## La función `plot()`
+
+```{r,echo=TRUE,fig.align = "center", fig.height=2.5, fig.width=6}
+par(mfrow= c(1,3)) 
+plot(x=iris$Sepal.Length, y=iris$Sepal.Width)
+plot(x=iris$Sepal.Length, y = iris$Species)
+plot(x=iris$Sepal.Length)
+```
+
+## La función `plot()`
+
+```{r,echo=TRUE,fig.align = "center", fig.height=2.5, fig.width=6}
+par(mfrow= c(1,3))
+plot(x = iris$Species, y = iris$Sepal.Length)
+plot(x=iris$Species, y=iris$Species)
+plot(x=iris$Species)
+```
+
+## La función `plot()`
+
+Además de estas, también hay otras funciones de Rbase que nos permiten graficar tipos específicos como son:
+
+-   `hist()`
+
+-   `barplot()`
+
+-   `boxplot()`
+
+Veamos algunas de estas...
+
+## Histogramas
+
+```{r,  echo=TRUE, fig.align='center', fig.height=4, fig.width=4}
+hist(x = iris$Sepal.Length, 
+     main = "Histograma de longitud de sepalo", 
+     xlab = "Longitud", ylab = "Frecuencia",
+     col = "purple")
+
+```
+
+## Histogramas
+
+Como vimos en este ejemplo hay argumentos que aplicamos que puede ser aplicados para todos los gráficos de Rbase, tales como:
+
+-   *main* : Titulo de la gráfica
+
+-   *xlab* y *ylab*: Títulos de los axis x y y
+
+-   *col* = color de las barras o gráfica.
+
+## Gráficos de dispersión
+
+```{r, echo=TRUE, fig.align='center', fig.height=3.5, fig.width=4}
+plot(x = iris$Petal.Length, 
+     y = iris$Petal.Width, 
+     col = iris$Species, 
+     xlab = "Largo", 
+     ylab = "Ancho")
+```
+
+## Gráficos de dispersión
+
+`legend()` la usamos si queremos adicionar una leyenda:
+
+-   `legend`: Las etiquetas de los datos que queremos describir con la leyenda.
+
+-   `fill`: Los colores que acompañan a las etiquetas definidas con `legend`.
+
+-   `x` y `y`: Las coordenadas en pixeles. Podemos dar como argumento a `x` alguno de los siguientes, para ubicar automáticamente la leyenda: "bottomright", "bottom", "bottomleft", "left", "topleft", "top", "topright", "right", "center".
+
+-   `title`: Para poner título a la leyenda.
+
+## Gráficos de dispersión
+
+```{r,  echo=TRUE, fig.align='center', fig.height=3.5, fig.width=5}
+plot(x = iris$Petal.Length, 
+     y = iris$Petal.Width, 
+     col = iris$Species)
+legend(x = "topleft", 
+       legend = c("Setosa", "Versicolor", "Virginica"), 
+       fill = c("black", "red", "green"), 
+       title = "Especie")
+```
+
+## Boxplots o diagramas de cajas
+
+```{r, echo=TRUE,fig.align='center', fig.height=3.2, fig.width=4}
+plot(x=iris$Species, 
+     y = iris$Sepal.Length, 
+     xlab = "Especie",
+     ylab = "Longitud Sépalo", 
+     col = c("purple", "pink", "blue"))
+```
+
+## Boxplots o diagramas de cajas
+
+También podemos usar la función `boxplot()`. En esta segunda forma de hacer diagramas de cajas necesitamos declarar dos argumentos principales:
+
+-   `formula`: Para esta función las fórmulas tienen el formato `y ~ x`, donde x es el nombre de la variable continua a graficar, y la x es la variable que usaremos como agrupación.
+
+-   `data`: Es el data frame del que serántomadas las variables.
+
+## Boxplots o diagramas de cajas
+
+```{r,echo=TRUE,fig.align='center', fig.height=3.5, fig.width=4}
+boxplot(formula = Sepal.Length ~ Species, 
+        data = iris, 
+        xlab = "Especie", 
+        ylab = "Longitu Sépalo", 
+        col = c("purple", "pink", "blue"))
+```
+
+## Otros gráficos
+
+Usando la función `plot()` podemos dibujar más gráficos.
+
+También existe otro argumento de esta función que se denomina *type* y nos permite escoger otros tipos de gráficos. Hagamos:
+
+```{r, echo=TRUE, eval=FALSE}
+?plot
+```
+
+Son posibles los siguientes valores: "p" para puntos, "l" para líneas, "b" para puntos y líneas, "c" para puntos vacíos unidos por líneas, "o" para puntos sobretrazados y líneas, "s" y "S" para escalones y "h" para líneas verticales similares a histogramas. Finalmente, "n" no produce ningún punto o línea.
+
+## Otros gráficos
+
+Veamos algunos ejemplos:
+
+```{r,echo=TRUE,fig.align = "center", fig.height=2.5, fig.width=6}
+#dataset de ensayo
+df<- data.frame(x= c(1:5),y= c(200, 400, 600, 700, 500))
+par(mfrow = c(1, 3))
+plot(df$x, df$y, type = "p", main = 'type = "p"')
+plot(df$x, df$y, type = "l", main = 'type = "l"')
+plot(df$x, df$y, type = "b", main = 'type = "b"')
+
+```
+
+## Otros gráficos
+
+```{r,echo=TRUE,fig.align = "center", fig.height=2.5, fig.width=6}
+par(mfrow = c(1, 3))
+plot(df$x, df$y, type = "c", main = 'type = "c"')
+plot(df$x, df$y, type = "s", main = 'type = "s"')
+plot(df$x, df$y, type = "h", main = 'type = "h"')
+```
+
+## Otros gráficos
+
+Ahora bien, en cuanto a líneas podemos escoger el tipo de línea con el argumento *lty*:\
+
+```{r,echo=TRUE,fig.align = "center", fig.height=2.5, fig.width=6}
+par(mfrow = c(1, 3))
+plot(df$x, df$y, type = "l", lty=1, main = 'type = "l1"')
+plot(df$x, df$y, type = "l", lty=2, main = 'type = "l2"')
+plot(df$x, df$y, type = "l", lty=3, main = 'type = "l3"')
+```
+
+## Otros gráficos
+
+```{r,echo=TRUE,fig.align = "center", fig.height=2.5, fig.width=6}
+par(mfrow = c(1, 3))
+plot(df$x, df$y, type = "l", lty=4, main = 'type = "l4"')
+plot(df$x, df$y, type = "l", lty=5, main = 'type = "l5"')
+plot(df$x, df$y, type = "l", lty=6, main = 'type = "l6"')
+```
+
+## Barplots o gráficas de barras
+
+```{r, echo=TRUE, fig.height=3.4, fig.width=4, fig.align='center'}
+barplot(y ~ x , 
+        data = df, 
+        main = "Barplot", 
+        col = "darkred")
+```
+
+## Otros gráficos
+
+Podemos agregar capas a nuestros gráficos y más elementos.
+
+::::{.columns}
+:::{.column width="50%"}
+
+
+```{r, echo=TRUE, fig.align='center', fig.height=3, fig.width=4, eval=FALSE}
+plot(df$x, 
+     df$y, 
+     type = "p", 
+     main = 'type = "p-capas"')
+abline(h=400, 
+       v=3, 
+       col="red", 
+       lty=2)
+text(df, 
+     labels=rownames(df), 
+     cex=0.7, 
+     pos=2, 
+     col="blue")
+```
+
+:::
+
+:::{.column width="50%"}
+
+
+```{r, fig.align='center', fig.height=4, fig.width=4}
+plot(df$x, 
+     df$y, 
+     type = "p", 
+     main = 'type = "p-capas"')
+abline(h=400, 
+       v=3, 
+       col="red", 
+       lty=2)
+text(df, 
+     labels=rownames(df), 
+     cex=0.7, 
+     pos=2, 
+     col="blue")
+```
+
+:::
+::::
+
+
+
+## Guardando una gráfica
+
+Para guardar o exportar una gráfica debemos:
+
+1.  Indicar las instrucciones de cómo exportaremos la imagen
+
+2.  Usar *plot()* y graficarla y luego,
+
+3.  *dev.off*() para quitarla del panel y exportarla
+
+```{r, echo=TRUE, eval=FALSE}
+png(filename="gráfica1.png", width=648, height=432)
+plot(df$x, df$y, type = "p", main = 'type = "p"')
+dev.off()
+```
