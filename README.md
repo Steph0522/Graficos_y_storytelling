@@ -3,7 +3,7 @@
 Repositorio creado para el material del Módulo I: Presentación de gráficos en R y Excel, storytelling de visualizaciones del curso: "Habilidades básicas para la elaboración de documentos académicos"
 
 
-1. Gráficos exploratorios en Excel: [Presentación](https://drive.google.com/drive/folders/1qbaztkVNTWj_PReaxHi8AH9xmdkjC-AK?usp=drive_link)
+**1. Gráficos exploratorios en Excel: [Presentación](https://drive.google.com/drive/folders/1qbaztkVNTWj_PReaxHi8AH9xmdkjC-AK?usp=drive_link)**
 
 1.1. Gráficos de columnas y barras 
 
@@ -15,11 +15,10 @@ Repositorio creado para el material del Módulo I: Presentación de gráficos en
 
  
 
-
-2. Gráficos en R:
-[Presentación 1]()
-[Presentación 2]()
-[Presentación 3]()
+**2. Gráficos en R:**
+[Presentación 1](https://steph0522.github.io/Graficos_y_storytelling/Presentaciones/2.Graficos_en_R.html#/gr%C3%A1ficos-en-r-parte-1)
+[Presentación 2](https://steph0522.github.io/Graficos_y_storytelling/Presentaciones/2.Graficos_en_R.html#/gr%C3%A1ficos-en-r-parte-2)
+[Presentación 3](https://steph0522.github.io/Graficos_y_storytelling/Presentaciones/2.Graficos_en_R.html#/gr%C3%A1ficos-en-r-parte-3)
 
 2.1 Sintaxis R básico 
 
@@ -43,7 +42,7 @@ Repositorio creado para el material del Módulo I: Presentación de gráficos en
 
 
 
-3. Storytelling de datos 
+**3. Storytelling de datos. [Presentación](https://drive.google.com/drive/folders/1qbaztkVNTWj_PReaxHi8AH9xmdkjC-AK?usp=drive_link)**
 
 3.1. Importancia del contexto 
 
@@ -56,7 +55,8 @@ Repositorio creado para el material del Módulo I: Presentación de gráficos en
 3.5. Pensar como diseñador 
 
 
-4. "Los amigos no dejan que sus amigos hagan malos gráficos”. 
+
+**4. "Los amigos no dejan que sus amigos hagan malos gráficos”. [Presentación](https://drive.google.com/drive/folders/1qbaztkVNTWj_PReaxHi8AH9xmdkjC-AK?usp=drive_link)**
 Créditos de esta parte al repositorio de [cxli233](https://github.com/cxli233/FriendsDontLetFriends)
 
 4.1. Los amigos no dejan que sus amigos hagan gráficos de barras para separar medias. 
