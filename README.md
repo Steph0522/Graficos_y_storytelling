@@ -55,7 +55,7 @@ Repositorio creado para el material del Módulo I: Presentación de gráficos en
 
 
 
-## 4. "Los amigos no dejan que sus amigos hagan malos gráficos”. [Presentación](https://drive.google.com/drive/folders/1qbaztkVNTWj_PReaxHi8AH9xmdkjC-AK?usp=drive_link)
+## 4. "Los amigos no dejan que sus amigos hagan malos gráficos”. [Presentación](https://steph0522.github.io/Graficos_y_storytelling/Presentaciones/4.Malos_graficos.html)
 Créditos de esta parte al repositorio de [cxli233](https://github.com/cxli233/FriendsDontLetFriends)
 
 ### 4.1. Los amigos no dejan que sus amigos hagan gráficos de barras para separar medias. 
