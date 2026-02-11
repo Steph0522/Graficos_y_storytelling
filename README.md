@@ -14,10 +14,7 @@ Repositorio creado para el material del Módulo I: Presentación de gráficos en
 ### 1.4. Otros gráficos 
 
  
-## 2. Gráficos en R:
-[Presentación 1](https://steph0522.github.io/Graficos_y_storytelling/Presentaciones/2.Graficos_en_R.html#/gr%C3%A1ficos-en-r-parte-1)
-[Presentación 2](https://steph0522.github.io/Graficos_y_storytelling/Presentaciones/2.Graficos_en_R_2.html#/gr%C3%A1ficos-en-r-parte-2)
-[Presentación 3](https://steph0522.github.io/Graficos_y_storytelling/Presentaciones/2.Graficos_en_R_3.html#/gr%C3%A1ficos-en-r-parte-3)
+## 2. Gráficos en R: [Presentación 1](https://steph0522.github.io/Graficos_y_storytelling/Presentaciones/2.Graficos_en_R.html#/gr%C3%A1ficos-en-r-parte-1) [Presentación 2](https://steph0522.github.io/Graficos_y_storytelling/Presentaciones/2.Graficos_en_R_2.html#/gr%C3%A1ficos-en-r-parte-2) [Presentación 3](https://steph0522.github.io/Graficos_y_storytelling/Presentaciones/2.Graficos_en_R_3.html#/gr%C3%A1ficos-en-r-parte-3)
 
 ### 2.1 Sintaxis R básico 
 
