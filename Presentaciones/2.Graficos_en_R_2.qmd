@@ -1,0 +1,430 @@
+---
+title: ""
+format:
+   revealjs:
+    slide-number: true
+    theme: serif
+---
+
+::: cover
+# Gráficos en R parte 2
+
+::: subtitle
+PhD. Stephanie Elizabeth Hereira Pacheco
+:::
+
+------------------------------------------------------------------------
+
+![](logo.png)
+:::
+
+## Gráficos con `ggplot2`
+
+-   Las gráficas con `ggplot2` es quizás de las cosas más poderosas y atractivas de R si lo comparamos con otros lenguajes y/o programas.
+
+-   `ggplot2` es generalmente más intuitiva porque usa una gramática de gráficos además de ser visualmente agradable.
+
+-   La limitación de `ggplot2` es que está diseñado para trabajar exclusivamente con tablas de datos en formato tidy (donde las filas son observaciones y las columnas son variables).
+
+## Gráficos con `ggplot2`
+
+-   Es fácil de usar, pero puedes crear figuras complejas con una sintaxis bastante simple.
+
+-   Para usar `ggplot2`, tendrán que aprender varias funciones y argumentos.
+
+-   Estos son difíciles de memorizar, por lo que la recomendación es que tengan a mano la hoja de referencia de `ggplot2`.
+
+## Gráficas con `ggplot2()`
+
+```{r, echo=FALSE, out.width= "500px", fig.align='center'}
+img_path<- "images/"
+knitr::include_graphics(file.path(img_path,"ggplot.png"))
+```
+
+## Gráficas con `ggplot2()`
+
+"gg" significa gramática gráfica - Significa que se superponen diferentes capas de objetos y elementos sobre los anteriores para generar la figura.
+
+En esta parte se repasará las diferentes características de ggplot2:
+
+1.  geomas o "geoms"
+
+2.  escalas o "scales"
+
+3.  temas o "theme"
+
+4.  facetas o "facets"
+
+## Gráficas con `ggplot2()`
+
+El primer paso para aprender **ggplot2** es poder separar un gráfico en componentes. Las figuras aquí, se construyen por capas. Los tres componentes principales para considerar son:
+
+-   **Data**: nuestro set de datos o *dataframe.*
+
+-   **Mapeo estético o 'aes'**: son las posiciones de los puntos en el eje-x y el eje-y.
+
+-   **Geometría**: Nos indica el tipo de gráfica a realizar.
+
+-   **Elementos adicionales**: temas, guías, colores, etc.
+
+## ggplot
+
+El primer paso es definir un objeto `ggplot` con la función `ggplot()`.
+
+Pero, antes......
+
+Llamamos la data y los paquetes a usar:
+
+```{r, echo=TRUE}
+data("ToothGrowth")
+library(dplyr)
+library(ggplot2)
+```
+
+## ggplot
+
+Para definir este primer objeto, podemos hacerlo de dos maneras:
+
+::: columns
+::: {.column width="50%"}
+```{r, echo=TRUE, fig.height=2.5, fig.width=3, warning=FALSE, message=FALSE, fig.align='center'}
+ToothGrowth %>% ggplot()
+```
+:::
+
+::: {.column width="50%"}
+```{r, echo=TRUE,fig.height=2.5, fig.width=3,warning=FALSE, message=FALSE, fig.align='center'}
+ggplot(data = ToothGrowth)
+```
+:::
+:::
+
+El código crea un gráfico, en este caso una pizarra en blanco ya que no se ha definido la geometría. La única opción de estilo que vemos es un fondo gris.
+
+## ggplot
+
+-   También dentro de esta capa de *ggplot()* se declara algo que se conoce como ***mapeo estético***. En palabras coloquiales, qué con qué graficamos, también podemos colocar aquí si queremos colorear o llenar un factor.
+
+-   Por ejemplo, con la data de ToothGrowth, queremos graficar el tamaño o longitud de los dientes versus la dosis aplicada y destacando o coloreando el método de aplicación de la vitamina C.\
+
+## ggplot
+
+```{r, echo=TRUE, fig.align='center', fig.height=2.5, fig.width=5.5}
+ToothGrowth %>% ggplot(aes(x = dose, y = len, fill=supp))
+```
+
+## Geometrías
+
+-   Esta es la siguiente capa en `ggplot2`. Los nombres de las funciones de geometría siguen el patrón: `geom_$` donde \$ es el nombre de la geometría.
+
+-   Algunos ejemplos incluyen `geom_bar`, `geom_point` y `geom_histogram`.
+
+-   Luego de cada capa de `ggplot2` en vez de usar pipe usamos el signo **+** y así vamos agregando cada capa.
+
+## Geometrías
+
+```{r,echo=TRUE, fig.height=2, fig.width=4, fig.align='center'}
+ToothGrowth %>% 
+  ggplot(aes(x = dose, y = len, color=supp)) +
+  geom_point()
+```
+
+## Geometrías
+
+```{r, echo=TRUE, fig.height=2, fig.width=4, fig.align='center'}
+ToothGrowth %>% 
+  ggplot(aes(x = dose, y = len, color=supp)) +
+  geom_line()
+```
+
+## Geometrías
+
+```{r, echo=TRUE, fig.height=2, fig.width=4, fig.align='center'}
+ToothGrowth %>%  
+  mutate(dose=case_when(dose==0.5~"D0.5",dose==1~"D1", dose==2~"D2")) %>% 
+  ggplot(aes(x = dose, y = len, color=supp)) +  
+  geom_boxplot()
+```
+
+## Geometrías
+
+En el caso de *geom_bar* debemos cambiar poner otros argumentos como 'fill' en vez de 'color' y dentro de la geomtría escogemos una `stat` y una `position`:
+
+::: columns
+::: {.column width="50%"}
+```{r, echo=TRUE, fig.height=2, fig.width=4, fig.align='center', eval=FALSE}
+ToothGrowth %>%  
+  mutate(dose=case_when(
+    dose==0.5~"D0.5",dose==1~"D1", dose==2~"D2")) %>% 
+  ggplot(aes( x = dose, y = len, fill=supp))+
+  geom_bar(stat = "identity", position = "dodge")
+```
+:::
+
+::: {.column width="50%"}
+```{r, echo=FALSE, fig.height=4, fig.width=4, fig.align='center'}
+ToothGrowth %>%  
+  mutate(dose=case_when( dose==0.5~"D0.5",dose==1~"D1", dose==2~"D2")) %>% 
+  ggplot(aes( x = dose, y = len, fill=supp))+
+  geom_bar(stat = "identity", position = "dodge")
+```
+:::
+:::
+
+## Geometrías
+
+Podemos también agregar más de una capa de geometría y así hacer gráficas combinadas, por ejemplo:
+
+::: columns
+::: {.column width="50%"}
+```{r, echo=TRUE, fig.height=2.1, fig.width=4, fig.align='center', eval=FALSE}
+ToothGrowth %>% ggplot(
+  aes(x = dose, y = len, color=supp)) +
+  geom_point()+
+  geom_text(aes(label=rownames(ToothGrowth)))+
+  geom_line()
+```
+:::
+
+::: {.column width="50%"}
+```{r, echo=FALSE, fig.height=4, fig.width=4, fig.align='center'}
+ToothGrowth %>% ggplot(aes(x = dose, y = len, color=supp)) +
+  geom_point()+
+  geom_text(aes(label=rownames(ToothGrowth)))+
+  geom_line()
+```
+:::
+:::
+
+## Colores
+
+-   `ggplot2()` tiene su escala personalizadas de colores. Sin embargo, esto podemos cambiarlo usando *scale_color\_\$,* tomando *\$* varias formas*, como scale_color_manual(), scale_color_continuous(),scale_color_discrete(), scale_color_brewer()*, entre otros.
+
+-   Para declarar los colores en R podemos utilizar los nombres de los colores inglés o usando el formato de colores de html. También hay muchas paletas de varios paquetes ya definidas como la de `RColorBrewer` y `viridis`.
+
+## Colores
+
+Para buscar los colores en formato html pomos usar el siguiente link: [***html-colors***](https://htmlcolorcodes.com/es/ "html-colors")***.*** El código html se ve de esta manera:
+
+```{r, echo=FALSE, out.width= "300px", fig.align='center'}
+img_path<- "images/"
+knitr::include_graphics(file.path(img_path,"colors.jpg"))
+```
+
+## Colores
+
+Y de esta manera los declaramos en nuestra gráfica usando `scale_color_manual()`:
+
+```{r, echo=TRUE, fig.height=2, fig.width=4, fig.align='center'}
+ToothGrowth %>%  mutate(dose=case_when(
+dose==0.5~"D0.5",dose==1~"D1", dose==2~"D2")) %>% 
+  ggplot(aes(x = dose, y = len, col=supp)) +  
+  geom_boxplot()+
+  scale_color_manual( values = c("#FF00FF","#00FFFF"))
+```
+
+## Colores
+
+Los diagramas de cajas y barras son elementos huecos, si queremos colorearlos debemos usar \*fill y usamos `scale_fill_$`:
+
+```{r, echo=TRUE, fig.height=2, fig.width=4, fig.align='center'}
+ToothGrowth %>%  mutate(dose=case_when( dose==0.5~"D0.5",dose==1~"D1",
+  dose==2~"D2")) %>% 
+  ggplot(aes(x = dose, y = len, fill=supp)) + 
+  geom_boxplot()+
+  scale_fill_manual(values = c("#FF00FF","#00FFFF"))
+```
+
+## Colores
+
+Podemos utilizar paletas de colores ya determinadas como `RColorBrewer` y `viridis`
+
+```{r,  echo=FALSE, message=FALSE, warning=FALSE}
+library(imager)
+library(cowplot)
+file1<-load.image("images/rcolor.png")
+file2<-load.image("images/viridis.png")
+p1 <- ggdraw() + draw_image(file1, scale = 1)
+p2 <- ggdraw() + draw_image(file2, scale = 1)
+plot_grid(p1,p2)
+```
+
+## Colores
+
+Y así las podemos usar:
+
+::: columns
+::: {.column width="50%"}
+```{r, echo=TRUE, fig.height=3, fig.width=4, fig.align='center'}
+ToothGrowth %>%  mutate(
+  dose=case_when(
+  dose==0.5~"D0.5",dose==1~"D1", dose==2~"D2")) %>% 
+  ggplot(aes(x = dose, y = len, fill=supp)) +  
+  geom_boxplot()+
+  scale_fill_brewer(palette = "Dark2")+
+  theme(legend.position = "none")
+```
+:::
+
+::: {.column width="50%"}
+```{r, echo=TRUE, fig.height=3, fig.width=4, fig.align='center'}
+ToothGrowth %>%  mutate(
+  dose=case_when(
+  dose==0.5~"D0.5",dose==1~"D1", dose==2~"D2")) %>% 
+  ggplot(
+    aes(x = dose, y = len, fill=supp)) +  
+  geom_boxplot()+
+  scale_fill_viridis_d(option = "C")+
+  theme(legend.position = "none")
+```
+:::
+:::
+
+## Títulos
+
+```{r, echo=TRUE, fig.height=2, fig.width=4, fig.align='center'}
+ToothGrowth %>%  mutate(dose=case_when(
+  dose==0.5~"D0.5",dose==1~"D1", dose==2~"D2")) %>% 
+  ggplot(
+    aes(x = dose, y = len, fill=supp)) +  
+  geom_boxplot()+
+  ylab("Longitud diente")+
+  xlab("Dosis")+
+  ggtitle("Longitud de dientes por Dosis aplicada")
+```
+
+## Escalas
+
+```{r, echo=TRUE, fig.height=2, fig.width=4, fig.align='center'}
+ToothGrowth %>%  mutate(dose=case_when(
+  dose==0.5~"D0.5",dose==1~"D1", dose==2~"D2")) %>% 
+  ggplot(
+    aes(x = dose, y = len, fill=supp)) +  
+  geom_boxplot()+
+  ylab("Longitud diente")+  xlab("Dosis")+
+  ggtitle("Longitud de dientes por Dosis aplicada") +
+  scale_x_discrete(limits = c("D2", "D0.5", "D1"), position ="bottom" )+
+  scale_y_continuous(breaks = c(0, 20,40))
+```
+
+## Temas
+
+`ggplot2()` usa como *default* el tema `theme_grey()` pero hay otros:
+
+```{r, echo=FALSE}
+par(mfrow= c(2,3))
+a1<-ToothGrowth %>%  mutate(dose=case_when(
+  dose==0.5~"D0.5",dose==1~"D1", dose==2~"D2")) %>% ggplot(
+    aes(x = dose, y = len, fill=supp)) +  geom_boxplot()+ theme_classic()+
+  ggtitle("theme_classic()")
+
+a2<-ToothGrowth %>%  mutate(dose=case_when(
+  dose==0.5~"D0.5",dose==1~"D1", dose==2~"D2")) %>% ggplot(
+    aes(x = dose, y = len, fill=supp)) +  geom_boxplot()+ theme_linedraw()+
+  ggtitle("theme_linedraw()")
+
+a3<-ToothGrowth %>%  mutate(dose=case_when(
+  dose==0.5~"D0.5",dose==1~"D1", dose==2~"D2")) %>% ggplot(
+    aes(x = dose, y = len, fill=supp)) +  geom_boxplot()+ theme_bw()+
+  ggtitle("theme_bw()")
+
+a4<-ToothGrowth %>%  mutate(dose=case_when(
+  dose==0.5~"D0.5",dose==1~"D1", dose==2~"D2")) %>% ggplot(
+    aes(x = dose, y = len, fill=supp)) +  geom_boxplot()+ theme_get()+
+  ggtitle("theme_get()")
+
+a5<-ToothGrowth %>%  mutate(dose=case_when(
+  dose==0.5~"D0.5",dose==1~"D1", dose==2~"D2")) %>% ggplot(
+    aes(x = dose, y = len, fill=supp)) +  geom_boxplot()+ theme_dark()+
+  ggtitle("theme_dark()")
+
+a6<-ToothGrowth %>%  mutate(dose=case_when(
+  dose==0.5~"D0.5",dose==1~"D1", dose==2~"D2")) %>% ggplot(
+    aes(x = dose, y = len, fill=supp)) +  geom_boxplot()+ theme_light()+
+  ggtitle("theme_light()")
+
+library(cowplot)
+plot_grid(a1,a2,a3,a4,a5,a6, ncol = 3, nrow = 2)
+
+```
+
+## Otros ajustesd en `theme()`
+
+```{r, echo=TRUE, fig.height=3, fig.width=4, fig.align='center'}
+ToothGrowth %>% 
+  mutate(dose=case_when(  
+    dose==0.5~"D0.5",dose==1~"D1",
+  dose==2~"D2")) %>% 
+  ggplot(aes(x = dose, y = len, fill=supp)) + 
+  geom_boxplot()+ 
+  theme(axis.title = element_text(size = 14, colour = "blue"),
+  title = element_text(size = 16, colour = "red"), legend.position = "top")
+```
+
+## Figuras Multi-panel / Facets
+
+Para dibujar varias figuras en una misma página o output hay varias estrategias.
+
+-   par (multi-panel con R base)[^1]
+
+-   cowplot (ggplot2)[^2]
+
+-   grid.arrange(ggplot2)[^3]
+
+-   Facets
+
+[^1]: <https://bookdown.org/ndphillips/YaRrr/arranging-plots-with-parmfrow-and-layout.html>
+
+[^2]: <https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html>
+
+[^3]: <https://cran.r-project.org/web/packages/egg/vignettes/Ecosystem.html>
+
+## Facets
+
+-   Esta forma de graficar en multi-panel es quizás la más sencilla por ser una capa de `ggplot2().`
+
+-   Para esta hay dos funciones `facet_grid()`y `facet_wrap()`. \
+
+## Facet grid
+
+```{r, echo=TRUE, fig.height=2, fig.width=4, fig.align='center'}
+ToothGrowth %>%  mutate(dose=case_when(
+  dose==0.5~"D0.5",dose==1~"D1", dose==2~"D2")) %>% 
+  ggplot(aes(x = dose, y = len, fill=supp)) +  
+  geom_boxplot()+ 
+  facet_grid(supp~.)
+```
+
+## Facet grid
+
+```{r, echo=TRUE, fig.height=2, fig.width=4, fig.align='center'}
+ToothGrowth %>%  mutate(dose=case_when(
+  dose==0.5~"D0.5",dose==1~"D1", dose==2~"D2")) %>% 
+  ggplot(aes(x = dose, y = len, fill=supp)) +  
+  geom_boxplot()+ 
+  facet_grid(.~supp)
+```
+
+## Facets
+
+Y con `facet_wrap()` podemos combinar columnas y filas, por ejemplo:
+
+```{r, echo=TRUE, fig.height=3.2, fig.width=6, fig.align='center'}
+ToothGrowth %>%  mutate(dose=case_when(dose==0.5~"D0.5",dose==1~"D1", 
+dose==2~"D2")) %>% 
+  ggplot(aes(x = dose, y = len, fill=supp))+
+  geom_boxplot()+ 
+  facet_wrap(~supp+dose, ncol = 3, nrow = 2)
+```
+
+## Guardando una gráfica en ggplot2
+
+Para guardar una gráfica de tipo *ggplot2()* usamos la función *ggsave()*
+
+```{r, echo=TRUE, eval=FALSE}
+ggsave(filename = "plot.png", 
+       plot = a1, 
+       dpi = 300,
+       width = 4, 
+       height = 3.5)
+```
