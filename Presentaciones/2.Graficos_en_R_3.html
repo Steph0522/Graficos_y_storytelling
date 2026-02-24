@@ -494,51 +494,93 @@
 <h2>Heatmaps usando <a href="https://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html"><code>ComplexHeatmap</code></a></h2>
 
 <img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<section id="redes" class="slide level2">
+<h2>Redes</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="co">#install.packages("igraph")</span></span>
+<span id="cb8-2"><a href=""></a><span class="co">#install.packages("bipartite")</span></span>
+<span id="cb8-3"><a href=""></a>bmat<span class="ot">=</span><span class="fu">as.matrix</span>(<span class="fu">read.csv</span>(<span class="st">"https://dshizuka.github.io/networkanalysis/SampleData/Sample_bipartite.csv"</span>, <span class="at">header=</span>T, <span class="at">row.names=</span><span class="dv">1</span>))</span>
+<span id="cb8-4"><a href=""></a>bmat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        hummingbird bat moth butterfly bee
+Plant_1           1   1    0         1   0
+Plant_2           1   0    0         1   0
+Plant_3           0   1    1         1   0
+Plant_4           0   0    0         1   1</code></pre>
+</div>
+</div>
+</section>
+<section id="redes-con-igraph" class="slide level2">
+<h2>Redes con igraph</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">library</span>(igraph)</span>
+<span id="cb10-2"><a href=""></a>bg<span class="ot">=</span><span class="fu">graph_from_biadjacency_matrix</span>(bmat) </span>
+<span id="cb10-3"><a href=""></a><span class="fu">V</span>(bg)<span class="sc">$</span>shape<span class="ot">=</span><span class="fu">c</span>(<span class="st">"square"</span>,<span class="st">"circle"</span>)[<span class="fu">V</span>(bg)<span class="sc">$</span>type<span class="sc">+</span><span class="dv">1</span>]</span>
+<span id="cb10-4"><a href=""></a><span class="fu">V</span>(bg)<span class="sc">$</span>color<span class="ot">=</span><span class="fu">c</span>(<span class="st">"tomato"</span>,<span class="st">"lightblue"</span>)[<span class="fu">V</span>(bg)<span class="sc">$</span>type<span class="sc">+</span><span class="dv">1</span>]</span>
+<span id="cb10-5"><a href=""></a><span class="fu">plot</span>(bg) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section id="redes-bipartitas-con-bipartite" class="slide level2">
+<h2>Redes bipartitas con bipartite</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">library</span>(bipartite)</span>
+<span id="cb11-2"><a href=""></a><span class="fu">plotweb</span>(bmat) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="redes-bipartitas-con-bipartite-1" class="slide level2">
+<h2>Redes bipartitas con bipartite</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">plotweb</span>(bmat, <span class="at">sorting=</span><span class="st">"normal"</span>, <span class="at">link_color=</span><span class="st">"wheat2"</span>,  <span class="at">arrow=</span><span class="st">"no"</span>,  <span class="at">higher_color=</span><span class="st">"lightblue"</span>, <span class="at">lower_color=</span><span class="st">"tomato"</span>,<span class="at">text_size=</span><span class="fl">1.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
 <section id="diagramas-de-venn" class="slide level2">
 <h2>Diagramas de Venn</h2>
 <ul>
 <li>Instalando <a href="https://r-charts.com/es/parte-todo/ggvenndiagram/"><code>ggVennDiagram</code></a>:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"ggVennDiagram"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"ggVennDiagram"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Corriendo <a href="https://r-charts.com/es/parte-todo/ggvenndiagram/"><code>ggVennDiagram</code></a>:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">library</span>(ggVennDiagram)</span>
-<span id="cb9-2"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">A =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">B =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>)</span>
-<span id="cb9-3"><a href=""></a><span class="fu">ggVennDiagram</span>(x) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">library</span>(ggVennDiagram)</span>
+<span id="cb14-2"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">A =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">B =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>)</span>
+<span id="cb14-3"><a href=""></a><span class="fu">ggVennDiagram</span>(x) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="diagramas-de-venn-1" class="slide level2">
 <h2>Diagramas de Venn</h2>
 
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="sankey-plots" class="slide level2">
 <h2>Sankey plots</h2>
 <ul>
 <li>Instalando paquete</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"networkD3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"networkD3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Construyendo la data</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">library</span>(networkD3)</span>
-<span id="cb11-2"><a href=""></a>links <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb11-3"><a href=""></a>  <span class="at">source=</span><span class="fu">c</span>(<span class="st">"group_A"</span>,<span class="st">"group_A"</span>, <span class="st">"group_B"</span>, <span class="st">"group_C"</span>, <span class="st">"group_C"</span>, <span class="st">"group_E"</span>), </span>
-<span id="cb11-4"><a href=""></a>  <span class="at">target=</span><span class="fu">c</span>(<span class="st">"group_C"</span>,<span class="st">"group_D"</span>, <span class="st">"group_E"</span>, <span class="st">"group_F"</span>, <span class="st">"group_G"</span>, <span class="st">"group_H"</span>), </span>
-<span id="cb11-5"><a href=""></a>  <span class="at">value=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
-<span id="cb11-6"><a href=""></a>  )</span>
-<span id="cb11-7"><a href=""></a>nodes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb11-8"><a href=""></a>  <span class="at">name=</span><span class="fu">c</span>(<span class="fu">as.character</span>(links<span class="sc">$</span>source), </span>
-<span id="cb11-9"><a href=""></a>  <span class="fu">as.character</span>(links<span class="sc">$</span>target)) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
-<span id="cb11-10"><a href=""></a>)</span>
-<span id="cb11-11"><a href=""></a>links<span class="sc">$</span>IDsource <span class="ot">&lt;-</span> <span class="fu">match</span>(links<span class="sc">$</span>source, nodes<span class="sc">$</span>name)<span class="sc">-</span><span class="dv">1</span> </span>
-<span id="cb11-12"><a href=""></a>links<span class="sc">$</span>IDtarget <span class="ot">&lt;-</span> <span class="fu">match</span>(links<span class="sc">$</span>target, nodes<span class="sc">$</span>name)<span class="sc">-</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">library</span>(networkD3)</span>
+<span id="cb16-2"><a href=""></a>links <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb16-3"><a href=""></a>  <span class="at">source=</span><span class="fu">c</span>(<span class="st">"group_A"</span>,<span class="st">"group_A"</span>, <span class="st">"group_B"</span>, <span class="st">"group_C"</span>, <span class="st">"group_C"</span>, <span class="st">"group_E"</span>), </span>
+<span id="cb16-4"><a href=""></a>  <span class="at">target=</span><span class="fu">c</span>(<span class="st">"group_C"</span>,<span class="st">"group_D"</span>, <span class="st">"group_E"</span>, <span class="st">"group_F"</span>, <span class="st">"group_G"</span>, <span class="st">"group_H"</span>), </span>
+<span id="cb16-5"><a href=""></a>  <span class="at">value=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb16-6"><a href=""></a>  )</span>
+<span id="cb16-7"><a href=""></a>nodes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb16-8"><a href=""></a>  <span class="at">name=</span><span class="fu">c</span>(<span class="fu">as.character</span>(links<span class="sc">$</span>source), </span>
+<span id="cb16-9"><a href=""></a>  <span class="fu">as.character</span>(links<span class="sc">$</span>target)) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
+<span id="cb16-10"><a href=""></a>)</span>
+<span id="cb16-11"><a href=""></a>links<span class="sc">$</span>IDsource <span class="ot">&lt;-</span> <span class="fu">match</span>(links<span class="sc">$</span>source, nodes<span class="sc">$</span>name)<span class="sc">-</span><span class="dv">1</span> </span>
+<span id="cb16-12"><a href=""></a>links<span class="sc">$</span>IDtarget <span class="ot">&lt;-</span> <span class="fu">match</span>(links<span class="sc">$</span>target, nodes<span class="sc">$</span>name)<span class="sc">-</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="sankey-plots-1" class="slide level2">
@@ -547,31 +589,31 @@
 <li>Corriendo la función</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>p <span class="ot">&lt;-</span> <span class="fu">sankeyNetwork</span>(<span class="at">Links =</span> links, <span class="at">Nodes =</span> nodes,</span>
-<span id="cb12-2"><a href=""></a>              <span class="at">Source =</span> <span class="st">"IDsource"</span>, <span class="at">Target =</span> <span class="st">"IDtarget"</span>,</span>
-<span id="cb12-3"><a href=""></a>              <span class="at">Value =</span> <span class="st">"value"</span>, <span class="at">NodeID =</span> <span class="st">"name"</span>, </span>
-<span id="cb12-4"><a href=""></a>              <span class="at">sinksRight=</span><span class="cn">FALSE</span>)</span>
-<span id="cb12-5"><a href=""></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>p <span class="ot">&lt;-</span> <span class="fu">sankeyNetwork</span>(<span class="at">Links =</span> links, <span class="at">Nodes =</span> nodes,</span>
+<span id="cb17-2"><a href=""></a>              <span class="at">Source =</span> <span class="st">"IDsource"</span>, <span class="at">Target =</span> <span class="st">"IDtarget"</span>,</span>
+<span id="cb17-3"><a href=""></a>              <span class="at">Value =</span> <span class="st">"value"</span>, <span class="at">NodeID =</span> <span class="st">"name"</span>, </span>
+<span id="cb17-4"><a href=""></a>              <span class="at">sinksRight=</span><span class="cn">FALSE</span>)</span>
+<span id="cb17-5"><a href=""></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Guardando la red</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">library</span>(htmlwidgets)</span>
-<span id="cb13-2"><a href=""></a><span class="fu">saveWidget</span>(p, <span class="at">file=</span><span class="fu">paste0</span>( <span class="fu">getwd</span>(), <span class="st">"/HtmlWidget/sankeyBasic1.html"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">library</span>(htmlwidgets)</span>
+<span id="cb18-2"><a href=""></a><span class="fu">saveWidget</span>(p, <span class="at">file=</span><span class="fu">paste0</span>( <span class="fu">getwd</span>(), <span class="st">"/HtmlWidget/sankeyBasic1.html"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="lolipop-plots" class="slide level2">
 <h2>Lolipop plots</h2>
 <p>Usaremos la data de <strong><em>iris</em></strong>, pero primero la modificamos para graficar.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">data</span>(iris)</span>
-<span id="cb14-2"><a href=""></a></span>
-<span id="cb14-3"><a href=""></a>df <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
-<span id="cb14-4"><a href=""></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span></span>
-<span id="cb14-5"><a href=""></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Sepal.Length, mean)) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-6"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">x=</span><span class="dv">0</span>, <span class="at">y=</span>Sepal.Length)</span>
-<span id="cb14-7"><a href=""></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="fu">data</span>(iris)</span>
+<span id="cb19-2"><a href=""></a></span>
+<span id="cb19-3"><a href=""></a>df <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href=""></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span></span>
+<span id="cb19-5"><a href=""></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Sepal.Length, mean)) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-6"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">x=</span><span class="dv">0</span>, <span class="at">y=</span>Sepal.Length)</span>
+<span id="cb19-7"><a href=""></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   Species    Sepal.Length     x     y
@@ -586,36 +628,36 @@
 <h2>Lolipop plots</h2>
 <p>Ahora si graficamos….</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> Species)) <span class="sc">+</span></span>
-<span id="cb16-2"><a href=""></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">xend =</span> y, <span class="at">yend =</span> Species),</span>
-<span id="cb16-3"><a href=""></a>               <span class="at">color =</span> <span class="st">"gray"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb16-4"><a href=""></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> y),</span>
-<span id="cb16-5"><a href=""></a>             <span class="at">size =</span> <span class="fl">7.5</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"purple"</span>) <span class="sc">+</span></span>
-<span id="cb16-6"><a href=""></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">label =</span> <span class="fu">round</span>(y, <span class="dv">2</span>)),</span>
-<span id="cb16-7"><a href=""></a>            <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">2.8</span>) <span class="sc">+</span></span>
-<span id="cb16-8"><a href=""></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
-<span id="cb16-9"><a href=""></a>  <span class="fu">xlab</span>(<span class="st">"Promedio de Sepal Length"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> Species)) <span class="sc">+</span></span>
+<span id="cb21-2"><a href=""></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">xend =</span> y, <span class="at">yend =</span> Species),</span>
+<span id="cb21-3"><a href=""></a>               <span class="at">color =</span> <span class="st">"gray"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb21-4"><a href=""></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> y),</span>
+<span id="cb21-5"><a href=""></a>             <span class="at">size =</span> <span class="fl">7.5</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"purple"</span>) <span class="sc">+</span></span>
+<span id="cb21-6"><a href=""></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">label =</span> <span class="fu">round</span>(y, <span class="dv">2</span>)),</span>
+<span id="cb21-7"><a href=""></a>            <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">2.8</span>) <span class="sc">+</span></span>
+<span id="cb21-8"><a href=""></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb21-9"><a href=""></a>  <span class="fu">xlab</span>(<span class="st">"Promedio de Sepal Length"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-17-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-21-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="gráficos-de-ordenación" class="slide level2">
 <h2>Gráficos de ordenación</h2>
 <ul>
 <li>Instalando <code>ggordiplots</code></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">'ggordiplots'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">'ggordiplots'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p>Corriendo <code>ggord</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">library</span>(ggordiplots)</span>
-<span id="cb18-2"><a href=""></a>ord <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
-<span id="cb18-3"><a href=""></a>p <span class="ot">&lt;-</span> <span class="fu">gg_ordiplot</span>(ord, </span>
-<span id="cb18-4"><a href=""></a>                 iris<span class="sc">$</span>Species, </span>
-<span id="cb18-5"><a href=""></a>                 <span class="at">spiders =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb18-6"><a href=""></a>                 <span class="at">ellipse =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb18-7"><a href=""></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">library</span>(ggordiplots)</span>
+<span id="cb23-2"><a href=""></a>ord <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb23-3"><a href=""></a>p <span class="ot">&lt;-</span> <span class="fu">gg_ordiplot</span>(ord, </span>
+<span id="cb23-4"><a href=""></a>                 iris<span class="sc">$</span>Species, </span>
+<span id="cb23-5"><a href=""></a>                 <span class="at">spiders =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb23-6"><a href=""></a>                 <span class="at">ellipse =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb23-7"><a href=""></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ul>
 </section>
@@ -625,7 +667,7 @@
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
+<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1283,7 +1325,7 @@ $plot</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-20-2.png" width="960"></p>
+<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-24-2.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1295,35 +1337,35 @@ $plot</code></pre>
 <li>Manualmente</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a>pcaData <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(ord<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]) </span>
-<span id="cb20-2"><a href=""></a>pcaData <span class="ot">&lt;-</span> <span class="fu">cbind</span>(pcaData, iris<span class="sc">$</span>Species) </span>
-<span id="cb20-3"><a href=""></a><span class="fu">colnames</span>(pcaData) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PC1"</span>, <span class="st">"PC2"</span>, <span class="st">"Species"</span>) </span>
-<span id="cb20-4"><a href=""></a></span>
-<span id="cb20-5"><a href=""></a><span class="fu">ggplot</span>(pcaData) <span class="sc">+</span></span>
-<span id="cb20-6"><a href=""></a>  <span class="fu">aes</span>(PC1, PC2, <span class="at">color =</span> Species, <span class="at">shape =</span> Species) <span class="sc">+</span> </span>
-<span id="cb20-7"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb20-8"><a href=""></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
-<span id="cb20-9"><a href=""></a>  <span class="fu">xlab</span>(<span class="st">"PC1: 73%"</span>)<span class="sc">+</span></span>
-<span id="cb20-10"><a href=""></a>  <span class="fu">ylab</span>(<span class="st">"PC2: 23%"</span>) <span class="sc">+</span></span>
-<span id="cb20-11"><a href=""></a>  <span class="fu">stat_ellipse</span>(<span class="at">geom=</span><span class="st">"polygon"</span>, <span class="at">level=</span><span class="fl">0.95</span>, <span class="at">alpha=</span><span class="fl">0.2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a>pcaData <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(ord<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]) </span>
+<span id="cb25-2"><a href=""></a>pcaData <span class="ot">&lt;-</span> <span class="fu">cbind</span>(pcaData, iris<span class="sc">$</span>Species) </span>
+<span id="cb25-3"><a href=""></a><span class="fu">colnames</span>(pcaData) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PC1"</span>, <span class="st">"PC2"</span>, <span class="st">"Species"</span>) </span>
+<span id="cb25-4"><a href=""></a></span>
+<span id="cb25-5"><a href=""></a><span class="fu">ggplot</span>(pcaData) <span class="sc">+</span></span>
+<span id="cb25-6"><a href=""></a>  <span class="fu">aes</span>(PC1, PC2, <span class="at">color =</span> Species, <span class="at">shape =</span> Species) <span class="sc">+</span> </span>
+<span id="cb25-7"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb25-8"><a href=""></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb25-9"><a href=""></a>  <span class="fu">xlab</span>(<span class="st">"PC1: 73%"</span>)<span class="sc">+</span></span>
+<span id="cb25-10"><a href=""></a>  <span class="fu">ylab</span>(<span class="st">"PC2: 23%"</span>) <span class="sc">+</span></span>
+<span id="cb25-11"><a href=""></a>  <span class="fu">stat_ellipse</span>(<span class="at">geom=</span><span class="st">"polygon"</span>, <span class="at">level=</span><span class="fl">0.95</span>, <span class="at">alpha=</span><span class="fl">0.2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="gráficos-de-ordenación-3" class="slide level2">
 <h2>Gráficos de ordenación</h2>
 
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch"></section>
 <section id="pie-charts" class="slide level2">
 <h2>Pie charts</h2>
 <ul>
 <li>Modificamos la data de iris</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a>df <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> </span>
-<span id="cb21-2"><a href=""></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span> </span>
-<span id="cb21-3"><a href=""></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb21-4"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> n<span class="sc">/</span><span class="dv">150</span><span class="sc">*</span><span class="dv">100</span>)</span>
-<span id="cb21-5"><a href=""></a></span>
-<span id="cb21-6"><a href=""></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a>df <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href=""></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-3"><a href=""></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb26-4"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> n<span class="sc">/</span><span class="dv">150</span><span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb26-5"><a href=""></a></span>
+<span id="cb26-6"><a href=""></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
 # Groups:   Species [3]
@@ -1338,87 +1380,87 @@ $plot</code></pre>
 <section id="pie-charts-1" class="slide level2">
 <h2>Pie charts</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">library</span>(scales)</span>
-<span id="cb23-2"><a href=""></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(<span class="at">x=</span><span class="st">""</span>,<span class="at">y=</span>percent, <span class="at">fill=</span>Species)) <span class="sc">+</span></span>
-<span id="cb23-3"><a href=""></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>,</span>
-<span id="cb23-4"><a href=""></a>           <span class="at">color=</span><span class="st">"white"</span>)<span class="sc">+</span></span>
-<span id="cb23-5"><a href=""></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span><span class="fu">percent</span>(percent<span class="sc">/</span><span class="dv">100</span>)),</span>
-<span id="cb23-6"><a href=""></a>              <span class="at">position=</span><span class="fu">position_stack</span>(<span class="at">vjust=</span><span class="fl">0.5</span>),<span class="at">color=</span><span class="st">"white"</span>,<span class="at">size=</span><span class="dv">6</span>)<span class="sc">+</span></span>
-<span id="cb23-7"><a href=""></a>  <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>)<span class="sc">+</span></span>
-<span id="cb23-8"><a href=""></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"salmon"</span>,<span class="st">"steelblue"</span>,<span class="st">"orange"</span>))<span class="sc">+</span></span>
-<span id="cb23-9"><a href=""></a>    <span class="fu">theme_void</span>()<span class="sc">+</span></span>
-<span id="cb23-10"><a href=""></a>    <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Pie chart"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="fu">library</span>(scales)</span>
+<span id="cb28-2"><a href=""></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(<span class="at">x=</span><span class="st">""</span>,<span class="at">y=</span>percent, <span class="at">fill=</span>Species)) <span class="sc">+</span></span>
+<span id="cb28-3"><a href=""></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>,</span>
+<span id="cb28-4"><a href=""></a>           <span class="at">color=</span><span class="st">"white"</span>)<span class="sc">+</span></span>
+<span id="cb28-5"><a href=""></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span><span class="fu">percent</span>(percent<span class="sc">/</span><span class="dv">100</span>)),</span>
+<span id="cb28-6"><a href=""></a>              <span class="at">position=</span><span class="fu">position_stack</span>(<span class="at">vjust=</span><span class="fl">0.5</span>),<span class="at">color=</span><span class="st">"white"</span>,<span class="at">size=</span><span class="dv">6</span>)<span class="sc">+</span></span>
+<span id="cb28-7"><a href=""></a>  <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>)<span class="sc">+</span></span>
+<span id="cb28-8"><a href=""></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"salmon"</span>,<span class="st">"steelblue"</span>,<span class="st">"orange"</span>))<span class="sc">+</span></span>
+<span id="cb28-9"><a href=""></a>    <span class="fu">theme_void</span>()<span class="sc">+</span></span>
+<span id="cb28-10"><a href=""></a>    <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Pie chart"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-24-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-28-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="donus-chart" class="slide level2">
 <h2>Donus chart</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">2</span>,<span class="at">y=</span>percent, <span class="at">fill=</span>Species)) <span class="sc">+</span></span>
-<span id="cb24-2"><a href=""></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>,</span>
-<span id="cb24-3"><a href=""></a>           <span class="at">color=</span><span class="st">"white"</span>)  <span class="sc">+</span></span>
-<span id="cb24-4"><a href=""></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span><span class="fu">percent</span>(percent<span class="sc">/</span><span class="dv">100</span>)),</span>
-<span id="cb24-5"><a href=""></a>              <span class="at">position=</span><span class="fu">position_stack</span>(<span class="at">vjust=</span><span class="fl">0.5</span>),<span class="at">color=</span><span class="st">"white"</span>,<span class="at">size=</span><span class="dv">6</span>)<span class="sc">+</span></span>
-<span id="cb24-6"><a href=""></a>  <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>)<span class="sc">+</span></span>
-<span id="cb24-7"><a href=""></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"salmon"</span>,<span class="st">"steelblue"</span>,<span class="st">"orange"</span>))<span class="sc">+</span></span>
-<span id="cb24-8"><a href=""></a>    <span class="fu">theme_void</span>()<span class="sc">+</span></span>
-<span id="cb24-9"><a href=""></a>    <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Donus chart"</span>)<span class="sc">+</span></span>
-<span id="cb24-10"><a href=""></a>  <span class="fu">xlim</span>(<span class="fl">0.5</span>,<span class="fl">2.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">2</span>,<span class="at">y=</span>percent, <span class="at">fill=</span>Species)) <span class="sc">+</span></span>
+<span id="cb29-2"><a href=""></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>,</span>
+<span id="cb29-3"><a href=""></a>           <span class="at">color=</span><span class="st">"white"</span>)  <span class="sc">+</span></span>
+<span id="cb29-4"><a href=""></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span><span class="fu">percent</span>(percent<span class="sc">/</span><span class="dv">100</span>)),</span>
+<span id="cb29-5"><a href=""></a>              <span class="at">position=</span><span class="fu">position_stack</span>(<span class="at">vjust=</span><span class="fl">0.5</span>),<span class="at">color=</span><span class="st">"white"</span>,<span class="at">size=</span><span class="dv">6</span>)<span class="sc">+</span></span>
+<span id="cb29-6"><a href=""></a>  <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>)<span class="sc">+</span></span>
+<span id="cb29-7"><a href=""></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"salmon"</span>,<span class="st">"steelblue"</span>,<span class="st">"orange"</span>))<span class="sc">+</span></span>
+<span id="cb29-8"><a href=""></a>    <span class="fu">theme_void</span>()<span class="sc">+</span></span>
+<span id="cb29-9"><a href=""></a>    <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Donus chart"</span>)<span class="sc">+</span></span>
+<span id="cb29-10"><a href=""></a>  <span class="fu">xlim</span>(<span class="fl">0.5</span>,<span class="fl">2.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-25-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-29-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="stat_summary-y-stat_smooth" class="slide level2">
 <h2>stat_summary() y stat_smooth()</h2>
 <p>Esta es una capa que nos permite poner desviaciones estándar o líneas que representan el promedio de los datos, por ejemplo:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a>ToothGrowth <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dose, <span class="at">y =</span> len)) <span class="sc">+</span></span>
-<span id="cb25-2"><a href=""></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun =</span> mean, <span class="fu">aes</span>(<span class="at">group =</span> supp, <span class="at">color =</span> supp)) <span class="sc">+</span></span>
-<span id="cb25-3"><a href=""></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">fun.data =</span> mean_se, <span class="fu">aes</span>(<span class="at">group =</span> supp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a>ToothGrowth <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dose, <span class="at">y =</span> len)) <span class="sc">+</span></span>
+<span id="cb30-2"><a href=""></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun =</span> mean, <span class="fu">aes</span>(<span class="at">group =</span> supp, <span class="at">color =</span> supp)) <span class="sc">+</span></span>
+<span id="cb30-3"><a href=""></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">fun.data =</span> mean_se, <span class="fu">aes</span>(<span class="at">group =</span> supp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-27-1.png" class="quarto-figure quarto-figure-center r-stretch" width="384"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-31-1.png" class="quarto-figure quarto-figure-center r-stretch" width="384"></section>
 <section id="stat_summary-y-stat_smoot" class="slide level2">
 <h2>stat_summary() y stat_smoot()</h2>
 <p>stat_smooth() nos permite colorear o resaltar la línea que representa nuestro modelo lineal:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Petal.Width, <span class="at">y =</span> Sepal.Length)) <span class="sc">+</span>    </span>
-<span id="cb26-2"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb26-3"><a href=""></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Petal.Width, <span class="at">y =</span> Sepal.Length)) <span class="sc">+</span>    </span>
+<span id="cb31-2"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb31-3"><a href=""></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-28-1.png" class="quarto-figure quarto-figure-center r-stretch" width="384"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-32-1.png" class="quarto-figure quarto-figure-center r-stretch" width="384"></section>
 <section id="ggpubr" class="slide level2">
 <h2><code>ggpubr()</code></h2>
 <p><a href="https://cran.r-project.org/web/packages/ggpubr/index.html"><code>ggpubr()</code></a> es una paqutería tipo compatible con <code>ggplot2()</code> pero un poco más fácil de declarar y más intuitivo.</p>
 <p>Para instarla, debemos hacerlo como usualmente:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"ggpubr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"ggpubr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="ggpubr-1" class="slide level2">
 <h2><code>ggpubr()</code></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="fu">library</span>(ggpubr) </span>
-<span id="cb28-2"><a href=""></a><span class="fu">ggboxplot</span>(ToothGrowth, </span>
-<span id="cb28-3"><a href=""></a>          <span class="at">x =</span> <span class="st">"dose"</span>, </span>
-<span id="cb28-4"><a href=""></a>          <span class="at">y =</span> <span class="st">"len"</span>, </span>
-<span id="cb28-5"><a href=""></a>          <span class="at">color =</span> <span class="st">"dose"</span>, </span>
-<span id="cb28-6"><a href=""></a>          <span class="at">add =</span> <span class="st">"jitter"</span>, </span>
-<span id="cb28-7"><a href=""></a>          <span class="at">shape =</span> <span class="st">"dose"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">library</span>(ggpubr) </span>
+<span id="cb33-2"><a href=""></a><span class="fu">ggboxplot</span>(ToothGrowth, </span>
+<span id="cb33-3"><a href=""></a>          <span class="at">x =</span> <span class="st">"dose"</span>, </span>
+<span id="cb33-4"><a href=""></a>          <span class="at">y =</span> <span class="st">"len"</span>, </span>
+<span id="cb33-5"><a href=""></a>          <span class="at">color =</span> <span class="st">"dose"</span>, </span>
+<span id="cb33-6"><a href=""></a>          <span class="at">add =</span> <span class="st">"jitter"</span>, </span>
+<span id="cb33-7"><a href=""></a>          <span class="at">shape =</span> <span class="st">"dose"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-30-1.png" class="quarto-figure quarto-figure-center r-stretch" width="336"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-34-1.png" class="quarto-figure quarto-figure-center r-stretch" width="336"></section>
 <section id="ggpubr-2" class="slide level2">
 <h2><code>ggpubr()</code></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a><span class="fu">ggbarplot</span>(ToothGrowth, </span>
-<span id="cb29-2"><a href=""></a>          <span class="at">x =</span> <span class="st">"dose"</span>, </span>
-<span id="cb29-3"><a href=""></a>          <span class="at">y =</span> <span class="st">"len"</span>, </span>
-<span id="cb29-4"><a href=""></a>          <span class="at">fill =</span> <span class="st">"dose"</span>, </span>
-<span id="cb29-5"><a href=""></a>          <span class="at">add =</span> <span class="st">"mean_se"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="fu">ggbarplot</span>(ToothGrowth, </span>
+<span id="cb34-2"><a href=""></a>          <span class="at">x =</span> <span class="st">"dose"</span>, </span>
+<span id="cb34-3"><a href=""></a>          <span class="at">y =</span> <span class="st">"len"</span>, </span>
+<span id="cb34-4"><a href=""></a>          <span class="at">fill =</span> <span class="st">"dose"</span>, </span>
+<span id="cb34-5"><a href=""></a>          <span class="at">add =</span> <span class="st">"mean_se"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-31-1.png" class="quarto-figure quarto-figure-center r-stretch" width="288"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-35-1.png" class="quarto-figure quarto-figure-center r-stretch" width="288"></section>
 <section id="ggpubr-3" class="slide level2">
 <h2><code>ggpubr()</code></h2>
 <ul>
@@ -1429,129 +1471,129 @@ $plot</code></pre>
 <section id="ggpubr-4" class="slide level2">
 <h2><code>ggpubr()</code></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="fu">ggboxplot</span>(ToothGrowth,</span>
-<span id="cb30-2"><a href=""></a>          <span class="at">x =</span> <span class="st">"dose"</span>,</span>
-<span id="cb30-3"><a href=""></a>          <span class="at">y =</span> <span class="st">"len"</span>, </span>
-<span id="cb30-4"><a href=""></a>          <span class="at">color =</span> <span class="st">"dose"</span>,           </span>
-<span id="cb30-5"><a href=""></a>          <span class="at">facet.by =</span> <span class="st">"supp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">ggboxplot</span>(ToothGrowth,</span>
+<span id="cb35-2"><a href=""></a>          <span class="at">x =</span> <span class="st">"dose"</span>,</span>
+<span id="cb35-3"><a href=""></a>          <span class="at">y =</span> <span class="st">"len"</span>, </span>
+<span id="cb35-4"><a href=""></a>          <span class="at">color =</span> <span class="st">"dose"</span>,           </span>
+<span id="cb35-5"><a href=""></a>          <span class="at">facet.by =</span> <span class="st">"supp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-32-1.png" class="quarto-figure quarto-figure-center r-stretch" width="336"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-36-1.png" class="quarto-figure quarto-figure-center r-stretch" width="336"></section>
 <section id="ggpubr-5" class="slide level2">
 <h2><code>ggpubr()</code></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a>comparaciones <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="fu">c</span>(<span class="st">"0.5"</span>, <span class="st">"1"</span>), <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>), <span class="fu">c</span>(<span class="st">"0.5"</span>, <span class="st">"2"</span>) ) </span>
-<span id="cb31-2"><a href=""></a><span class="fu">ggbarplot</span>(ToothGrowth, <span class="at">x =</span> <span class="st">"dose"</span>, </span>
-<span id="cb31-3"><a href=""></a>          <span class="at">y =</span> <span class="st">"len"</span>, <span class="at">fill =</span> <span class="st">"dose"</span>, </span>
-<span id="cb31-4"><a href=""></a>          <span class="at">add =</span> <span class="st">"mean_sd"</span>, </span>
-<span id="cb31-5"><a href=""></a>          <span class="at">legend =</span> <span class="st">"right"</span>)<span class="sc">+</span></span>
-<span id="cb31-6"><a href=""></a>  <span class="fu">stat_compare_means</span>(<span class="at">comparisons =</span> comparaciones, <span class="at">label =</span> <span class="st">"p.signif"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a>comparaciones <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="fu">c</span>(<span class="st">"0.5"</span>, <span class="st">"1"</span>), <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>), <span class="fu">c</span>(<span class="st">"0.5"</span>, <span class="st">"2"</span>) ) </span>
+<span id="cb36-2"><a href=""></a><span class="fu">ggbarplot</span>(ToothGrowth, <span class="at">x =</span> <span class="st">"dose"</span>, </span>
+<span id="cb36-3"><a href=""></a>          <span class="at">y =</span> <span class="st">"len"</span>, <span class="at">fill =</span> <span class="st">"dose"</span>, </span>
+<span id="cb36-4"><a href=""></a>          <span class="at">add =</span> <span class="st">"mean_sd"</span>, </span>
+<span id="cb36-5"><a href=""></a>          <span class="at">legend =</span> <span class="st">"right"</span>)<span class="sc">+</span></span>
+<span id="cb36-6"><a href=""></a>  <span class="fu">stat_compare_means</span>(<span class="at">comparisons =</span> comparaciones, <span class="at">label =</span> <span class="st">"p.signif"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-33-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:60.0%"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-37-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:60.0%"></section>
 <section id="tidyplots" class="slide level2">
 <h2><a href="https://jbengler.github.io/tidyplots/">Tidyplots</a></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"tidyplots"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"tidyplots"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">library</span>(tidyplots)</span>
-<span id="cb33-2"><a href=""></a></span>
-<span id="cb33-3"><a href=""></a>study <span class="sc">|&gt;</span> </span>
-<span id="cb33-4"><a href=""></a>  <span class="fu">tidyplot</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> score, <span class="at">color =</span> treatment) <span class="sc">|&gt;</span> </span>
-<span id="cb33-5"><a href=""></a>  <span class="fu">add_mean_bar</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb33-6"><a href=""></a>  <span class="fu">add_sem_errorbar</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb33-7"><a href=""></a>  <span class="fu">add_data_points_beeswarm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-35-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="tidyplots-1" class="slide level2">
-<h2><a href="https://jbengler.github.io/tidyplots/">Tidyplots</a></h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a>study <span class="sc">|&gt;</span> </span>
-<span id="cb34-2"><a href=""></a>  <span class="fu">tidyplot</span>(<span class="at">x =</span> group, <span class="at">y =</span> score, <span class="at">color =</span> dose) <span class="sc">|&gt;</span> </span>
-<span id="cb34-3"><a href=""></a>  <span class="fu">add_mean_bar</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb34-4"><a href=""></a>  <span class="fu">add_mean_dash</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb34-5"><a href=""></a>  <span class="fu">add_mean_value</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-36-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="tidyplots-2" class="slide level2">
-<h2><a href="https://jbengler.github.io/tidyplots/">Tidyplots</a></h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a>study <span class="sc">|&gt;</span> </span>
-<span id="cb35-2"><a href=""></a>  <span class="fu">tidyplot</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> score, <span class="at">color =</span> treatment) <span class="sc">|&gt;</span> </span>
-<span id="cb35-3"><a href=""></a>  <span class="fu">add_boxplot</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb35-4"><a href=""></a>  <span class="fu">add_test_pvalue</span>(<span class="at">ref.group =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-37-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="tidyplots-3" class="slide level2">
-<h2><a href="https://jbengler.github.io/tidyplots/">Tidyplots</a></h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a>energy <span class="sc">|&gt;</span> </span>
-<span id="cb36-2"><a href=""></a>  <span class="fu">tidyplot</span>(<span class="at">x =</span> year, <span class="at">y =</span> energy, <span class="at">color =</span> energy_source) <span class="sc">|&gt;</span> </span>
-<span id="cb36-3"><a href=""></a>  <span class="fu">add_barstack_absolute</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-38-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="tidyplots-4" class="slide level2">
-<h2><a href="https://jbengler.github.io/tidyplots/">Tidyplots</a></h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a>energy <span class="sc">|&gt;</span> </span>
-<span id="cb37-2"><a href=""></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2005</span>, <span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">2020</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb37-3"><a href=""></a>  <span class="fu">tidyplot</span>(<span class="at">y =</span> energy, <span class="at">color =</span> energy_source) <span class="sc">|&gt;</span> </span>
-<span id="cb37-4"><a href=""></a>  <span class="fu">add_donut</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb37-5"><a href=""></a>  <span class="fu">adjust_size</span>(<span class="at">width =</span> <span class="dv">25</span>, <span class="at">height =</span> <span class="dv">25</span>) <span class="sc">|&gt;</span></span>
-<span id="cb37-6"><a href=""></a>  <span class="fu">split_plot</span>(<span class="at">by =</span> year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a><span class="fu">library</span>(tidyplots)</span>
+<span id="cb38-2"><a href=""></a></span>
+<span id="cb38-3"><a href=""></a>study <span class="sc">|&gt;</span> </span>
+<span id="cb38-4"><a href=""></a>  <span class="fu">tidyplot</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> score, <span class="at">color =</span> treatment) <span class="sc">|&gt;</span> </span>
+<span id="cb38-5"><a href=""></a>  <span class="fu">add_mean_bar</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb38-6"><a href=""></a>  <span class="fu">add_sem_errorbar</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb38-7"><a href=""></a>  <span class="fu">add_data_points_beeswarm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-39-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="tidyplots-1" class="slide level2">
+<h2><a href="https://jbengler.github.io/tidyplots/">Tidyplots</a></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a>study <span class="sc">|&gt;</span> </span>
+<span id="cb39-2"><a href=""></a>  <span class="fu">tidyplot</span>(<span class="at">x =</span> group, <span class="at">y =</span> score, <span class="at">color =</span> dose) <span class="sc">|&gt;</span> </span>
+<span id="cb39-3"><a href=""></a>  <span class="fu">add_mean_bar</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb39-4"><a href=""></a>  <span class="fu">add_mean_dash</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb39-5"><a href=""></a>  <span class="fu">add_mean_value</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-40-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="tidyplots-2" class="slide level2">
+<h2><a href="https://jbengler.github.io/tidyplots/">Tidyplots</a></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a>study <span class="sc">|&gt;</span> </span>
+<span id="cb40-2"><a href=""></a>  <span class="fu">tidyplot</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> score, <span class="at">color =</span> treatment) <span class="sc">|&gt;</span> </span>
+<span id="cb40-3"><a href=""></a>  <span class="fu">add_boxplot</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb40-4"><a href=""></a>  <span class="fu">add_test_pvalue</span>(<span class="at">ref.group =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-41-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="tidyplots-3" class="slide level2">
+<h2><a href="https://jbengler.github.io/tidyplots/">Tidyplots</a></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a>energy <span class="sc">|&gt;</span> </span>
+<span id="cb41-2"><a href=""></a>  <span class="fu">tidyplot</span>(<span class="at">x =</span> year, <span class="at">y =</span> energy, <span class="at">color =</span> energy_source) <span class="sc">|&gt;</span> </span>
+<span id="cb41-3"><a href=""></a>  <span class="fu">add_barstack_absolute</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-42-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="tidyplots-4" class="slide level2">
+<h2><a href="https://jbengler.github.io/tidyplots/">Tidyplots</a></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a>energy <span class="sc">|&gt;</span> </span>
+<span id="cb42-2"><a href=""></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2005</span>, <span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">2020</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb42-3"><a href=""></a>  <span class="fu">tidyplot</span>(<span class="at">y =</span> energy, <span class="at">color =</span> energy_source) <span class="sc">|&gt;</span> </span>
+<span id="cb42-4"><a href=""></a>  <span class="fu">add_donut</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb42-5"><a href=""></a>  <span class="fu">adjust_size</span>(<span class="at">width =</span> <span class="dv">25</span>, <span class="at">height =</span> <span class="dv">25</span>) <span class="sc">|&gt;</span></span>
+<span id="cb42-6"><a href=""></a>  <span class="fu">split_plot</span>(<span class="at">by =</span> year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-43-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="plotly" class="slide level2">
 <h2><a href="https://plotly.com/r/">Plotly</a></h2>
 <ul>
 <li>Instalando plotly</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"plotly"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"plotly"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a><span class="fu">library</span>(plotly)</span>
-<span id="cb39-2"><a href=""></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(<span class="at">data =</span> iris, <span class="at">x =</span> <span class="sc">~</span>Sepal.Length, <span class="at">y =</span> <span class="sc">~</span>Petal.Length)</span>
-<span id="cb39-3"><a href=""></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">library</span>(plotly)</span>
+<span id="cb44-2"><a href=""></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(<span class="at">data =</span> iris, <span class="at">x =</span> <span class="sc">~</span>Sepal.Length, <span class="at">y =</span> <span class="sc">~</span>Petal.Length)</span>
+<span id="cb44-3"><a href=""></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-812c9115cde5c072f267" style="width:960px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-812c9115cde5c072f267">{"x":{"visdat":{"2f0076935192":["function () ","plotlyVisDat"]},"cur_data":"2f0076935192","attrs":{"2f0076935192":{"x":{},"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Sepal.Length"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Petal.Length"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[5.0999999999999996,4.9000000000000004,4.7000000000000002,4.5999999999999996,5,5.4000000000000004,4.5999999999999996,5,4.4000000000000004,4.9000000000000004,5.4000000000000004,4.7999999999999998,4.7999999999999998,4.2999999999999998,5.7999999999999998,5.7000000000000002,5.4000000000000004,5.0999999999999996,5.7000000000000002,5.0999999999999996,5.4000000000000004,5.0999999999999996,4.5999999999999996,5.0999999999999996,4.7999999999999998,5,5,5.2000000000000002,5.2000000000000002,4.7000000000000002,4.7999999999999998,5.4000000000000004,5.2000000000000002,5.5,4.9000000000000004,5,5.5,4.9000000000000004,4.4000000000000004,5.0999999999999996,5,4.5,4.4000000000000004,5,5.0999999999999996,4.7999999999999998,5.0999999999999996,4.5999999999999996,5.2999999999999998,5,7,6.4000000000000004,6.9000000000000004,5.5,6.5,5.7000000000000002,6.2999999999999998,4.9000000000000004,6.5999999999999996,5.2000000000000002,5,5.9000000000000004,6,6.0999999999999996,5.5999999999999996,6.7000000000000002,5.5999999999999996,5.7999999999999998,6.2000000000000002,5.5999999999999996,5.9000000000000004,6.0999999999999996,6.2999999999999998,6.0999999999999996,6.4000000000000004,6.5999999999999996,6.7999999999999998,6.7000000000000002,6,5.7000000000000002,5.5,5.5,5.7999999999999998,6,5.4000000000000004,6,6.7000000000000002,6.2999999999999998,5.5999999999999996,5.5,5.5,6.0999999999999996,5.7999999999999998,5,5.5999999999999996,5.7000000000000002,5.7000000000000002,6.2000000000000002,5.0999999999999996,5.7000000000000002,6.2999999999999998,5.7999999999999998,7.0999999999999996,6.2999999999999998,6.5,7.5999999999999996,4.9000000000000004,7.2999999999999998,6.7000000000000002,7.2000000000000002,6.5,6.4000000000000004,6.7999999999999998,5.7000000000000002,5.7999999999999998,6.4000000000000004,6.5,7.7000000000000002,7.7000000000000002,6,6.9000000000000004,5.5999999999999996,7.7000000000000002,6.2999999999999998,6.7000000000000002,7.2000000000000002,6.2000000000000002,6.0999999999999996,6.4000000000000004,7.2000000000000002,7.4000000000000004,7.9000000000000004,6.4000000000000004,6.2999999999999998,6.0999999999999996,7.7000000000000002,6.2999999999999998,6.4000000000000004,6,6.9000000000000004,6.7000000000000002,6.9000000000000004,5.7999999999999998,6.7999999999999998,6.7000000000000002,6.7000000000000002,6.2999999999999998,6.5,6.2000000000000002,5.9000000000000004],"y":[1.3999999999999999,1.3999999999999999,1.3,1.5,1.3999999999999999,1.7,1.3999999999999999,1.5,1.3999999999999999,1.5,1.5,1.6000000000000001,1.3999999999999999,1.1000000000000001,1.2,1.5,1.3,1.3999999999999999,1.7,1.5,1.7,1.5,1,1.7,1.8999999999999999,1.6000000000000001,1.6000000000000001,1.5,1.3999999999999999,1.6000000000000001,1.6000000000000001,1.5,1.5,1.3999999999999999,1.5,1.2,1.3,1.3999999999999999,1.3,1.5,1.3,1.3,1.3,1.6000000000000001,1.8999999999999999,1.3999999999999999,1.6000000000000001,1.3999999999999999,1.5,1.3999999999999999,4.7000000000000002,4.5,4.9000000000000004,4,4.5999999999999996,4.5,4.7000000000000002,3.2999999999999998,4.5999999999999996,3.8999999999999999,3.5,4.2000000000000002,4,4.7000000000000002,3.6000000000000001,4.4000000000000004,4.5,4.0999999999999996,4.5,3.8999999999999999,4.7999999999999998,4,4.9000000000000004,4.7000000000000002,4.2999999999999998,4.4000000000000004,4.7999999999999998,5,4.5,3.5,3.7999999999999998,3.7000000000000002,3.8999999999999999,5.0999999999999996,4.5,4.5,4.7000000000000002,4.4000000000000004,4.0999999999999996,4,4.4000000000000004,4.5999999999999996,4,3.2999999999999998,4.2000000000000002,4.2000000000000002,4.2000000000000002,4.2999999999999998,3,4.0999999999999996,6,5.0999999999999996,5.9000000000000004,5.5999999999999996,5.7999999999999998,6.5999999999999996,4.5,6.2999999999999998,5.7999999999999998,6.0999999999999996,5.0999999999999996,5.2999999999999998,5.5,5,5.0999999999999996,5.2999999999999998,5.5,6.7000000000000002,6.9000000000000004,5,5.7000000000000002,4.9000000000000004,6.7000000000000002,4.9000000000000004,5.7000000000000002,6,4.7999999999999998,4.9000000000000004,5.5999999999999996,5.7999999999999998,6.0999999999999996,6.4000000000000004,5.5999999999999996,5.0999999999999996,5.5999999999999996,6.0999999999999996,5.5999999999999996,5.5,4.7999999999999998,5.4000000000000004,5.5999999999999996,5.0999999999999996,5.0999999999999996,5.9000000000000004,5.7000000000000002,5.2000000000000002,5,5.2000000000000002,5.4000000000000004,5.0999999999999996],"type":"scatter","mode":"markers","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-511c8bbf0c771fbf3ecc" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-511c8bbf0c771fbf3ecc">{"x":{"visdat":{"32142cf53151":["function () ","plotlyVisDat"]},"cur_data":"32142cf53151","attrs":{"32142cf53151":{"x":{},"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Sepal.Length"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Petal.Length"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[5.0999999999999996,4.9000000000000004,4.7000000000000002,4.5999999999999996,5,5.4000000000000004,4.5999999999999996,5,4.4000000000000004,4.9000000000000004,5.4000000000000004,4.7999999999999998,4.7999999999999998,4.2999999999999998,5.7999999999999998,5.7000000000000002,5.4000000000000004,5.0999999999999996,5.7000000000000002,5.0999999999999996,5.4000000000000004,5.0999999999999996,4.5999999999999996,5.0999999999999996,4.7999999999999998,5,5,5.2000000000000002,5.2000000000000002,4.7000000000000002,4.7999999999999998,5.4000000000000004,5.2000000000000002,5.5,4.9000000000000004,5,5.5,4.9000000000000004,4.4000000000000004,5.0999999999999996,5,4.5,4.4000000000000004,5,5.0999999999999996,4.7999999999999998,5.0999999999999996,4.5999999999999996,5.2999999999999998,5,7,6.4000000000000004,6.9000000000000004,5.5,6.5,5.7000000000000002,6.2999999999999998,4.9000000000000004,6.5999999999999996,5.2000000000000002,5,5.9000000000000004,6,6.0999999999999996,5.5999999999999996,6.7000000000000002,5.5999999999999996,5.7999999999999998,6.2000000000000002,5.5999999999999996,5.9000000000000004,6.0999999999999996,6.2999999999999998,6.0999999999999996,6.4000000000000004,6.5999999999999996,6.7999999999999998,6.7000000000000002,6,5.7000000000000002,5.5,5.5,5.7999999999999998,6,5.4000000000000004,6,6.7000000000000002,6.2999999999999998,5.5999999999999996,5.5,5.5,6.0999999999999996,5.7999999999999998,5,5.5999999999999996,5.7000000000000002,5.7000000000000002,6.2000000000000002,5.0999999999999996,5.7000000000000002,6.2999999999999998,5.7999999999999998,7.0999999999999996,6.2999999999999998,6.5,7.5999999999999996,4.9000000000000004,7.2999999999999998,6.7000000000000002,7.2000000000000002,6.5,6.4000000000000004,6.7999999999999998,5.7000000000000002,5.7999999999999998,6.4000000000000004,6.5,7.7000000000000002,7.7000000000000002,6,6.9000000000000004,5.5999999999999996,7.7000000000000002,6.2999999999999998,6.7000000000000002,7.2000000000000002,6.2000000000000002,6.0999999999999996,6.4000000000000004,7.2000000000000002,7.4000000000000004,7.9000000000000004,6.4000000000000004,6.2999999999999998,6.0999999999999996,7.7000000000000002,6.2999999999999998,6.4000000000000004,6,6.9000000000000004,6.7000000000000002,6.9000000000000004,5.7999999999999998,6.7999999999999998,6.7000000000000002,6.7000000000000002,6.2999999999999998,6.5,6.2000000000000002,5.9000000000000004],"y":[1.3999999999999999,1.3999999999999999,1.3,1.5,1.3999999999999999,1.7,1.3999999999999999,1.5,1.3999999999999999,1.5,1.5,1.6000000000000001,1.3999999999999999,1.1000000000000001,1.2,1.5,1.3,1.3999999999999999,1.7,1.5,1.7,1.5,1,1.7,1.8999999999999999,1.6000000000000001,1.6000000000000001,1.5,1.3999999999999999,1.6000000000000001,1.6000000000000001,1.5,1.5,1.3999999999999999,1.5,1.2,1.3,1.3999999999999999,1.3,1.5,1.3,1.3,1.3,1.6000000000000001,1.8999999999999999,1.3999999999999999,1.6000000000000001,1.3999999999999999,1.5,1.3999999999999999,4.7000000000000002,4.5,4.9000000000000004,4,4.5999999999999996,4.5,4.7000000000000002,3.2999999999999998,4.5999999999999996,3.8999999999999999,3.5,4.2000000000000002,4,4.7000000000000002,3.6000000000000001,4.4000000000000004,4.5,4.0999999999999996,4.5,3.8999999999999999,4.7999999999999998,4,4.9000000000000004,4.7000000000000002,4.2999999999999998,4.4000000000000004,4.7999999999999998,5,4.5,3.5,3.7999999999999998,3.7000000000000002,3.8999999999999999,5.0999999999999996,4.5,4.5,4.7000000000000002,4.4000000000000004,4.0999999999999996,4,4.4000000000000004,4.5999999999999996,4,3.2999999999999998,4.2000000000000002,4.2000000000000002,4.2000000000000002,4.2999999999999998,3,4.0999999999999996,6,5.0999999999999996,5.9000000000000004,5.5999999999999996,5.7999999999999998,6.5999999999999996,4.5,6.2999999999999998,5.7999999999999998,6.0999999999999996,5.0999999999999996,5.2999999999999998,5.5,5,5.0999999999999996,5.2999999999999998,5.5,6.7000000000000002,6.9000000000000004,5,5.7000000000000002,4.9000000000000004,6.7000000000000002,4.9000000000000004,5.7000000000000002,6,4.7999999999999998,4.9000000000000004,5.5999999999999996,5.7999999999999998,6.0999999999999996,6.4000000000000004,5.5999999999999996,5.0999999999999996,5.5999999999999996,6.0999999999999996,5.5999999999999996,5.5,4.7999999999999998,5.4000000000000004,5.5999999999999996,5.0999999999999996,5.0999999999999996,5.9000000000000004,5.7000000000000002,5.2000000000000002,5,5.2000000000000002,5.4000000000000004,5.0999999999999996],"type":"scatter","mode":"markers","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
 <section id="plotly-1" class="slide level2">
 <h2><a href="https://plotly.com/r/">Plotly</a></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a>Animals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"giraffes"</span>, <span class="st">"orangutans"</span>, <span class="st">"monkeys"</span>)</span>
-<span id="cb40-2"><a href=""></a>SF_Zoo <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">14</span>, <span class="dv">23</span>)</span>
-<span id="cb40-3"><a href=""></a>LA_Zoo <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">29</span>)</span>
-<span id="cb40-4"><a href=""></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Animals, SF_Zoo, LA_Zoo)</span>
-<span id="cb40-5"><a href=""></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(data, <span class="at">x =</span> <span class="sc">~</span>Animals, <span class="at">y =</span> <span class="sc">~</span>SF_Zoo, <span class="at">type =</span> <span class="st">'bar'</span>, <span class="at">name =</span> <span class="st">'SF Zoo'</span>)</span>
-<span id="cb40-6"><a href=""></a>fig <span class="ot">&lt;-</span> fig <span class="sc">%&gt;%</span> <span class="fu">add_trace</span>(<span class="at">y =</span> <span class="sc">~</span>LA_Zoo, <span class="at">name =</span> <span class="st">'LA Zoo'</span>)</span>
-<span id="cb40-7"><a href=""></a>fig <span class="ot">&lt;-</span> fig <span class="sc">%&gt;%</span> <span class="fu">layout</span>(<span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">'Count'</span>), <span class="at">barmode =</span> <span class="st">'group'</span>)</span>
-<span id="cb40-8"><a href=""></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a>Animals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"giraffes"</span>, <span class="st">"orangutans"</span>, <span class="st">"monkeys"</span>)</span>
+<span id="cb45-2"><a href=""></a>SF_Zoo <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">14</span>, <span class="dv">23</span>)</span>
+<span id="cb45-3"><a href=""></a>LA_Zoo <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">29</span>)</span>
+<span id="cb45-4"><a href=""></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Animals, SF_Zoo, LA_Zoo)</span>
+<span id="cb45-5"><a href=""></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(data, <span class="at">x =</span> <span class="sc">~</span>Animals, <span class="at">y =</span> <span class="sc">~</span>SF_Zoo, <span class="at">type =</span> <span class="st">'bar'</span>, <span class="at">name =</span> <span class="st">'SF Zoo'</span>)</span>
+<span id="cb45-6"><a href=""></a>fig <span class="ot">&lt;-</span> fig <span class="sc">%&gt;%</span> <span class="fu">add_trace</span>(<span class="at">y =</span> <span class="sc">~</span>LA_Zoo, <span class="at">name =</span> <span class="st">'LA Zoo'</span>)</span>
+<span id="cb45-7"><a href=""></a>fig <span class="ot">&lt;-</span> fig <span class="sc">%&gt;%</span> <span class="fu">layout</span>(<span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">'Count'</span>), <span class="at">barmode =</span> <span class="st">'group'</span>)</span>
+<span id="cb45-8"><a href=""></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-45d6feeb4567664ad0e3" style="width:960px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-45d6feeb4567664ad0e3">{"x":{"visdat":{"2f00346e2396":["function () ","plotlyVisDat"]},"cur_data":"2f00346e2396","attrs":{"2f00346e2396":{"x":{},"y":{},"name":"SF Zoo","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"},"2f00346e2396.1":{"x":{},"y":{},"name":"LA Zoo","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"Count"},"barmode":"group","xaxis":{"domain":[0,1],"automargin":true,"title":"Animals","type":"category","categoryorder":"array","categoryarray":["giraffes","monkeys","orangutans"]},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["giraffes","orangutans","monkeys"],"y":[20,14,23],"name":"SF Zoo","type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["giraffes","orangutans","monkeys"],"y":[12,18,29],"name":"LA Zoo","type":"bar","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-5598da21ec74c36a30a2" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-5598da21ec74c36a30a2">{"x":{"visdat":{"321439892dcc":["function () ","plotlyVisDat"]},"cur_data":"321439892dcc","attrs":{"321439892dcc":{"x":{},"y":{},"name":"SF Zoo","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"},"321439892dcc.1":{"x":{},"y":{},"name":"LA Zoo","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"Count"},"barmode":"group","xaxis":{"domain":[0,1],"automargin":true,"title":"Animals","type":"category","categoryorder":"array","categoryarray":["giraffes","monkeys","orangutans"]},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["giraffes","orangutans","monkeys"],"y":[20,14,23],"name":"SF Zoo","type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["giraffes","orangutans","monkeys"],"y":[12,18,29],"name":"LA Zoo","type":"bar","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
 <section id="plotly-2" class="slide level2">
 <h2><a href="https://plotly.com/r/">Plotly</a></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(<span class="at">y =</span> <span class="sc">~</span><span class="fu">rnorm</span>(<span class="dv">50</span>), <span class="at">type =</span> <span class="st">"box"</span>)</span>
-<span id="cb41-2"><a href=""></a>fig <span class="ot">&lt;-</span> fig <span class="sc">%&gt;%</span> <span class="fu">add_trace</span>(<span class="at">y =</span> <span class="sc">~</span><span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="dv">1</span>))</span>
-<span id="cb41-3"><a href=""></a></span>
-<span id="cb41-4"><a href=""></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(<span class="at">y =</span> <span class="sc">~</span><span class="fu">rnorm</span>(<span class="dv">50</span>), <span class="at">type =</span> <span class="st">"box"</span>)</span>
+<span id="cb46-2"><a href=""></a>fig <span class="ot">&lt;-</span> fig <span class="sc">%&gt;%</span> <span class="fu">add_trace</span>(<span class="at">y =</span> <span class="sc">~</span><span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="dv">1</span>))</span>
+<span id="cb46-3"><a href=""></a></span>
+<span id="cb46-4"><a href=""></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-0c27d8af58166d53661c" style="width:960px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-0c27d8af58166d53661c">{"x":{"visdat":{"2f0070e7d08":["function () ","plotlyVisDat"]},"cur_data":"2f0070e7d08","attrs":{"2f0070e7d08":{"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"},"2f0070e7d08.1":{"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"rnorm(50)"},"xaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(31,119,180,0.5)","y":[-0.053805040582905118,-1.3770595568286066,-0.41499456329967976,-0.39428995371034931,-0.059313396711185663,1.1000253719838831,0.76317574845754421,-0.1645235962535869,-0.25336168013650756,0.69696337540473741,0.55666319867365732,-0.6887556945495199,-0.70749515696211962,0.36458196213683031,0.76853292451541577,-0.11234621215022805,0.88110772645421476,0.39810588036706807,-0.61202639325077124,0.34111969142442478,-1.1293630960807926,1.433023701701037,1.98039989850586,-0.36722147646650904,-1.0441346263165308,0.56971962744241289,-0.13505460388082435,2.4016177605047764,-0.039240002733169244,0.68973936245077672,0.028002158780666062,-0.74327320888240533,0.1887922995143429,-1.8049586288910378,1.4655548615628859,0.15325333821189771,2.1726116703621527,0.47550952889966253,-0.70994643092181453,0.61072635348905491,-0.93409763164425152,-1.2536334002391021,0.29144623551746285,-0.443291873218433,0.0011053516316241311,0.074341324151664057,-0.58952094618807194,-0.56866873281850194,-0.13517861512383206,1.1780869965732044],"type":"box","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(255,127,14,0.5)","y":[-0.523566800429762,1.5939461876284216,1.3329503712135182,2.0630998372763627,0.69581607636569931,1.3700188099162882,1.2670987907722311,0.45747996900834964,2.207867805983172,2.1604026156949514,1.7002136495149982,2.5868334545408453,1.5584864255653039,-0.27659220845803656,0.42673458576311374,-0.22461261489835582,0.52659936356068848,0.3796333227758758,1.0421158731442353,0.089078351447554494,1.158028772404075,0.34541535608118223,2.767287269372646,1.7167074760172056,1.9101742294952273,1.3841853578263446,2.6821760805194184,0.36426354605102296,0.53835526963943403,2.4322822385416627,0.34930364668963332,0.79261925639803454,0.60719207055801605,0.68000713145149316,0.7208866970234411,1.494188331267827,0.82266951773039365,0.49404253788574259,2.3430388251704115,0.78542059145313126,0.82044346995661288,0.89980925878643803,1.7126663070514052,0.92643559587367363,0.96236582853295205,0.31833952124434306,0.6757297277536809,1.0601604404345151,0.41110551374033621,1.5314961926325723],"type":"box","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-0a363970a60f0551577d" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-0a363970a60f0551577d">{"x":{"visdat":{"321465ee5732":["function () ","plotlyVisDat"]},"cur_data":"321465ee5732","attrs":{"321465ee5732":{"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"},"321465ee5732.1":{"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"rnorm(50)"},"xaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(31,119,180,0.5)","y":[-0.7332165707455508,0.8662388225781964,-1.6354466469508586,0.62756835012227308,-0.63513337278493887,0.081710115148050155,1.3878195777500746,0.1268780012347219,-0.77953757960129111,0.90452001469610277,-0.64961358706982142,1.3973261779224604,1.1627705763170089,0.4345543009663892,0.2913826779455081,-0.27679938435791579,-1.8106537755196455,1.2941958115154681,0.077450430545900908,-0.77058056662589414,-0.49153824532601631,-0.98674093209909364,0.028901904806438197,-0.80354760918394785,-2.7625768936056492,-0.16902183876614815,-1.8104022403130491,-0.2255833658275056,-0.90164784909784512,0.60962161372962254,0.0059117742816046674,1.426576675612351,-0.11577449805087152,-1.756917187557234,-0.0012004439806171318,1.0399523883183608,-0.15837447096464033,0.53811759003868909,-0.049020902637758872,0.31521521855702628,0.47540450138483725,-0.30335492057595892,-0.8615068688356996,-1.5739493826486806,-0.66594011984294921,0.56182112204181156,1.8818708752534004,0.13334609354289664,-1.5250290789527066,0.61808250037241519],"type":"box","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(255,127,14,0.5)","y":[-0.15730474391107241,0.84587363519735392,1.4024473500970045,1.5223607237401635,1.1995965219507645,0.67517932772186939,0.21985553469716912,1.9817271098227864,0.37447540876791741,-0.42555254540303866,1.1234476750580877,0.4236468996927808,1.0990450673600485,2.1255449251359564,1.0824631752146971,1.1437063751106755,0.35285206067998875,1.8288411243542695,0.96542525539262891,2.5893316491490084,0.70403836332856717,2.3245092252944999,-0.20293180149598822,0.15204395961851613,1.326727610240207,-0.45953689168294831,2.2231934047562043,0.82915491399664765,0.67298591751888681,1.4592070814387355,0.57456362119584703,1.56061225583107,1.4399223742817813,1.5943785955265819,1.682943697520225,0.024789164300371369,2.5161568133163756,1.079474282540535,0.68985165838622331,1.147318291026405,-0.5609614036970334,0.75427931090087741,0.47684411815358296,3.4857096339823928,2.7253325147858147,1.3937509844900791,0.60312966306181481,1.759329840572267,0.86673401763783786,1.3452476850175561],"type":"box","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -1559,66 +1601,66 @@ $plot</code></pre>
 <h2>Misceláneos: <code>ggcats()</code></h2>
 <p><code>ggplot2()</code> nos permite usar diversos paquetes desarrollados por muchos usarios con fines divertidos o misceláneos como <a href="https://r-charts.com/es/miscelanea/ggcats/"><code>ggcats</code></a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>) </span>
-<span id="cb42-2"><a href=""></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"R-CoderDotCom/ggcats@main"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>) </span>
+<span id="cb47-2"><a href=""></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"R-CoderDotCom/ggcats@main"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="misceláneos-ggcats-1" class="slide level2">
 <h2>Misceláneos: <code>ggcats()</code></h2>
 
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-45-1.png" width="960" class="r-stretch"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-49-1.png" width="960" class="r-stretch"></section>
 <section id="misceláneos-ggcats-2" class="slide level2">
 <h2>Misceláneos: <code>ggcats()</code></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a><span class="fu">library</span>(ggcats)</span>
-<span id="cb43-2"><a href=""></a>ToothGrowth<span class="sc">$</span>cats <span class="ot">&lt;-</span> <span class="fu">factor</span>(ToothGrowth<span class="sc">$</span>dose, <span class="at">levels =</span> <span class="fu">c</span>(<span class="fl">0.5</span>,<span class="dv">1</span>,<span class="dv">2</span>),                            <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"mouth"</span>, <span class="st">"grumpy"</span>, <span class="st">"pusheen_pc"</span>))  </span>
-<span id="cb43-3"><a href=""></a></span>
-<span id="cb43-4"><a href=""></a>ToothGrowth <span class="sc">%&gt;%</span>  </span>
-<span id="cb43-5"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> len, <span class="at">x =</span> dose)) <span class="sc">+</span>   </span>
-<span id="cb43-6"><a href=""></a>  <span class="fu">geom_cat</span>(<span class="fu">aes</span>(<span class="at">cat =</span> cats), <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span>  </span>
-<span id="cb43-7"><a href=""></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">2.25</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">library</span>(ggcats)</span>
+<span id="cb48-2"><a href=""></a>ToothGrowth<span class="sc">$</span>cats <span class="ot">&lt;-</span> <span class="fu">factor</span>(ToothGrowth<span class="sc">$</span>dose, <span class="at">levels =</span> <span class="fu">c</span>(<span class="fl">0.5</span>,<span class="dv">1</span>,<span class="dv">2</span>),                            <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"mouth"</span>, <span class="st">"grumpy"</span>, <span class="st">"pusheen_pc"</span>))  </span>
+<span id="cb48-3"><a href=""></a></span>
+<span id="cb48-4"><a href=""></a>ToothGrowth <span class="sc">%&gt;%</span>  </span>
+<span id="cb48-5"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> len, <span class="at">x =</span> dose)) <span class="sc">+</span>   </span>
+<span id="cb48-6"><a href=""></a>  <span class="fu">geom_cat</span>(<span class="fu">aes</span>(<span class="at">cat =</span> cats), <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span>  </span>
+<span id="cb48-7"><a href=""></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">2.25</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-46-1.png" class="quarto-figure quarto-figure-center r-stretch" width="316"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-50-1.png" class="quarto-figure quarto-figure-center r-stretch" width="316"></section>
 <section id="misceláneos-ggtexttable" class="slide level2">
 <h2>Misceláneos: <code>ggtexttable()</code></h2>
 <p>Esta función me permite hacer mis tablas como figuras que puedo exportar como imágenes y darle formato. Hace parte del paquete <code>ggpubr()</code> que vimos anteriormente.</p>
 <p>Haremos un ejemplo con los primeros cuatro datos de <strong>iris</strong>:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">library</span>(dplyr) </span>
-<span id="cb44-2"><a href=""></a>df<span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)) </span>
-<span id="cb44-3"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href=""></a><span class="fu">library</span>(dplyr) </span>
+<span id="cb49-2"><a href=""></a>df<span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)) </span>
+<span id="cb49-3"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-47-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-51-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="misceláneos-ggtexttable-1" class="slide level2">
 <h2>Misceláneos: <em>ggtexttable()</em></h2>
 <p>También podemos cambiar el tema con el que se formatea la tabla, por ejemplo:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"blank"</span>)) </span>
-<span id="cb45-2"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"light"</span>)) </span>
-<span id="cb45-3"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"classic"</span>)) </span>
-<span id="cb45-4"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"minimal"</span>)) </span>
-<span id="cb45-5"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"lVioletWhite"</span>)) </span>
-<span id="cb45-6"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"mVioletWhite"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"blank"</span>)) </span>
+<span id="cb50-2"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"light"</span>)) </span>
+<span id="cb50-3"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"classic"</span>)) </span>
+<span id="cb50-4"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"minimal"</span>)) </span>
+<span id="cb50-5"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"lVioletWhite"</span>)) </span>
+<span id="cb50-6"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"mVioletWhite"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="misceláneos-ggtexttable-2" class="slide level2">
 <h2>Misceláneos: <em>ggtexttable()</em></h2>
 
-<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-49-1.png" width="960" class="r-stretch"></section>
+<img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-53-1.png" width="960" class="r-stretch"></section>
 <section id="misceláneos-ggtexttable-3" class="slide level2">
 <h2>Misceláneos: <em>ggtexttable()</em></h2>
 <p>Otros formateos:</p>
 <ul>
 <li><p>Poner en negrita una celda:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>,  <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"classic"</span>)) <span class="sc">%&gt;%</span>    </span>
-<span id="cb46-2"><a href=""></a>  <span class="fu">table_cell_font</span>(<span class="at">row =</span> <span class="dv">3</span>, <span class="at">column =</span> <span class="dv">2</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>,  <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"classic"</span>)) <span class="sc">%&gt;%</span>    </span>
+<span id="cb51-2"><a href=""></a>  <span class="fu">table_cell_font</span>(<span class="at">row =</span> <span class="dv">3</span>, <span class="at">column =</span> <span class="dv">2</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-50-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-54-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1630,12 +1672,12 @@ $plot</code></pre>
 <ul>
 <li><p>Resaltar una columna:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>,  <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"classic"</span>)) <span class="sc">%&gt;%</span>    </span>
-<span id="cb47-2"><a href=""></a>  <span class="fu">table_cell_bg</span>(<span class="at">row =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">column =</span> <span class="dv">3</span>, <span class="at">fill=</span><span class="st">"yellow"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>,  <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"classic"</span>)) <span class="sc">%&gt;%</span>    </span>
+<span id="cb52-2"><a href=""></a>  <span class="fu">table_cell_bg</span>(<span class="at">row =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">column =</span> <span class="dv">3</span>, <span class="at">fill=</span><span class="st">"yellow"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-51-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-55-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1647,13 +1689,13 @@ $plot</code></pre>
 <ul>
 <li><p>Poner títulos y pies de notas:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>,  <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"classic"</span>)) <span class="sc">%&gt;%</span>    </span>
-<span id="cb48-2"><a href=""></a>  <span class="fu">tab_add_title</span>(<span class="at">text =</span> <span class="st">"Data iris"</span>,  <span class="at">size =</span> <span class="dv">14</span>, <span class="at">face=</span><span class="st">"bold"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb48-3"><a href=""></a>  <span class="fu">tab_add_footnote</span>(<span class="at">text =</span> <span class="st">"*Alguna nota"</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">face =</span> <span class="st">"italic"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href=""></a><span class="fu">ggtexttable</span>(df, <span class="at">rows =</span> <span class="cn">NULL</span>,  <span class="at">theme =</span> <span class="fu">ttheme</span>(<span class="st">"classic"</span>)) <span class="sc">%&gt;%</span>    </span>
+<span id="cb53-2"><a href=""></a>  <span class="fu">tab_add_title</span>(<span class="at">text =</span> <span class="st">"Data iris"</span>,  <span class="at">size =</span> <span class="dv">14</span>, <span class="at">face=</span><span class="st">"bold"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb53-3"><a href=""></a>  <span class="fu">tab_add_footnote</span>(<span class="at">text =</span> <span class="st">"*Alguna nota"</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">face =</span> <span class="st">"italic"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-52-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+<p><img data-src="2.Graficos_en_R_3_files/figure-revealjs/unnamed-chunk-56-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
