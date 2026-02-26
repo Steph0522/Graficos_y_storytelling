@@ -47,6 +47,21 @@ Heatmap(
   right_annotation = rowAnnotation(foo2 = 5:1, bar2 = anno_barplot(runif(5)))
 )
 
+#install.packages("igraph")
+#install.packages("bipartite")
+bmat=as.matrix(read.csv("https://dshizuka.github.io/networkanalysis/SampleData/Sample_bipartite.csv", header=T, row.names=1))
+bmat
+
+library(igraph)
+bg=graph_from_biadjacency_matrix(bmat) 
+V(bg)$shape=c("square","circle")[V(bg)$type+1]
+V(bg)$color=c("tomato","lightblue")[V(bg)$type+1]
+plot(bg) 
+library(bipartite)
+plotweb(bmat) 
+
+plotweb(bmat, sorting="normal", link_color="wheat2",  arrow="no",  higher_color="lightblue", lower_color="tomato",text_size=1.5)
+
 # install.packages("ggVennDiagram")
 
 library(ggVennDiagram)
