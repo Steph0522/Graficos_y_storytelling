@@ -90,11 +90,11 @@ links$IDsource <- match(links$source, nodes$name)-1
 links$IDtarget <- match(links$target, nodes$name)-1
 
 
-# p <- sankeyNetwork(Links = links, Nodes = nodes,
-#               Source = "IDsource", Target = "IDtarget",
-#               Value = "value", NodeID = "name",
-#               sinksRight=FALSE)
-# p
+ p <- sankeyNetwork(Links = links, Nodes = nodes,
+               Source = "IDsource", Target = "IDtarget",
+               Value = "value", NodeID = "name",
+               sinksRight=FALSE)
+ p
 
 # library(htmlwidgets)
 # saveWidget(p, file=paste0( getwd(), "/HtmlWidget/sankeyBasic1.html"))
@@ -119,13 +119,13 @@ ggplot(df, aes(x = x, y = Species)) +
 
 # install.packages('ggordiplots')
 
-# library(ggordiplots)
-# ord <- prcomp(iris[, 1:4])
-# p <- gg_ordiplot(ord,
-#                  iris$Species,
-#                  spiders = TRUE,
-#                  ellipse = FALSE)
-# p
+ library(ggordiplots)
+ord <- prcomp(iris[, 1:4])
+p <- gg_ordiplot(ord,
+                  iris$Species,
+                  spiders = TRUE,
+                  ellipse = FALSE)
+p
 
 library(ggordiplots)
 ord <- prcomp(iris[, 1:4])
@@ -135,17 +135,18 @@ p <- gg_ordiplot(ord,
                  ellipse = FALSE)
 p
 
-# pcaData <- as.data.frame(ord$x[, 1:2])
-# pcaData <- cbind(pcaData, iris$Species)
-# colnames(pcaData) <- c("PC1", "PC2", "Species")
-# 
-# ggplot(pcaData) +
-#   aes(PC1, PC2, color = Species, shape = Species) +
-#   geom_point(size = 2) +
-#   coord_fixed() +
-#   xlab("PC1: 73%")+
-#   ylab("PC2: 23%") +
-#   stat_ellipse(geom="polygon", level=0.95, alpha=0.2)
+ pcaData <- as.data.frame(ord$x[, 1:2])
+ pcaData <- cbind(pcaData, iris$Species)
+ colnames(pcaData) <- c("PC1", "PC2", "Species")
+ 
+ ggplot(pcaData) +
+   aes(PC1, PC2, color = Species, shape = Species) +
+   geom_point(size = 2) +
+   coord_fixed() +
+   xlab("PC1: 73%")+
+   ylab("PC2: 23%") +
+   stat_ellipse(geom="polygon", level=0.95, alpha=0.2)+
+   theme_classic()
 
 pcaData <- as.data.frame(ord$x[, 1:2]) 
 pcaData <- cbind(pcaData, iris$Species) 
@@ -214,7 +215,7 @@ ggbarplot(ToothGrowth,
           x = "dose", 
           y = "len", 
           fill = "dose", 
-          add = "mean_se")
+          add = "mean_sd")
 
 ggboxplot(ToothGrowth,
           x = "dose",
@@ -227,7 +228,7 @@ ggbarplot(ToothGrowth, x = "dose",
           y = "len", fill = "dose", 
           add = "mean_sd", 
           legend = "right")+
-  stat_compare_means(comparisons = comparaciones, label = "p.signif")
+  stat_compare_means(comparisons = comparaciones, label = "p.signif", method = "t.test")
 
 # install.packages("tidyplots")
 
